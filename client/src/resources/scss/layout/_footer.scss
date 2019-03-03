@@ -1,0 +1,19 @@
+// -----------------------------------------------------------------------------
+// This file contains all styles related to the footer of the site/application.
+// -----------------------------------------------------------------------------
+
+.footer {
+  color: $white;
+  background-color: $dark;
+  padding: 2rem 1.5rem;
+}
+
+.footer-left {
+  text-align: left;
+}
+
+.footer-right {
+  @include media-breakpoint-up(sm) {
+    text-align: right;
+  }
+}
