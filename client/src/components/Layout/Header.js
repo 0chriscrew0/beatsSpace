@@ -3,7 +3,8 @@ import { NavLink } from "react-router-dom";
 
 class Header extends Component {
   state = {
-    isAtTop: true
+    isAtTop: true,
+    isOpen: false
   };
 
   componentDidMount() {
@@ -18,13 +19,17 @@ class Header extends Component {
     }
   };
 
+  handleClick = () => {
+    this.setState({ isOpen: !this.state.isOpen });
+  };
+
   render() {
     return (
       <div>
         <nav
           className={`navbar fixed-top navbar-expand-lg navbar-dark ${
             this.state.isAtTop ? "bg-primary" : "bg-dark"
-          }`}
+          } ${this.state.isOpen ? "bg-dark" : "bg-primary"}`}
         >
           <div className="container">
             <NavLink className="navbar-brand" to="/">
@@ -32,6 +37,7 @@ class Header extends Component {
             </NavLink>
 
             <button
+              onClick={this.handleClick}
               className="navbar-toggler"
               type="button"
               data-toggle="collapse"
@@ -48,7 +54,7 @@ class Header extends Component {
               id="navbarSupportedContent"
             >
               <ul className="navbar-nav ml-auto">
-                <li className="nav-item active">
+                <li className="nav-item">
                   <NavLink className="nav-link" to="/">
                     Login
                   </NavLink>

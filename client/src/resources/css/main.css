@@ -7371,6 +7371,9 @@ h1, h2, h3, h4, h5, h6 {
   transition: 0.5s ease-in-out;
   transition-property: background-color; }
 
+.navbar-collapse {
+  text-align: center; }
+
 .footer {
   color: #eff6ee;
   background-color: #273043;
