@@ -10,7 +10,8 @@ const Footer = () => {
             <p>All Rights Reserved.</p>
           </div>
           <div className="col-xs-12 col-sm-6 footer-right">
-            <p>Terms of Service | Privacy Policy</p>
+            <p>Terms of Service</p>
+            <p>Privacy Policy</p>
           </div>
         </div>
       </div>
