@@ -1,31 +1,27 @@
 import React, { Component } from "react";
+import { Link } from "react-router-dom";
 
 import HeroImage from "../../resources/img/hero-image.jpg";
 
 class Hero extends Component {
   render() {
     return (
-      <section className="hero-section">
-        <div className="container-fluid">
-          <div className="row">
-            <div className="col-xs-12 col-sm-6 px-0 mb-4">
+      <section className="hero-section bg-primary">
+        <div className="container d-flex h-100">
+          <div className="row align-self-center align-items-center">
+            <div className="col-sm-6 text-center px-2 mb-4">
               <img
-                className="img-fluid"
+                className="hero-image img-fluid"
                 src={HeroImage}
                 alt="producing music"
               />
             </div>
-            <div className="col-xs-12 col-sm-6">
-              <h2 className="text-center">Header</h2>
-              <p>
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-                eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
-                enim ad minim veniam, quis nostrud exercitation ullamco laboris
-                nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor
-                in reprehenderit in voluptate velit esse cillum dolore eu fugiat
-                nulla pariatur. Excepteur sint occaecat cupidatat non proident,
-                sunt in culpa qui officia deserunt mollit anim id est laborum.
-              </p>
+            <div className="col-sm-6 text-center text-white">
+              <h4 className="display-6">Header</h4>
+              <h2 className="display-5">Lorem ipsum dolor sit amet.</h2>
+              <Link to="/" className="btn btn-white my-2">
+                Go to Store
+              </Link>
             </div>
           </div>
         </div>

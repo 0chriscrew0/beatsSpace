@@ -1,20 +1,34 @@
 import React, { Component } from "react";
 import { NavLink } from "react-router-dom";
 
-import Logo from "../../resources/img/logo.png";
-
 class Header extends Component {
+  state = {
+    isAtTop: true
+  };
+
+  componentDidMount() {
+    window.addEventListener("scroll", this.handleScroll);
+  }
+
+  handleScroll = () => {
+    if (window.scrollY > 0) {
+      this.setState({ isAtTop: false });
+    } else {
+      this.setState({ isAtTop: true });
+    }
+  };
+
   render() {
     return (
       <div>
-        <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
+        <nav
+          className={`navbar fixed-top navbar-expand-lg navbar-dark ${
+            this.state.isAtTop ? "bg-primary" : "bg-dark"
+          }`}
+        >
           <div className="container">
-            <NavLink className="nav-brand" to="/">
-              <img
-                className="img-fluid header-logo"
-                src={Logo}
-                alt="Site Logo"
-              />
+            <NavLink className="navbar-brand" to="/">
+              Beats Store
             </NavLink>
 
             <button
@@ -46,7 +60,7 @@ class Header extends Component {
                 </li>
                 <li className="nav-item">
                   <NavLink className="nav-link" to="/">
-                    My Cart
+                    <i className="fas fa-shopping-cart pr-2" /> Cart
                   </NavLink>
                 </li>
                 <li className="nav-item">

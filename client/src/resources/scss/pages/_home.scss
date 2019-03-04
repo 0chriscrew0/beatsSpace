@@ -8,4 +8,14 @@
 
 .hero-section {
   height: 100vh;
+  margin: auto;
+}
+
+.hero-image {
+  max-height: 300px;
+}
+
+.btn-white {
+  color: $primary;
+  background-color: $white;
 }
