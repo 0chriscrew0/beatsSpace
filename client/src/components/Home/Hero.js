@@ -8,18 +8,18 @@ class Hero extends Component {
     return (
       <section className="hero-section bg-primary">
         <div className="container d-flex h-100">
-          <div className="row align-self-center align-items-center">
-            <div className="col-sm-6 text-center px-2 mb-4">
+          <div className="row px-3 align-self-center align-items-center">
+            <div className="col-sm-6 hero-image-wrapper px-2 mb-4">
               <img
                 className="hero-image img-fluid"
                 src={HeroImage}
                 alt="producing music"
               />
             </div>
-            <div className="col-sm-6 text-center text-white">
-              <h4 className="display-6">Header</h4>
-              <h2 className="display-5">Lorem ipsum dolor sit amet.</h2>
-              <Link to="/" className="btn btn-white my-2">
+            <div className="col-sm-6 px-4 hero-text">
+              <h4>Header</h4>
+              <h2>Lorem ipsum dolor sit amet.</h2>
+              <Link to="/" className="btn btn-secondary my-2">
                 Go to Store
               </Link>
             </div>

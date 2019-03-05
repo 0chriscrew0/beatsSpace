@@ -5,7 +5,7 @@ import Hero from "./Hero";
 class Home extends Component {
   render() {
     return (
-      <div className="home-page mt-5">
+      <div className="home-page">
         <Hero />
       </div>
     );

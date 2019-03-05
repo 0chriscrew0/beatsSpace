@@ -6,9 +6,12 @@ import Footer from "../components/Layout/Footer";
 class Layout extends Component {
   render() {
     return (
-      <div className="layout">
-        <Header />
-        {this.props.children}
+      <div className="flex-wrapper">
+        <div>
+          <Header />
+          {this.props.children}
+        </div>
+
         <Footer />
       </div>
     );

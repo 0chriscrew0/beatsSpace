@@ -27,13 +27,25 @@ class Header extends Component {
     return (
       <div>
         <nav
-          className={`navbar fixed-top navbar-expand-lg navbar-dark ${
-            this.state.isAtTop ? "bg-primary" : "bg-dark"
-          } ${this.state.isOpen ? "bg-dark" : "bg-primary"}`}
+          className={`navbar fixed-top navbar-expand-lg navbar-dark  ${
+            window.location.pathname === "/"
+              ? `${
+                  this.state.isOpen ? "bg-dark navbar-shadow" : "transparent"
+                } ${
+                  this.state.isAtTop ? "transparent" : "bg-dark navbar-shadow"
+                } `
+              : "bg-dark navbar-shadow"
+          }`}
         >
           <div className="container">
             <NavLink className="navbar-brand" to="/">
-              Beats Store
+              <h4
+                data-toggle="collapse"
+                data-target=".navbar-collapse.show"
+                onClick={this.state.isOpen ? this.handleClick : null}
+              >
+                Beats Store
+              </h4>
             </NavLink>
 
             <button
@@ -54,23 +66,39 @@ class Header extends Component {
               id="navbarSupportedContent"
             >
               <ul className="navbar-nav ml-auto">
-                <li className="nav-item">
-                  <NavLink className="nav-link" to="/">
+                <li
+                  className="nav-item"
+                  data-toggle="collapse"
+                  data-target=".navbar-collapse.show"
+                >
+                  <NavLink className="nav-link" to="/login">
                     Login
                   </NavLink>
                 </li>
-                <li className="nav-item">
-                  <NavLink className="nav-link" to="/">
+                <li
+                  data-toggle="collapse"
+                  data-target=".navbar-collapse.show"
+                  className="nav-item"
+                >
+                  <NavLink className="nav-link" to="/register">
                     Sign up
                   </NavLink>
                 </li>
-                <li className="nav-item">
-                  <NavLink className="nav-link" to="/">
+                <li
+                  data-toggle="collapse"
+                  data-target=".navbar-collapse.show"
+                  className="nav-item"
+                >
+                  <NavLink className="nav-link" to="/cart">
                     <i className="fas fa-shopping-cart pr-2" /> Cart
                   </NavLink>
                 </li>
-                <li className="nav-item">
-                  <NavLink className="nav-link" to="/">
+                <li
+                  data-toggle="collapse"
+                  data-target=".navbar-collapse.show"
+                  className="nav-item"
+                >
+                  <NavLink className="nav-link" to="/checkout">
                     Checkout
                   </NavLink>
                 </li>

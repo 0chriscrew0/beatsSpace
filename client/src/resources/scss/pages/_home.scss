@@ -9,10 +9,33 @@
 .hero-section {
   height: 100vh;
   margin: auto;
+
+  @include media-breakpoint-up(md) {
+    background: $white;
+    background: linear-gradient(90deg, $white 40%, $primary 40%);
+  }
+}
+
+.hero-image-wrapper {
+  text-align: center;
 }
 
 .hero-image {
-  max-height: 300px;
+  // max-height: 300px;
+  -webkit-box-shadow: 6px 7px 5px -5px rgba(0, 0, 0, 0.75);
+  -moz-box-shadow: 6px 7px 5px -5px rgba(0, 0, 0, 0.75);
+  box-shadow: 6px 7px 5px -5px rgba(0, 0, 0, 0.75);
+}
+
+.hero-text {
+  text-align: center;
+  color: $secondary;
+  @include media-breakpoint-up(sm) {
+    text-align: left;
+    h2 {
+      font-size: 3.6em;
+    }
+  }
 }
 
 .btn-white {
