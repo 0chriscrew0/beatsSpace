@@ -7,11 +7,8 @@ class Layout extends Component {
   render() {
     return (
       <div className="flex-wrapper">
-        <div>
-          <Header />
-          {this.props.children}
-        </div>
-
+        <Header />
+        {this.props.children}
         <Footer />
       </div>
     );

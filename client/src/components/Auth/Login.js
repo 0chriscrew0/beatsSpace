@@ -1,38 +1,39 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 const Login = () => {
   return (
-    <div className="login-page">
+    <div className="login-page d-flex align-items-center my-4">
       <div className="container">
-        <div className="login-wrapper">
-          <h2 className="text-center">Login</h2>
+        <div className="login-wrapper mx-auto mt-5 p-4">
+          <h2 className="py-3">Login</h2>
           <form>
-            <div className="form-group">
-              <label htmlFor="exampleInputEmail1">Email address</label>
-              <input
-                type="email"
-                className="form-control"
-                id="exampleInputEmail1"
-                aria-describedby="emailHelp"
-                placeholder="Enter email"
-              />
-              <small id="emailHelp" className="form-text text-muted">
-                We'll never share your email with anyone else.
-              </small>
-            </div>
-            <div className="form-group">
-              <label htmlFor="exampleInputPassword1">Password</label>
-              <input
-                type="password"
-                className="form-control"
-                id="exampleInputPassword1"
-                placeholder="Password"
-              />
-            </div>
+            <input
+              type="email"
+              className="form-control my-3"
+              placeholder="Email"
+            />
+
+            <input
+              type="password"
+              className="form-control my-3"
+              placeholder="Password"
+            />
 
             <button type="submit" className="btn btn-block btn-outline-primary">
               Submit
             </button>
+
+            <div className="register mt-5">
+              <p>Don't have an account?</p>
+              <Link
+                to="/register"
+                className="btn btn-info"
+                id="register-button"
+              >
+                Sign up now
+              </Link>
+            </div>
           </form>
         </div>
       </div>
