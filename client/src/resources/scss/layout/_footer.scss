@@ -7,10 +7,20 @@
   background-color: $dark;
   padding: 2rem 1.5rem;
   text-align: center;
+  @include media-breakpoint-up(md) {
+    text-align: left;
+  }
 }
 
 .footer-form {
   padding-bottom: 2.5rem;
+  .footer-form__input {
+    max-width: 90%;
+    @include media-breakpoint-down(sm) {
+      margin-right: auto;
+      margin-left: auto;
+    }
+  }
 }
 
 .footer-info {

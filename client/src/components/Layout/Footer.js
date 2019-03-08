@@ -9,7 +9,7 @@ const Footer = () => {
           <div className="col-sm-4 footer-form">
             <h4 className="display-5 mb-3">BeatsStore</h4>
             <input
-              className="form-control mb-3"
+              className="form-control mb-3 footer-form__input"
               type="text"
               placeholder="Enter Your Email"
             />
