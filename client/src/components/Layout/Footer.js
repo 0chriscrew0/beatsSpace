@@ -6,7 +6,7 @@ const Footer = () => {
     <section className="footer">
       <div className="container">
         <div className="row">
-          <div className="col-sm-4 footer-form">
+          <div className="col-md-4 footer-form">
             <h4 className="display-5 mb-3">BeatsStore</h4>
             <input
               className="form-control mb-3 footer-form__input"
@@ -19,7 +19,7 @@ const Footer = () => {
               value="Subscribe"
             />
           </div>
-          <div className="col-sm-4 footer-info">
+          <div className="col-md-4 footer-info">
             <div className="footer-contact">
               <p>Phone: (555) 555 5555</p>
               <p>Email: email@beatsstore.com</p>

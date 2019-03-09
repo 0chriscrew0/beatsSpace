@@ -1,0 +1,30 @@
+.user-dashboard-wrapper {
+  min-height: 100vh;
+  margin-top: 6rem;
+  @include media-breakpoint-down(sm) {
+    .nav-item {
+      padding: 0;
+    }
+  }
+}
+.account-section {
+  margin: 1em 0;
+  padding: 1em;
+  div {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+
+  background-color: $gray;
+  @include media-breakpoint-down(sm) {
+    h4 {
+      font-size: 2rem;
+    }
+    font-size: 0.8rem;
+  }
+
+  @include media-breakpoint-up(md) {
+    margin: 1em;
+  }
+}

@@ -22,7 +22,7 @@ class Login extends Component {
         config: {
           name: "email",
           type: "email",
-          placeholder: "Enter your email"
+          placeholder: "Email"
         },
         validation: {
           required: true,
@@ -38,7 +38,7 @@ class Login extends Component {
         config: {
           name: "password",
           type: "password",
-          placeholder: "Enter your password"
+          placeholder: "Password"
         },
         validation: {
           required: true
@@ -83,7 +83,7 @@ class Login extends Component {
       <div className="container mt-5 login-container">
         <div className="row my-5">
           <div className="col-md-6 mx-auto login-form">
-            <h3>Login</h3>
+            <h3 className="text-secondary">BeatsStore</h3>
             <form onSubmit={event => this.submitForm(event)}>
               <div className="form-group">
                 <FormField

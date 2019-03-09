@@ -44,7 +44,7 @@ class Header extends Component {
                 data-target=".navbar-collapse.show"
                 onClick={this.state.isOpen ? this.handleClick : null}
               >
-                Beats Store
+                BeatsStore
               </h4>
             </NavLink>
 
@@ -98,8 +98,8 @@ class Header extends Component {
                   data-target=".navbar-collapse.show"
                   className="nav-item"
                 >
-                  <NavLink className="nav-link" to="/checkout">
-                    Checkout
+                  <NavLink className="nav-link" to="/user/dashboard">
+                    Account
                   </NavLink>
                 </li>
               </ul>

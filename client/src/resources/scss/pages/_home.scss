@@ -12,7 +12,7 @@
 
   @include media-breakpoint-up(md) {
     background: $white;
-    background: linear-gradient(90deg, $white 40%, $primary 40%);
+    background: linear-gradient(90deg, $light 40%, $primary 40%);
   }
 }
 
@@ -36,9 +36,4 @@
       font-size: 2em;
     }
   }
-}
-
-.btn-white {
-  color: $primary;
-  background-color: $white;
 }
