@@ -14,7 +14,7 @@ import { loginUser } from "../../actions/userActions";
 class Login extends Component {
   state = {
     formError: false,
-    formSuccess: "",
+    formSuccess: false,
     formData: {
       email: {
         element: "input",
@@ -66,9 +66,8 @@ class Login extends Component {
 
     if (isFormValid) {
       this.props.dispatch(loginUser(formattedData)).then(response => {
-        if (response.payload.loginSuccess) {
-          console.log(response.payload);
-          this.props.history.push("/dashboard");
+        if (response.payload.success) {
+          this.props.history.push("/user/dashboard");
         } else {
           this.setState({ formError: true });
         }
@@ -87,9 +86,7 @@ class Login extends Component {
             <form onSubmit={event => this.submitForm(event)}>
               <div className="form-group">
                 <FormField
-                  type="text"
                   className="form-control"
-                  placeholder="Your Email *"
                   id="email"
                   formData={this.state.formData.email}
                   change={element => this.updateForm(element)}
@@ -97,9 +94,7 @@ class Login extends Component {
               </div>
               <div className="form-group">
                 <FormField
-                  type="password"
                   className="form-control"
-                  placeholder="Your Password *"
                   id="password"
                   formData={this.state.formData.password}
                   change={element => this.updateForm(element)}
