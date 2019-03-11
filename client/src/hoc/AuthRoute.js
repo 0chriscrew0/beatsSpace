@@ -12,7 +12,6 @@ export default function(ComposedClass, reload, admin = null) {
     componentDidMount() {
       this.props.dispatch(authenticateUser()).then(response => {
         let user = this.props.user.userData;
-        console.log(user);
 
         if (!user.isAuth) {
           if (reload) {

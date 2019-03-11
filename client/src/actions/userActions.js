@@ -1,6 +1,11 @@
 import axios from "axios";
 
-import { LOGIN_USER, REGISTER_USER, AUTHENTICATE_USER } from "./types";
+import {
+  LOGIN_USER,
+  REGISTER_USER,
+  LOGOUT_USER,
+  AUTHENTICATE_USER
+} from "./types";
 import { USER_ROUTES } from "../utils/misc";
 
 export function loginUser(data) {
@@ -21,6 +26,17 @@ export function registerUser(data) {
 
   return {
     type: REGISTER_USER,
+    payload: request
+  };
+}
+
+export function logoutUser() {
+  const request = axios
+    .get(`${USER_ROUTES}/logout`)
+    .then(request => request.data);
+
+  return {
+    type: LOGOUT_USER,
     payload: request
   };
 }

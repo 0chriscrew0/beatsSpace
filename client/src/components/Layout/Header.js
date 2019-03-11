@@ -1,10 +1,39 @@
 import React, { Component } from "react";
-import { NavLink } from "react-router-dom";
+import { NavLink, withRouter } from "react-router-dom";
+import { connect } from "react-redux";
+
+import { logoutUser } from "../../actions/userActions";
 
 class Header extends Component {
   state = {
     isAtTop: true,
-    isOpen: false
+    isOpen: false,
+    links: [
+      {
+        name: "Beats",
+        url: "/beats",
+        public: true
+      },
+      {
+        name: "Cart",
+        url: "/user/cart",
+        public: false
+      },
+      {
+        name: "Account",
+        url: "/user/dashboard",
+        public: false
+      },
+      {
+        name: "Login",
+        url: "/login",
+        public: true
+      },
+      {
+        name: "Logout",
+        public: false
+      }
+    ]
   };
 
   componentDidMount() {
@@ -23,6 +52,80 @@ class Header extends Component {
     this.setState({ isOpen: !this.state.isOpen });
   };
 
+  logout = () => {
+    this.props.dispatch(logoutUser()).then(response => {
+      console.log(response);
+      if (response.payload.success) {
+        this.props.history.push("/login");
+      }
+    });
+  };
+
+  cartLink = (item, index) => {
+    const user = this.props.user.userData;
+
+    return (
+      <li
+        className="nav-item"
+        data-toggle="collapse"
+        data-target=".navbar-collapse.show"
+        key={index}
+      >
+        <NavLink className="nav-link" to={item.url}>
+          <span className="cart-amount">
+            {user.cart ? user.cart.length : 0}{" "}
+          </span>
+          {item.name}
+        </NavLink>
+      </li>
+    );
+  };
+
+  defaultLink = (item, index) => (
+    <li
+      className="nav-item"
+      data-toggle="collapse"
+      data-target=".navbar-collapse.show"
+      key={index}
+    >
+      {item.name === "Logout" ? (
+        <div className="nav-link" onClick={() => this.logout()}>
+          {item.name}
+        </div>
+      ) : (
+        <NavLink className="nav-link" to={item.url}>
+          {item.name}
+        </NavLink>
+      )}
+    </li>
+  );
+
+  showLinks = () => {
+    let links = [];
+
+    if (this.props.user.userData) {
+      this.state.links.forEach(item => {
+        if (!this.props.user.userData.isAuth) {
+          if (item.public) {
+            links.push(item);
+          }
+        } else {
+          if (item.name !== "Login") {
+            links.push(item);
+          }
+        }
+      });
+    }
+
+    return links.map((item, index) => {
+      if (item.name !== "Cart") {
+        return this.defaultLink(item, index);
+      } else {
+        return this.cartLink(item, index);
+      }
+    });
+  };
+
   render() {
     return (
       <div>
@@ -38,7 +141,7 @@ class Header extends Component {
           }`}
         >
           <div className="container">
-            <NavLink className="navbar-brand" to="/">
+            <NavLink className="navbar-brand" to="/" exact={true}>
               <h4
                 data-toggle="collapse"
                 data-target=".navbar-collapse.show"
@@ -65,44 +168,7 @@ class Header extends Component {
               className="collapse navbar-collapse"
               id="navbarSupportedContent"
             >
-              <ul className="navbar-nav ml-auto">
-                <li
-                  className="nav-item"
-                  data-toggle="collapse"
-                  data-target=".navbar-collapse.show"
-                >
-                  <NavLink className="nav-link" to="/login">
-                    Login
-                  </NavLink>
-                </li>
-                <li
-                  data-toggle="collapse"
-                  data-target=".navbar-collapse.show"
-                  className="nav-item"
-                >
-                  <NavLink className="nav-link" to="/register">
-                    Sign up
-                  </NavLink>
-                </li>
-                <li
-                  data-toggle="collapse"
-                  data-target=".navbar-collapse.show"
-                  className="nav-item"
-                >
-                  <NavLink className="nav-link" to="/cart">
-                    <i className="fas fa-shopping-cart pr-2" /> Cart
-                  </NavLink>
-                </li>
-                <li
-                  data-toggle="collapse"
-                  data-target=".navbar-collapse.show"
-                  className="nav-item"
-                >
-                  <NavLink className="nav-link" to="/user/dashboard">
-                    Account
-                  </NavLink>
-                </li>
-              </ul>
+              <ul className="navbar-nav ml-auto">{this.showLinks()}</ul>
             </div>
           </div>
         </nav>
@@ -111,4 +177,10 @@ class Header extends Component {
   }
 }
 
-export default Header;
+function mapStateToProps(state) {
+  return {
+    user: state.user
+  };
+}
+
+export default connect(mapStateToProps)(withRouter(Header));

@@ -81,7 +81,7 @@ class Login extends Component {
     return (
       <div className="container mt-5 login-container">
         <div className="row my-5">
-          <div className="col-md-6 mx-auto login-form">
+          <div className="col-md-6 mx-auto mt-5 login-form">
             <h3 className="text-secondary">BeatsStore</h3>
             <form onSubmit={event => this.submitForm(event)}>
               <div className="form-group">

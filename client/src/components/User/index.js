@@ -4,7 +4,7 @@ import Account from "./Account";
 import Profile from "./Profile";
 import Cart from "./Cart";
 
-const UserDashboard = () => {
+const UserDashboard = props => {
   return (
     <div className="container user-dashboard-wrapper">
       <h4 className="mb-5">My Account</h4>
@@ -56,7 +56,7 @@ const UserDashboard = () => {
           role="tabpanel"
           aria-labelledby="account-tab"
         >
-          <Account />
+          <Account user={props.user.userData} />
         </div>
         <div
           className="tab-pane fade"

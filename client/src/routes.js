@@ -9,18 +9,17 @@ import Login from "./components/Auth/Login";
 import Register from "./components/Auth/Register";
 
 import UserDashboard from "./components/User";
-import Profile from "./components/User/Profile";
 
 const Routes = () => {
   return (
     <Layout>
       <Switch>
+        <Route path="/" component={AuthRoute(Home, null)} exact />
         <Route
           path="/user/dashboard"
           component={AuthRoute(UserDashboard, true)}
         />
 
-        <Route path="/" component={AuthRoute(Home, null)} exact />
         <Route path="/login" component={AuthRoute(Login, false)} />
         <Route path="/register" component={AuthRoute(Register, false)} />
       </Switch>

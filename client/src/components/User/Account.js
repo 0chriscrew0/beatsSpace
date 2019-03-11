@@ -1,6 +1,7 @@
 import React from "react";
 
-const Account = () => {
+const Account = ({ user }) => {
+  console.log(user);
   return (
     <div className="account p-4">
       <div className="container">
@@ -8,10 +9,9 @@ const Account = () => {
           <div className="col account-section account-section-info">
             <h4>Account Info</h4>
             <div>
-              <span>name</span>
-              <span>lastname</span>
-              <span>"Ball Boy"</span>
-              <span>email@gmail.com</span>
+              <span>{user.name}</span>
+              <span>{user.lastname}</span>
+              <span>{user.email}</span>
             </div>
           </div>
           <div className="col account-section account-section-history">
