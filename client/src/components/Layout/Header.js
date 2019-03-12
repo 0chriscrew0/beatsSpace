@@ -89,7 +89,7 @@ class Header extends Component {
       key={index}
     >
       {item.name === "Logout" ? (
-        <div className="nav-link" onClick={() => this.logout()}>
+        <div className="nav-link logout-link" onClick={() => this.logout()}>
           {item.name}
         </div>
       ) : (

@@ -32,3 +32,9 @@
   font-size: 1em;
   text-align: center;
 }
+
+.logout-link {
+  &:hover {
+    cursor: pointer;
+  }
+}

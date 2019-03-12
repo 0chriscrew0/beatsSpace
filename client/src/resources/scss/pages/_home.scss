@@ -2,6 +2,10 @@
 // This file contains styles that are specific to the home page.
 // -----------------------------------------------------------------------------
 
+// ====================
+// HERO SECTION
+// ====================
+
 .home-page {
   height: 100%;
 }
@@ -10,7 +14,7 @@
   height: 100vh;
   margin: auto;
 
-  @include media-breakpoint-up(md) {
+  @include media-breakpoint-up(sm) {
     background: $white;
     background: linear-gradient(90deg, $light 40%, $primary 40%);
   }
@@ -36,4 +40,98 @@
       font-size: 2em;
     }
   }
+}
+
+// ====================
+// FEATURED SECTION
+// ====================
+
+.featured {
+  margin: 2em auto;
+}
+
+.featured-title {
+  text-align: center;
+  margin-bottom: 0.8em;
+  @include media-breakpoint-up(sm) {
+    text-align: left;
+  }
+}
+
+.featured-card {
+  width: 100%;
+  margin: 1em auto;
+  div {
+    background-color: $gray;
+  }
+  @include media-breakpoint-up(sm) {
+    width: 90%;
+  }
+}
+
+.featured-card__img {
+  width: 100%;
+  height: auto;
+}
+
+// ====================
+// PROMOTION SECTION
+// ====================
+
+.promotion {
+  min-height: 16rem;
+  display: flex;
+  align-content: center;
+  color: $white;
+  text-align: center;
+
+  /* The image used */
+  background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
+    url("../img/promotion-image.jpg");
+
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.promotion-item {
+  margin: 1em auto;
+}
+
+.btn-outline-white {
+  color: $white;
+  border: 1px solid $white;
+  &:hover {
+    color: $black;
+    background: $white;
+  }
+}
+
+// ====================
+// NEW ARRIVALS SECTION
+// ====================
+
+.new-arrivals {
+  margin: 2em auto;
+}
+
+.new-arrivals-title {
+  text-align: center;
+  margin-bottom: 0.8em;
+  @include media-breakpoint-up(sm) {
+    text-align: left;
+  }
+}
+
+.new-arrivals-card {
+  width: 100%;
+  margin: 1em auto;
+  div {
+    background-color: $gray;
+  }
+}
+
+.new-arrivals-card__img {
+  width: 100%;
+  height: auto;
 }
