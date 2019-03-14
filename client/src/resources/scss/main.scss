@@ -13,7 +13,7 @@
 @import "layout/header", "layout/footer", "layout/wrapper";
 
 // 5. Components
-@import "components/button";
+@import "components/button", "components/product-card";
 
 // 6. Page-specific styles
 @import "pages/home", "pages/login", "pages/register", "pages/userDashboard";

@@ -7429,6 +7429,13 @@ h1, h2, h3, h4, h5, h6 {
   flex-direction: column;
   justify-content: space-between; }
 
+.product-card-preview {
+  margin-bottom: 0.6em; }
+
+.product-card-buttons {
+  display: flex;
+  justify-content: space-between; }
+
 .home-page {
   height: 100%; }
 
