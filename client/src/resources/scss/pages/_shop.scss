@@ -1,3 +1,28 @@
+// ==============
+// MOBILE
+// ==============
+
+// .mobile-shop {
+//   margin: 5rem 0;
+// }
+
+.mobile-shop-toolbar {
+  display: flex;
+  justify-content: space-between;
+  padding: 0.6em 1em;
+  background-color: $gray;
+}
+
+.mobile-shop-toolbar-buttons {
+  display: flex;
+  justify-content: space-between;
+  align-content: center;
+}
+
+// ==============
+// DESKTOP
+// ==============
+
 .shop {
   margin: 5rem auto;
 }

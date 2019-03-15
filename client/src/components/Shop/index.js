@@ -12,7 +12,25 @@ class Shop extends Component {
 
   render() {
     const products = this.props.products;
-    return (
+
+    const mobileContent = (
+      <div className="mobile-shop">
+        <div className="mobile-shop-toolbar">
+          <h4 className="mb-0">Beats</h4>
+          <div className="mobile-shop-toolbar-buttons">
+            <button className="btn btn-sm btn-outline-primary">Sort</button>
+            <button className="btn btn-sm btn-outline-primary ml-2">
+              Filter
+            </button>
+            <button className="btn btn-sm ml-2">
+              <i className="fas fa-th-large" />
+            </button>
+          </div>
+        </div>
+      </div>
+    );
+
+    const regularContent = (
       <div className="container shop">
         <div className="row my-5">
           <div className="col-sm-4">
@@ -28,10 +46,7 @@ class Shop extends Component {
                       aria-expanded="true"
                       aria-controls="collapseOne"
                     >
-                      <SizeSensitive
-                        mobileContent="mobile"
-                        regularContent="regular"
-                      />
+                      Artists
                     </button>
                   </h5>
                 </div>
@@ -109,6 +124,13 @@ class Shop extends Component {
           </div>
         </div>
       </div>
+    );
+
+    return (
+      <SizeSensitive
+        mobileContent={mobileContent}
+        regularContent={regularContent}
+      />
     );
   }
 }

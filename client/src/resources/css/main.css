@@ -7359,6 +7359,9 @@ body {
 h1, h2, h3, h4, h5, h6 {
   font-family: "Righteous", cursive; }
 
+.navbar {
+  box-sizing: border-box; }
+
 .header-logo {
   max-width: 50px;
   margin: 0 1rem; }
@@ -7428,6 +7431,9 @@ h1, h2, h3, h4, h5, h6 {
   min-height: 100vh;
   flex-direction: column;
   justify-content: space-between; }
+
+.main-content {
+  margin-top: 56px; }
 
 .product-card-preview {
   margin-bottom: 0.6em; }
@@ -7529,6 +7535,17 @@ h1, h2, h3, h4, h5, h6 {
   width: 100%;
   height: auto; }
 
+.mobile-shop-toolbar {
+  display: flex;
+  justify-content: space-between;
+  padding: 0.6em 1em;
+  background-color: #f1f0ee; }
+
+.mobile-shop-toolbar-buttons {
+  display: flex;
+  justify-content: space-between;
+  align-content: center; }
+
 .shop {
   margin: 5rem auto; }
 
@@ -7596,12 +7613,9 @@ h1, h2, h3, h4, h5, h6 {
   font-weight: 600;
   text-decoration: none; }
 
-.user-dashboard-wrapper {
-  min-height: 100vh;
-  margin-top: 6rem; }
-  @media (max-width: 767.98px) {
-    .user-dashboard-wrapper .nav-item {
-      padding: 0; } }
+@media (max-width: 767.98px) {
+  .user-dashboard-wrapper .nav-item {
+    padding: 0; } }
 
 .account-section {
   margin: 1em 0;

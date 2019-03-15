@@ -9,7 +9,7 @@ import Login from "./components/Auth/Login";
 import Register from "./components/Auth/Register";
 
 import UserDashboard from "./components/User";
-import Shop from "./components/Shop.js";
+import Shop from "./components/Shop";
 
 const Routes = () => {
   return (

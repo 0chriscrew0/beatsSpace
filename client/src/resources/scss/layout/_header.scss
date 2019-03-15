@@ -2,6 +2,10 @@
 // This file contains all styles related to the header of the site/application.
 // -----------------------------------------------------------------------------
 
+.navbar {
+  box-sizing: border-box;
+}
+
 .header-logo {
   max-width: 50px;
   margin: 0 1rem;

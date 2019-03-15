@@ -1,6 +1,4 @@
 .user-dashboard-wrapper {
-  min-height: 100vh;
-  margin-top: 6rem;
   @include media-breakpoint-down(sm) {
     .nav-item {
       padding: 0;

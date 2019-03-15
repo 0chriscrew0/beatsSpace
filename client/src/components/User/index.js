@@ -7,7 +7,7 @@ import Cart from "./Cart";
 const UserDashboard = props => {
   return (
     <div className="container user-dashboard-wrapper">
-      <h4 className="mb-5">My Account</h4>
+      <h4 className="pb-3 pt-4">My Account</h4>
       <ul className="nav nav-tabs" id="myTab" role="tablist">
         <li className="nav-item">
           <a

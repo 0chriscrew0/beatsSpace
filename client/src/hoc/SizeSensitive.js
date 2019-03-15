@@ -12,6 +12,10 @@ class SizeSensitive extends Component {
     window.addEventListener("resize", this.handleSizeChange);
   }
 
+  componentWillUnmount() {
+    window.removeEventListener("resize", this.handleSizeChange);
+  }
+
   handleSizeChange = () => {
     this.setState({ width: window.innerWidth });
   };
