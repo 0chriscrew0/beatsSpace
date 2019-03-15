@@ -16,7 +16,8 @@
 @import "components/button", "components/product-card";
 
 // 6. Page-specific styles
-@import "pages/home", "pages/login", "pages/register", "pages/userDashboard";
+@import "pages/home", "pages/shop", "pages/login", "pages/register",
+  "pages/userDashboard";
 
 // 7. Themes
 @import "themes/default";

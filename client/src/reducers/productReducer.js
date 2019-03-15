@@ -1,6 +1,8 @@
 import {
   GET_PRODUCTS_BY_ARRIVAL,
-  GET_PRODUCTS_BY_SALES
+  GET_PRODUCTS_BY_SALES,
+  GET_ARTISTS,
+  GET_GENRES
 } from "../actions/types";
 
 export default function(state = {}, action) {
@@ -14,6 +16,16 @@ export default function(state = {}, action) {
       return {
         ...state,
         bySales: action.payload
+      };
+    case GET_ARTISTS:
+      return {
+        ...state,
+        artists: action.payload
+      };
+    case GET_GENRES:
+      return {
+        ...state,
+        genres: action.payload
       };
     default:
       return state;

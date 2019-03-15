@@ -9,12 +9,14 @@ import Login from "./components/Auth/Login";
 import Register from "./components/Auth/Register";
 
 import UserDashboard from "./components/User";
+import Shop from "./components/Shop.js";
 
 const Routes = () => {
   return (
     <Layout>
       <Switch>
         <Route path="/" component={AuthRoute(Home, null)} exact />
+        <Route path="/shop" component={AuthRoute(Shop, null)} />
         <Route
           path="/user/dashboard"
           component={AuthRoute(UserDashboard, true)}

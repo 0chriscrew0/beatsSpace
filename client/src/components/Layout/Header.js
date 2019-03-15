@@ -10,8 +10,8 @@ class Header extends Component {
     isOpen: false,
     links: [
       {
-        name: "Beats",
-        url: "/beats",
+        name: "Shop",
+        url: "/shop",
         public: true
       },
       {
