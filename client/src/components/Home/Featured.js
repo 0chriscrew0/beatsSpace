@@ -1,12 +1,11 @@
-import React, { Component } from "react";
+import React from "react";
 
 import Image00 from "../../resources/img/featured-image-01.jpg";
-import Image01 from "../../resources/img/featured-image-02.jpg";
-import Image02 from "../../resources/img/featured-image-03.jpg";
+// import Image01 from "../../resources/img/featured-image-02.jpg";
+// import Image02 from "../../resources/img/featured-image-03.jpg";
 import ProductCard from "../Utils/ProductCard";
 
 const Featured = props => {
-  console.log(props);
   const renderCards = () =>
     props.list
       ? props.list.map((item, index) => (

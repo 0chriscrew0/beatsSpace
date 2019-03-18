@@ -89,6 +89,36 @@ app.get("/api/product/getBeats", (req, res) => {
   });
 });
 
+app.post("/api/product/shop", (req, res) => {
+  let order = req.body.order ? req.body.order : "desc";
+  let sortBy = req.body.sortBy ? req.body.sortBy : "_id";
+  let limit = req.body.limit ? parseInt(req.body.limit) : 100;
+  let skip = parseInt(req.body.skip);
+  let findArgs = {};
+
+  for (let key in req.body.filters) {
+    if (req.body.filters[key].length > 0) {
+      findArgs[key] = req.body.filters[key];
+    }
+  }
+  Beat.find(findArgs)
+    .populate("artist")
+    .populate("genre")
+    .sort([[sortBy, order]])
+    .skip(skip)
+    .limit(limit)
+    .exec((err, beats) => {
+      if (err) {
+        return res.status(400).send(err);
+      }
+
+      res.status(200).json({
+        size: beats.length,
+        beats
+      });
+    });
+});
+
 //-----------------------------
 //           Artist
 //-----------------------------

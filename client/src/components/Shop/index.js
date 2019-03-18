@@ -1,39 +1,65 @@
 import React, { Component } from "react";
 
 import { connect } from "react-redux";
-import { getArtists, getGenres } from "../../actions/productActions";
+import {
+  getProducts,
+  getArtists,
+  getGenres
+} from "../../actions/productActions";
 import SizeSensitive from "../../hoc/SizeSensitive";
+import ToolBar from "./ToolBar";
+import CheckBoxGroup from "./CheckBoxGroup";
+import RadioGroup from "./RadioGroup";
 
 class Shop extends Component {
+  state = {
+    grid: "",
+    limit: 6,
+    skip: 0,
+    filters: {
+      artist: [],
+      genre: [],
+      price: []
+    }
+  };
+
   componentDidMount() {
     this.props.dispatch(getArtists());
     this.props.dispatch(getGenres());
+
+    this.props.dispatch(
+      getProducts(this.state.skip, this.state.limit, this.state.filters)
+    );
   }
+
+  handleFilters = (filters, category) => {
+    const newFilters = { ...this.state.filters };
+
+    newFilters[category] = filters;
+
+    this.showFiltered(newFilters);
+    this.setState({ filters: newFilters });
+  };
+
+  showFiltered = filters => {
+    this.props.dispatch(getProducts(0, this.state.limit, filters)).then(() => {
+      this.setState({ skip: 0 });
+    });
+  };
 
   render() {
     const products = this.props.products;
 
     const mobileContent = (
       <div className="mobile-shop">
-        <div className="mobile-shop-toolbar">
-          <h4 className="mb-0">Beats</h4>
-          <div className="mobile-shop-toolbar-buttons">
-            <button className="btn btn-sm btn-outline-primary">Sort</button>
-            <button className="btn btn-sm btn-outline-primary ml-2">
-              Filter
-            </button>
-            <button className="btn btn-sm ml-2">
-              <i className="fas fa-th-large" />
-            </button>
-          </div>
-        </div>
+        <ToolBar mobile />
       </div>
     );
 
     const regularContent = (
       <div className="container shop">
-        <div className="row my-5">
-          <div className="col-sm-4">
+        <div className="row">
+          <div className="col-sm-3">
             <div className="accordion" id="accordionExample">
               <div className="card">
                 <div className="card-header" id="headingOne">
@@ -55,12 +81,14 @@ class Shop extends Component {
                   id="collapseOne"
                   className="collapse show"
                   aria-labelledby="headingOne"
-                  data-parent="#accordionExample"
                 >
                   <div className="card-body">
-                    Anim pariatur cliche reprehenderit, enim eiusmod high life
-                    accusamus terry richardson ad squid. 3 wolf moon officia
-                    aute, non cupidatat skateboard dolor brunch.
+                    <CheckBoxGroup
+                      list={products.artists}
+                      handleFilters={filters =>
+                        this.handleFilters(filters, "artist")
+                      }
+                    />
                   </div>
                 </div>
               </div>
@@ -68,11 +96,11 @@ class Shop extends Component {
                 <div className="card-header" id="headingTwo">
                   <h5 className="mb-0">
                     <button
-                      className="btn btn-link collapsed"
+                      className="btn btn-link"
                       type="button"
                       data-toggle="collapse"
                       data-target="#collapseTwo"
-                      aria-expanded="false"
+                      aria-expanded="true"
                       aria-controls="collapseTwo"
                     >
                       Genres
@@ -81,14 +109,16 @@ class Shop extends Component {
                 </div>
                 <div
                   id="collapseTwo"
-                  className="collapse"
+                  className="collapse show"
                   aria-labelledby="headingTwo"
-                  data-parent="#accordionExample"
                 >
                   <div className="card-body">
-                    Anim pariatur cliche reprehenderit, enim eiusmod high life
-                    accusamus terry richardson ad squid. 3 wolf moon officia
-                    aute, non cupidatat skateboard dolor brunch.
+                    <CheckBoxGroup
+                      list={products.genres}
+                      handleFilters={filters =>
+                        this.handleFilters(filters, "genre")
+                      }
+                    />
                   </div>
                 </div>
               </div>
@@ -96,11 +126,11 @@ class Shop extends Component {
                 <div className="card-header" id="headingThree">
                   <h5 className="mb-0">
                     <button
-                      className="btn btn-link collapsed"
+                      className="btn btn-link"
                       type="button"
                       data-toggle="collapse"
                       data-target="#collapseThree"
-                      aria-expanded="false"
+                      aria-expanded="true"
                       aria-controls="collapseThree"
                     >
                       Price
@@ -109,18 +139,16 @@ class Shop extends Component {
                 </div>
                 <div
                   id="collapseThree"
-                  className="collapse"
+                  className="collapse show"
                   aria-labelledby="headingThree"
-                  data-parent="#accordionExample"
                 >
-                  <div className="card-body">
-                    Anim pariatur cliche reprehenderit, enim eiusmod high life
-                    accusamus terry richardson ad squid. 3 wolf moon officia
-                    aute, non cupidatat skateboard dolor brunch.
-                  </div>
+                  <div className="card-body" />
                 </div>
               </div>
             </div>
+          </div>
+          <div className="col-sm-9">
+            <ToolBar />
           </div>
         </div>
       </div>

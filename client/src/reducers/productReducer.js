@@ -1,4 +1,5 @@
 import {
+  GET_PRODUCTS,
   GET_PRODUCTS_BY_ARRIVAL,
   GET_PRODUCTS_BY_SALES,
   GET_ARTISTS,
@@ -7,6 +8,12 @@ import {
 
 export default function(state = {}, action) {
   switch (action.type) {
+    case GET_PRODUCTS:
+      return {
+        ...state,
+        beats: action.payload.beats,
+        size: action.payload.size
+      };
     case GET_PRODUCTS_BY_ARRIVAL:
       return {
         ...state,

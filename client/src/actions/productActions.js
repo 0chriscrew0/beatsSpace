@@ -1,5 +1,6 @@
 import axios from "axios";
 import {
+  GET_PRODUCTS,
   GET_PRODUCTS_BY_SALES,
   GET_PRODUCTS_BY_ARRIVAL,
   GET_ARTISTS,
@@ -11,6 +12,26 @@ import { PRODUCT_ROUTES } from "../utils/misc";
 // ======================
 // PRODUCTS
 // ======================
+
+export function getProducts(skip, limit, filters = {}, previousState = {}) {
+  const data = {
+    limit,
+    skip,
+    filters
+  };
+
+  const request = axios.post(`${PRODUCT_ROUTES}/shop`, data).then(response => {
+    return {
+      size: response.data.size,
+      beats: response.data.beats
+    };
+  });
+
+  return {
+    type: GET_PRODUCTS,
+    payload: request
+  };
+}
 
 export function getProductsBySales() {
   const request = axios
