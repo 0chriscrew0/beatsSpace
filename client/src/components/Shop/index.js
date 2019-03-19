@@ -10,10 +10,12 @@ import SizeSensitive from "../../hoc/SizeSensitive";
 import ToolBar from "./ToolBar";
 import CheckBoxGroup from "./CheckBoxGroup";
 import RadioGroup from "./RadioGroup";
+import LoadProductCards from "./LoadProductCards";
 
 class Shop extends Component {
   state = {
-    grid: "",
+    grid: "4",
+    mobileGrid: "12",
     limit: 6,
     skip: 0,
     filters: {
@@ -47,19 +49,54 @@ class Shop extends Component {
     });
   };
 
+  loadMore = () => {
+    let skip = this.state.skip + this.state.limit;
+
+    this.props
+      .dispatch(
+        getProducts(
+          skip,
+          this.state.limit,
+          this.state.filters,
+          this.props.products.beats
+        )
+      )
+      .then(() => {
+        this.setState({ skip });
+      });
+  };
+
+  handleGrid = () => {
+    this.setState({
+      grid: this.state.grid === "4" ? "6" : "4",
+      mobileGrid: this.state.mobileGrid === "12" ? "6" : "12"
+    });
+  };
+
   render() {
     const products = this.props.products;
 
     const mobileContent = (
       <div className="mobile-shop">
-        <ToolBar mobile />
+        <ToolBar
+          mobile
+          grid={this.state.mobileGrid}
+          handleGrid={() => this.handleGrid()}
+        />
+        <LoadProductCards
+          grid={this.state.mobileGrid}
+          limit={this.state.limit}
+          size={products.size}
+          beats={products.beats}
+          loadMore={() => this.loadMore()}
+        />
       </div>
     );
 
     const regularContent = (
       <div className="container shop">
         <div className="row">
-          <div className="col-sm-3">
+          <div className="col-sm-4">
             <div className="accordion" id="accordionExample">
               <div className="card">
                 <div className="card-header" id="headingOne">
@@ -147,8 +184,18 @@ class Shop extends Component {
               </div>
             </div>
           </div>
-          <div className="col-sm-9">
-            <ToolBar />
+          <div className="col-sm-8">
+            <ToolBar
+              grid={this.state.grid}
+              handleGrid={() => this.handleGrid()}
+            />
+            <LoadProductCards
+              grid={this.state.grid}
+              limit={this.state.limit}
+              size={products.size}
+              beats={products.beats}
+              loadMore={() => this.loadMore()}
+            />
           </div>
         </div>
       </div>

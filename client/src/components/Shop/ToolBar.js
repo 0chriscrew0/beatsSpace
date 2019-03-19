@@ -1,6 +1,6 @@
 import React from "react";
 
-const ToolBar = ({ mobile }) => {
+const ToolBar = ({ mobile, handleGrid, grid }) => {
   return (
     <div className="mobile-shop-toolbar">
       <h4 className="mb-0">Beats</h4>
@@ -14,9 +14,11 @@ const ToolBar = ({ mobile }) => {
           </button>
         ) : null}
 
-        <button className="btn btn-sm ml-2">
-          <i className="fas fa-th-large" />
-        </button>
+        {mobile ? null : (
+          <button className="btn btn-sm ml-2" onClick={() => handleGrid()}>
+            <i className={grid === "4" ? `fas fa-th-large` : "fas fa-th"} />
+          </button>
+        )}
       </div>
     </div>
   );

@@ -13,7 +13,7 @@ import { PRODUCT_ROUTES } from "../utils/misc";
 // PRODUCTS
 // ======================
 
-export function getProducts(skip, limit, filters = {}, previousState = {}) {
+export function getProducts(skip, limit, filters = [], previousState = []) {
   const data = {
     limit,
     skip,
@@ -21,9 +21,11 @@ export function getProducts(skip, limit, filters = {}, previousState = {}) {
   };
 
   const request = axios.post(`${PRODUCT_ROUTES}/shop`, data).then(response => {
+    let newState = [...previousState, ...response.data.beats];
+
     return {
       size: response.data.size,
-      beats: response.data.beats
+      beats: newState
     };
   });
 

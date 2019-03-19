@@ -1,7 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
-import DefaultImage from "../../resources/img/logo.png";
+import DefaultImage from "../../resources/img/featured-image-01.jpg";
 
 const ProductCard = ({ type, _id, image, name, price }) => {
   return (
@@ -12,8 +12,9 @@ const ProductCard = ({ type, _id, image, name, price }) => {
         alt="beat"
       />
       <div className="card-body">
-        <h5 className="card-title">
-          {name} - {`$${price}`}
+        <h5 className="card-title display-6">
+          <div>{name}</div>
+          <div>{`$${price}`}</div>
         </h5>
 
         {/* <div className="product-card-preview">
