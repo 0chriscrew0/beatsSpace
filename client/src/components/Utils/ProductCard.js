@@ -5,14 +5,14 @@ import DefaultImage from "../../resources/img/featured-image-01.jpg";
 
 const ProductCard = ({ type, _id, image, name, price }) => {
   return (
-    <div className={`card ${type}-card`}>
+    <div className={`card product-card`}>
       <img
-        className={`card-img-top img-fluid ${type}-card__img`}
+        className={`card-img-top img-fluid product-card__img`}
         src={image ? image : DefaultImage}
         alt="beat"
       />
-      <div className="card-body">
-        <h5 className="card-title display-6">
+      <div className="card-body d-flex flex-column justify-content-between">
+        <h5 className="product-title">
           <div>{name}</div>
           <div>{`$${price}`}</div>
         </h5>

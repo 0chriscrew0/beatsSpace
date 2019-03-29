@@ -1,10 +1,13 @@
-import React from "react";
+import React, { Fragment } from "react";
 
 import Account from "./Account";
 import Profile from "./Profile";
 import Cart from "./Cart";
+import Admin from "./Admin";
 
 const UserDashboard = props => {
+  const { isAdmin } = props.user.userData;
+
   return (
     <div className="container user-dashboard-wrapper">
       <h4 className="pb-3 pt-4">My Account</h4>
@@ -48,6 +51,23 @@ const UserDashboard = props => {
             My Cart
           </a>
         </li>
+        {isAdmin ? (
+          <Fragment>
+            <li className="nav-item">
+              <a
+                className="nav-link"
+                id="site-info-tab"
+                data-toggle="tab"
+                href="#site-info"
+                role="tab"
+                aria-controls="site-info"
+                aria-selected="false"
+              >
+                Admin
+              </a>
+            </li>
+          </Fragment>
+        ) : null}
       </ul>
       <div className="tab-content" id="myTabContent">
         <div
@@ -74,6 +94,18 @@ const UserDashboard = props => {
         >
           <Cart />
         </div>
+        {isAdmin ? (
+          <Fragment>
+            <div
+              className="tab-pane fade"
+              id="site-info"
+              role="tabpanel"
+              aria-labelledby="site-info-tab"
+            >
+              <Admin />
+            </div>
+          </Fragment>
+        ) : null}
       </div>
     </div>
   );

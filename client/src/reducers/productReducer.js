@@ -3,7 +3,9 @@ import {
   GET_PRODUCTS_BY_ARRIVAL,
   GET_PRODUCTS_BY_SALES,
   GET_ARTISTS,
-  GET_GENRES
+  GET_GENRES,
+  ADD_PRODUCT,
+  CLEAR_PRODUCT
 } from "../actions/types";
 
 export default function(state = {}, action) {
@@ -33,6 +35,16 @@ export default function(state = {}, action) {
       return {
         ...state,
         genres: action.payload
+      };
+    case ADD_PRODUCT:
+      return {
+        ...state,
+        addedProduct: action.payload
+      };
+    case CLEAR_PRODUCT:
+      return {
+        ...state,
+        addedProduct: action.payload
       };
     default:
       return state;

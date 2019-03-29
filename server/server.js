@@ -101,6 +101,7 @@ app.post("/api/product/shop", (req, res) => {
       findArgs[key] = req.body.filters[key];
     }
   }
+
   Beat.find(findArgs)
     .populate("artist")
     .populate("genre")

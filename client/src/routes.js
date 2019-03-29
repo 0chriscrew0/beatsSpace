@@ -9,6 +9,7 @@ import Login from "./components/Auth/Login";
 import Register from "./components/Auth/Register";
 
 import UserDashboard from "./components/User";
+import AddProduct from "./components/User/Admin/AddProduct";
 import Shop from "./components/Shop";
 
 const Routes = () => {
@@ -20,6 +21,10 @@ const Routes = () => {
         <Route
           path="/user/dashboard"
           component={AuthRoute(UserDashboard, true)}
+        />
+        <Route
+          path="/admin/add-product"
+          component={AuthRoute(AddProduct, true)}
         />
 
         <Route path="/login" component={AuthRoute(Login, false)} />

@@ -7438,9 +7438,31 @@ h1, h2, h3, h4, h5, h6 {
 .product-card-preview {
   margin-bottom: 0.6em; }
 
+@media (max-width: 991.98px) {
+  .col-4 .product-card .card-body {
+    padding: 0.8em; }
+    .col-4 .product-card .card-body .btn {
+      font-size: 0.8rem !important; } }
+
 .product-card-buttons {
   display: flex;
   justify-content: space-between; }
+
+.product-title {
+  margin-bottom: 0.8em; }
+  @media (min-width: 576px) {
+    .product-title {
+      text-align: left; } }
+
+.product-card {
+  width: 100%;
+  margin: 0.6em auto; }
+  .product-card div {
+    background-color: #f1f0ee; }
+
+.product-card__img {
+  width: 100%;
+  height: auto; }
 
 .home-page {
   height: 100%; }

@@ -34,14 +34,6 @@ const beatSchema = new Schema(
       ref: "Artist",
       required: true
     },
-    available: {
-      type: Boolean,
-      required: true
-    },
-    publish: {
-      type: Boolean,
-      required: true
-    },
     images: {
       type: Array,
       default: []

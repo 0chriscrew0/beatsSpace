@@ -192,9 +192,6 @@ class Register extends Component {
                 {this.state.formError && <div>Please provide valid data.</div>}
               </div>
               <div className="form-group">
-                {this.state.formError && <div>Please provide valid data.</div>}
-              </div>
-              <div className="form-group">
                 <button
                   className="btnSubmit"
                   onClick={event => this.submitForm(event)}

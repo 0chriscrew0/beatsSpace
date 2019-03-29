@@ -2,7 +2,41 @@
   margin-bottom: 0.6em;
 }
 
+@include media-breakpoint-down(md) {
+  .col-4 {
+    .product-card {
+      .card-body {
+        padding: 0.8em;
+        .btn {
+          font-size: 0.8rem !important;
+        }
+      }
+    }
+  }
+}
+
 .product-card-buttons {
   display: flex;
   justify-content: space-between;
+}
+
+.product-title {
+  // text-align: center;
+  margin-bottom: 0.8em;
+  @include media-breakpoint-up(sm) {
+    text-align: left;
+  }
+}
+
+.product-card {
+  width: 100%;
+  margin: 0.6em auto;
+  div {
+    background-color: $gray;
+  }
+}
+
+.product-card__img {
+  width: 100%;
+  height: auto;
 }

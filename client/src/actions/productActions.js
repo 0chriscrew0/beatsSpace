@@ -4,7 +4,9 @@ import {
   GET_PRODUCTS_BY_SALES,
   GET_PRODUCTS_BY_ARRIVAL,
   GET_ARTISTS,
-  GET_GENRES
+  GET_GENRES,
+  ADD_PRODUCT,
+  CLEAR_PRODUCT
 } from "./types";
 
 import { PRODUCT_ROUTES } from "../utils/misc";
@@ -54,6 +56,24 @@ export function getProductsByArrival() {
   return {
     type: GET_PRODUCTS_BY_ARRIVAL,
     payload: request
+  };
+}
+
+export function addProduct(formattedData) {
+  const request = axios
+    .post(`${PRODUCT_ROUTES}/createBeat`, formattedData)
+    .then(response => response.data);
+
+  return {
+    type: ADD_PRODUCT,
+    payload: request
+  };
+}
+
+export function clearNewProduct() {
+  return {
+    type: CLEAR_PRODUCT,
+    payload: {}
   };
 }
 

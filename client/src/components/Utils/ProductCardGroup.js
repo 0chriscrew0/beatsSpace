@@ -6,7 +6,10 @@ const ProductCardGroup = props => {
     return props.beats
       ? props.beats.map(beat => {
           return (
-            <div className={`col-${props.grid} my-2`} key={beat._id}>
+            <div
+              className={`col-${props.grid} my-2 d-flex align-items-stretch`}
+              key={beat._id}
+            >
               <ProductCard {...beat} />
             </div>
           );

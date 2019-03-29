@@ -8,9 +8,8 @@ import {
 } from "../../actions/productActions";
 import SizeSensitive from "../../hoc/SizeSensitive";
 import ToolBar from "./ToolBar";
-import CheckBoxGroup from "./CheckBoxGroup";
-import RadioGroup from "./RadioGroup";
 import LoadProductCards from "./LoadProductCards";
+import Filter from "./Filter";
 
 class Shop extends Component {
   state = {
@@ -82,6 +81,9 @@ class Shop extends Component {
           mobile
           grid={this.state.mobileGrid}
           handleGrid={() => this.handleGrid()}
+          filter={
+            <Filter products={products} handleFilters={this.handleFilters} />
+          }
         />
         <LoadProductCards
           grid={this.state.mobileGrid}
@@ -96,95 +98,10 @@ class Shop extends Component {
     const regularContent = (
       <div className="container shop">
         <div className="row">
-          <div className="col-sm-4">
-            <div className="accordion" id="accordionExample">
-              <div className="card">
-                <div className="card-header" id="headingOne">
-                  <h5 className="mb-0">
-                    <button
-                      className="btn btn-link"
-                      type="button"
-                      data-toggle="collapse"
-                      data-target="#collapseOne"
-                      aria-expanded="true"
-                      aria-controls="collapseOne"
-                    >
-                      Artists
-                    </button>
-                  </h5>
-                </div>
-
-                <div
-                  id="collapseOne"
-                  className="collapse show"
-                  aria-labelledby="headingOne"
-                >
-                  <div className="card-body">
-                    <CheckBoxGroup
-                      list={products.artists}
-                      handleFilters={filters =>
-                        this.handleFilters(filters, "artist")
-                      }
-                    />
-                  </div>
-                </div>
-              </div>
-              <div className="card">
-                <div className="card-header" id="headingTwo">
-                  <h5 className="mb-0">
-                    <button
-                      className="btn btn-link"
-                      type="button"
-                      data-toggle="collapse"
-                      data-target="#collapseTwo"
-                      aria-expanded="true"
-                      aria-controls="collapseTwo"
-                    >
-                      Genres
-                    </button>
-                  </h5>
-                </div>
-                <div
-                  id="collapseTwo"
-                  className="collapse show"
-                  aria-labelledby="headingTwo"
-                >
-                  <div className="card-body">
-                    <CheckBoxGroup
-                      list={products.genres}
-                      handleFilters={filters =>
-                        this.handleFilters(filters, "genre")
-                      }
-                    />
-                  </div>
-                </div>
-              </div>
-              <div className="card">
-                <div className="card-header" id="headingThree">
-                  <h5 className="mb-0">
-                    <button
-                      className="btn btn-link"
-                      type="button"
-                      data-toggle="collapse"
-                      data-target="#collapseThree"
-                      aria-expanded="true"
-                      aria-controls="collapseThree"
-                    >
-                      Price
-                    </button>
-                  </h5>
-                </div>
-                <div
-                  id="collapseThree"
-                  className="collapse show"
-                  aria-labelledby="headingThree"
-                >
-                  <div className="card-body" />
-                </div>
-              </div>
-            </div>
+          <div className="col-sm-3">
+            <Filter products={products} handleFilters={this.handleFilters} />
           </div>
-          <div className="col-sm-8">
+          <div className="col-sm-9">
             <ToolBar
               grid={this.state.grid}
               handleGrid={() => this.handleGrid()}
