@@ -1,218 +1,118 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
-import {
-  update,
-  formatData,
-  validateForm
-} from "../../utils/Forms/FormActions";
-
 import { connect } from "react-redux";
+
+import { withFormik, Form, Field } from "formik";
+import * as Yup from "yup";
+
 import { registerUser } from "../../actions/userActions";
 
-import FormField from "../../utils/Forms/FormField";
-
 class Register extends Component {
-  state = {
-    formError: false,
-    formSuccess: false,
-    formData: {
-      name: {
-        element: "input",
-        value: "",
-        config: {
-          name: "name",
-          type: "text",
-          placeholder: "First Name"
-        },
-        validation: {
-          required: true
-        },
-        isValid: false,
-        touched: false,
-        validationMessage: ""
-      },
-      lastname: {
-        element: "input",
-        value: "",
-        config: {
-          name: "lastname",
-          type: "text",
-          placeholder: "Last Name"
-        },
-        validation: {
-          required: true
-        },
-        isValid: false,
-        touched: false,
-        validationMessage: ""
-      },
-      email: {
-        element: "input",
-        value: "",
-        config: {
-          name: "email",
-          type: "email",
-          placeholder: "Enter your email"
-        },
-        validation: {
-          required: true,
-          email: true
-        },
-        isValid: false,
-        touched: false,
-        validationMessage: ""
-      },
-      password: {
-        element: "input",
-        value: "",
-        config: {
-          name: "password",
-          type: "password",
-          placeholder: "Create a password"
-        },
-        validation: {
-          required: true
-        },
-        isValid: false,
-        touched: false,
-        validationMessage: ""
-      },
-      password2: {
-        element: "input",
-        value: "",
-        config: {
-          name: "password2",
-          type: "password",
-          placeholder: "Confirm password"
-        },
-        validation: {
-          required: true,
-          confirm: "password"
-        },
-        isValid: false,
-        touched: false,
-        validationMessage: ""
-      }
-    }
-  };
-
-  updateForm = element => {
-    const newFormData = update(element, this.state.formData, "register");
-    this.setState({
-      formError: false,
-      formData: newFormData
-    });
-  };
-
-  submitForm = event => {
-    event.preventDefault();
-
-    let formattedData = formatData(this.state.formData, "register");
-    let isFormValid = validateForm(this.state.formData);
-
-    if (isFormValid) {
-      this.props
-        .dispatch(registerUser(formattedData))
-        .then(response => {
-          if (response.payload.success) {
-            this.setState({ formError: false, formSuccess: true });
-            setTimeout(() => {
-              this.props.history.push("/login");
-            }, 3000);
-          } else {
-            this.setState({ formError: true });
-          }
-        })
-        .catch(err => {
-          this.setState({ formError: true });
-        });
-    } else {
-      this.setState({ formError: true });
-    }
-  };
-
   render() {
+    const { errors, touched, isSubmitting } = this.props;
     return (
-      <div className="container mt-5 login-container">
-        <div className="row my-5">
-          <div className="col-md-6 mx-auto my-5 login-form">
-            <h3>Make an Account</h3>
-            {this.state.formSuccess && (
-              <div>
-                Your account has been created, redirecting you to login page.
-              </div>
-            )}
-            <form onSubmit={event => this.submitForm(event)}>
-              <div className="form-group">
-                <FormField
-                  type="text"
-                  className="form-control"
-                  id="name"
-                  formData={this.state.formData.name}
-                  change={element => this.updateForm(element)}
-                />
-              </div>
-              <div className="form-group">
-                <FormField
-                  type="text"
-                  className="form-control"
-                  id="lastname"
-                  formData={this.state.formData.lastname}
-                  change={element => this.updateForm(element)}
-                />
-              </div>
-              <div className="form-group">
-                <FormField
-                  type="email"
-                  className="form-control"
-                  id="email"
-                  formData={this.state.formData.email}
-                  change={element => this.updateForm(element)}
-                />
-              </div>
-              <div className="form-group">
-                <FormField
-                  type="password"
-                  className="form-control"
-                  id="password"
-                  formData={this.state.formData.password}
-                  change={element => this.updateForm(element)}
-                />
-              </div>
-              <div className="form-group">
-                <FormField
-                  type="password"
-                  className="form-control"
-                  id="password2"
-                  formData={this.state.formData.password2}
-                  change={element => this.updateForm(element)}
-                />
-              </div>
-              <div className="form-group">
-                {this.state.formError && <div>Please provide valid data.</div>}
-              </div>
-              <div className="form-group">
-                <button
-                  className="btnSubmit"
-                  onClick={event => this.submitForm(event)}
-                >
-                  Register
-                </button>
-              </div>
-              <div className="form-group">
-                <span>
-                  Already have an account?{" "}
-                  <Link to="/login" className="login">
-                    Login
-                  </Link>
-                </span>
-              </div>
-            </form>
+      <div className="container py-5">
+        <Form>
+          <div>
+            {touched.firstname && errors.firstname && <p>{errors.firstname}</p>}
+            <Field
+              className="form-control"
+              type="text"
+              name="firstname"
+              placeholder="First Name"
+            />
           </div>
+          <div>
+            {touched.lastname && errors.lastname && <p>{errors.lastname}</p>}
+            <Field
+              className="form-control"
+              type="text"
+              name="lastname"
+              placeholder="Last Name"
+            />
+          </div>
+
+          <div>
+            {touched.email && errors.email && <p>{errors.email}</p>}
+            <Field
+              className="form-control"
+              type="email"
+              name="email"
+              placeholder="Email"
+            />
+          </div>
+
+          <div>
+            {touched.password && errors.password && <p>{errors.password}</p>}
+            <Field
+              className="form-control"
+              type="password"
+              name="password"
+              placeholder="Password"
+            />
+          </div>
+          <div>
+            {touched.password2 && errors.password2 && <p>{errors.password2}</p>}
+            <Field
+              className="form-control"
+              type="password"
+              name="password2"
+              placeholder="Confirm Password"
+            />
+          </div>
+
+          <button
+            disabled={isSubmitting}
+            className="btn btn-primary"
+            type="submit"
+          >
+            Submit
+          </button>
+        </Form>
+
+        <div>
+          <p>Already have an account?</p>
+          <Link className="btn btn-outline-primary" to="/login">
+            Login
+          </Link>
         </div>
       </div>
     );
   }
 }
 
-export default connect()(Register);
+export default withFormik({
+  mapPropsToValues({ firstname, lastname, email, password, password2 }) {
+    return {
+      firstname: firstname || "",
+      lastname: lastname || "",
+      email: email || "",
+      password: password || "",
+      password2: password2 || ""
+    };
+  },
+  validationSchema: Yup.object().shape({
+    firstname: Yup.string()
+      .min(2)
+      .required(),
+    lastname: Yup.string()
+      .min(2)
+      .required(),
+    email: Yup.string()
+      .email()
+      .required(),
+    password: Yup.string()
+      .min(6)
+      .required(),
+    password2: Yup.string()
+      .oneOf([Yup.ref("password")], "Passwords must match")
+      .required()
+  }),
+  handleSubmit(values, { props }) {
+    props.dispatch(registerUser(values)).then(response => {
+      if (response.payload.success) {
+        props.history.push("/login");
+      }
+    });
+  }
+})(connect()(Register));

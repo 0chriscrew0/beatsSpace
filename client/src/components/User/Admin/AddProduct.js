@@ -1,15 +1,9 @@
 import React, { Component } from "react";
-
-import FormField from "../../../utils/Forms/FormField";
-import {
-  update,
-  validateForm,
-  formatData,
-  populateOptions,
-  resetFields
-} from "../../../utils/Forms/FormActions";
-
 import { connect } from "react-redux";
+
+import { withFormik, Form, Field } from "formik";
+import * as Yup from "yup";
+
 import {
   getArtists,
   getGenres,
@@ -19,217 +13,90 @@ import {
 
 class AddProduct extends Component {
   state = {
-    formError: false,
-    formSuccess: false,
-    formData: {
-      name: {
-        element: "input",
-        value: "",
-        config: {
-          name: "name",
-          type: "text",
-          placeholder: "Name"
-        },
-        validation: {
-          required: true
-        },
-        isValid: false,
-        touched: false,
-        validationMessage: ""
-      },
-      description: {
-        element: "textarea",
-        value: "",
-        config: {
-          name: "description",
-          placeholder: "Product Description"
-        },
-        validation: {
-          required: true
-        },
-        isValid: false,
-        touched: false,
-        validationMessage: ""
-      },
-      price: {
-        element: "input",
-        value: "",
-        config: {
-          name: "price",
-          type: "number",
-          placeholder: "Price"
-        },
-        validation: {
-          required: true
-        },
-        isValid: false,
-        touched: false,
-        validationMessage: ""
-      },
-      artist: {
-        element: "select",
-        value: "",
-        config: {
-          name: "artist",
-          options: []
-        },
-        validation: {
-          required: true
-        },
-        isValid: false,
-        touched: false,
-        validationMessage: ""
-      },
-      genre: {
-        element: "select",
-        value: "",
-        config: {
-          name: "genre",
-          options: []
-        },
-        validation: {
-          required: true
-        },
-        isValid: false,
-        touched: false,
-        validationMessage: ""
-      }
-    }
+    artists: [],
+    genres: []
   };
 
   componentDidMount() {
-    const { formData } = this.state;
-
     this.props.dispatch(getArtists()).then(response => {
-      const newFormData = populateOptions(
-        formData,
-        this.props.products.artists,
-        "artist"
-      );
-      this.updateFields(newFormData);
+      this.setState({ artists: response.payload });
     });
 
     this.props.dispatch(getGenres()).then(response => {
-      const newFormData = populateOptions(
-        formData,
-        this.props.products.genres,
-        "genre"
-      );
-      this.updateFields(newFormData);
+      this.setState({ genres: response.payload });
     });
   }
 
-  updateFields = newFormData => {
-    this.setState({ formData: newFormData });
-  };
-
-  resetFieldHandler = () => {
-    const newFormData = resetFields(this.state.formData, "products");
-
-    this.setState({
-      formData: newFormData,
-      formSuccess: true
-    });
-
-    setTimeout(() => {
-      this.setState({ formSuccess: false }, () => {
-        this.props.dispatch(clearNewProduct());
-      });
-    }, 3000);
-  };
-
-  updateForm = element => {
-    const newFormData = update(element, this.state.formData, "products");
-    this.setState({
-      formError: false,
-      formData: newFormData
-    });
-  };
-
-  submitForm = event => {
-    event.preventDefault();
-
-    let formattedData = formatData(this.state.formData, "products");
-    let isFormValid = validateForm(this.state.formData, "products");
-
-    if (isFormValid) {
-      this.props.dispatch(addProduct(formattedData)).then(() => {
-        console.log(this.props.products.addedProduct);
-        if (this.props.products.addedProduct.success) {
-          console.log("success");
-          this.resetFieldHandler();
-        } else {
-          console.log("not success");
-          this.setState({ formError: true });
-        }
-      });
-    } else {
-      console.log("not valid");
-      this.setState({ formError: true });
-    }
-  };
-
   render() {
+    const { errors, touched, isSubmitting } = this.props;
     return (
-      <div className="add-product">
+      <div className="add-product py-5">
         <div className="container">
-          <h4 className="pt-4 pb-3">Add Product</h4>
+          <h4 className="py-2">Add Product</h4>
 
-          <form onSubmit={event => this.submitForm(event)}>
+          <Form>
             <div className="form-group">
-              <FormField
+              <Field
+                className="form-control"
                 type="text"
-                className="form-control"
-                id="name"
-                formData={this.state.formData.name}
-                change={element => this.updateForm(element)}
+                name="name"
+                placeholder="Name"
               />
+              {touched.name && errors.name && <p>{errors.name}</p>}
             </div>
             <div className="form-group">
-              <FormField
-                type="textarea"
+              <Field
                 className="form-control"
-                id="description"
-                formData={this.state.formData.description}
-                change={element => this.updateForm(element)}
+                type="text"
+                name="description"
+                placeholder="Description"
               />
+              {touched.description && errors.description && (
+                <p>{errors.description}</p>
+              )}
             </div>
             <div className="form-group">
-              <FormField
+              <Field
+                className="form-control"
                 type="number"
-                className="form-control"
-                id="price"
-                formData={this.state.formData.price}
-                change={element => this.updateForm(element)}
+                name="price"
+                placeholder="Price"
               />
+              {touched.price && errors.price && <p>{errors.price}</p>}
             </div>
             <div className="form-group">
-              <FormField
-                type="text"
-                className="form-control"
-                id="artist"
-                formData={this.state.formData.artist}
-                change={element => this.updateForm(element)}
-              />
+              <Field className="form-control" component="select" name="artist">
+                <option defaultValue>Select genre</option>
+                {this.state.artists.map(artist => (
+                  <option key={artist._id} value={artist._id}>
+                    {artist.name}
+                  </option>
+                ))}
+              </Field>
+              {touched.artist && errors.artist && <p>{errors.artist}</p>}
             </div>
             <div className="form-group">
-              <FormField
-                type="text"
-                className="form-control"
-                id="genre"
-                formData={this.state.formData.genre}
-                change={element => this.updateForm(element)}
-              />
+              <Field className="form-control" component="select" name="genre">
+                <option defaultValue>Select genre</option>
+                {this.state.genres.map(genre => (
+                  <option key={genre._id} value={genre._id}>
+                    {genre.name}
+                  </option>
+                ))}
+              </Field>
+              {touched.description && errors.description && (
+                <p>{errors.description}</p>
+              )}
             </div>
-            <div className="form-group">
-              {this.state.formError && <div>Please provide valid data.</div>}
-            </div>
-            <div className="form-group">
-              <button type="submit" className="btn btn-primary">
-                Create
-              </button>
-            </div>
-          </form>
+
+            <button
+              disabled={isSubmitting}
+              className="btn btn-primary"
+              type="submit"
+            >
+              Add Product
+            </button>
+          </Form>
         </div>
       </div>
     );
@@ -242,4 +109,34 @@ const mapStateToProps = state => {
   };
 };
 
-export default connect(mapStateToProps)(AddProduct);
+export default withFormik({
+  mapPropsToValues({ name, description, price, artist, genre }) {
+    return {
+      name: name || "",
+      description: description || "",
+      price: price || "",
+      artist: artist || "",
+      genre: genre || ""
+    };
+  },
+  validationSchema: Yup.object().shape({
+    name: Yup.string()
+      .max(100)
+      .required(),
+    description: Yup.string()
+      .max(500)
+      .required(),
+    price: Yup.number().required(),
+    artist: Yup.string()
+      .max(100)
+      .required(),
+    genre: Yup.string()
+      .max(100)
+      .required()
+  }),
+  handleSubmit(values, { props }) {
+    props.dispatch(addProduct(values)).then(response => {
+      props.dispatch(clearNewProduct());
+    });
+  }
+})(connect(mapStateToProps)(AddProduct));
