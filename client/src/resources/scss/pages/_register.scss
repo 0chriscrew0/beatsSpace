@@ -1,34 +1,27 @@
-.login-container {
-  margin: 5% auto;
+.register-container {
+  margin: auto;
   max-width: 90%;
+  @include media-breakpoint-up(md) {
+    max-width: 50%;
+  }
 }
-.login-form {
+.register-form {
   padding: 5%;
   box-shadow: 0 5px 8px 0 rgba(0, 0, 0, 0.2), 0 9px 26px 0 rgba(0, 0, 0, 0.19);
 }
-.login-form h3 {
+.register-form h3 {
   text-align: center;
   color: #333;
 }
 
-.login-container form {
+.register-container form {
   padding: 10%;
 }
-.btnSubmit {
-  width: 50%;
-  border-radius: 1rem;
-  padding: 1.5%;
-  border: none;
-  cursor: pointer;
-}
-.login-form .btnSubmit {
-  font-weight: 600;
-  color: #fff;
-  background-color: $primary;
-}
 
-.login-form .ForgotPwd {
-  color: $primary;
-  font-weight: 600;
-  text-decoration: none;
+.login-button {
+  margin-top: 2rem;
+  p {
+    display: inline;
+    padding-right: 1rem;
+  }
 }

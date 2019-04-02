@@ -11,70 +11,96 @@ class Register extends Component {
   render() {
     const { errors, touched, isSubmitting } = this.props;
     return (
-      <div className="container py-5">
-        <Form>
-          <div>
-            {touched.firstname && errors.firstname && <p>{errors.firstname}</p>}
-            <Field
-              className="form-control"
-              type="text"
-              name="firstname"
-              placeholder="First Name"
-            />
-          </div>
-          <div>
-            {touched.lastname && errors.lastname && <p>{errors.lastname}</p>}
-            <Field
-              className="form-control"
-              type="text"
-              name="lastname"
-              placeholder="Last Name"
-            />
-          </div>
+      <div className="container">
+        <div className="register-container py-5">
+          <div className="register-form">
+            <h3 className="text-secondary">BeatsStore</h3>
+            <Form>
+              <h4 className="pb-1">Register</h4>
+              <div className="form-group">
+                <Field
+                  className={`form-control ${touched.firstname &&
+                    errors.firstname &&
+                    "is-invalid"}`}
+                  type="text"
+                  name="firstname"
+                  placeholder="First Name"
+                />
+                {touched.firstname && errors.firstname && (
+                  <p className="text-danger pt-1">{errors.firstname}</p>
+                )}
+              </div>
+              <div className="form-group">
+                <Field
+                  className={`form-control ${touched.lastname &&
+                    errors.lastname &&
+                    "is-invalid"}`}
+                  type="text"
+                  name="lastname"
+                  placeholder="Last Name"
+                />
+                {touched.lastname && errors.lastname && (
+                  <p className="text-danger pt-1">{errors.lastname}</p>
+                )}
+              </div>
 
-          <div>
-            {touched.email && errors.email && <p>{errors.email}</p>}
-            <Field
-              className="form-control"
-              type="email"
-              name="email"
-              placeholder="Email"
-            />
-          </div>
+              <div className="form-group">
+                <Field
+                  className={`form-control ${touched.email &&
+                    errors.email &&
+                    "is-invalid"}`}
+                  type="email"
+                  name="email"
+                  placeholder="Email"
+                />
+                {touched.email && errors.email && (
+                  <p className="text-danger pt-1">{errors.email}</p>
+                )}
+              </div>
 
-          <div>
-            {touched.password && errors.password && <p>{errors.password}</p>}
-            <Field
-              className="form-control"
-              type="password"
-              name="password"
-              placeholder="Password"
-            />
-          </div>
-          <div>
-            {touched.password2 && errors.password2 && <p>{errors.password2}</p>}
-            <Field
-              className="form-control"
-              type="password"
-              name="password2"
-              placeholder="Confirm Password"
-            />
-          </div>
+              <div className="form-group">
+                <Field
+                  className={`form-control ${touched.password &&
+                    errors.password &&
+                    "is-invalid"}`}
+                  type="password"
+                  name="password"
+                  placeholder="Password"
+                />
+                {touched.password && errors.password && (
+                  <p className="text-danger pt-1">{errors.password}</p>
+                )}
+              </div>
+              <div className="form-group">
+                <Field
+                  className={`form-control ${touched.password2 &&
+                    errors.password2 &&
+                    "is-invalid"}`}
+                  type="password"
+                  name="password2"
+                  placeholder="Confirm Password"
+                />
+                {touched.password2 && errors.password2 && (
+                  <p className="text-danger pt-1">{errors.password2}</p>
+                )}
+              </div>
 
-          <button
-            disabled={isSubmitting}
-            className="btn btn-primary"
-            type="submit"
-          >
-            Submit
-          </button>
-        </Form>
+              <button
+                disabled={isSubmitting}
+                className="btn btn-primary"
+                type="submit"
+              >
+                Submit
+              </button>
 
-        <div>
-          <p>Already have an account?</p>
-          <Link className="btn btn-outline-primary" to="/login">
-            Login
-          </Link>
+              <div className="login-button">
+                <p>Already have an account?</p>
+                <Link className="btn btn-outline-primary" to="/login">
+                  Login
+                </Link>
+              </div>
+            </Form>
+          </div>
         </div>
       </div>
     );
@@ -92,21 +118,17 @@ export default withFormik({
     };
   },
   validationSchema: Yup.object().shape({
-    firstname: Yup.string()
-      .min(2)
-      .required(),
-    lastname: Yup.string()
-      .min(2)
-      .required(),
+    firstname: Yup.string().required("Enter your first name"),
+    lastname: Yup.string().required("Enter your last name"),
     email: Yup.string()
-      .email()
-      .required(),
+      .email("Enter a valid email")
+      .required("Enter your email"),
     password: Yup.string()
-      .min(6)
-      .required(),
+      .min(6, "Password must be a minum of 6 characters")
+      .required("Please enter a password"),
     password2: Yup.string()
       .oneOf([Yup.ref("password")], "Passwords must match")
-      .required()
+      .required("Please retype your password")
   }),
   handleSubmit(values, { props }) {
     props.dispatch(registerUser(values)).then(response => {
