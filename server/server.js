@@ -1,6 +1,8 @@
 const express = require("express");
 const cookieParser = require("cookie-parser");
 const mongoose = require("mongoose");
+const formidable = require("express-formidable");
+const cloudinary = require("cloudinary");
 require("dotenv").config();
 
 const app = express();
@@ -13,6 +15,12 @@ mongoose.connect(process.env.DATABASE, { useNewUrlParser: true });
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 app.use(cookieParser());
+
+cloudinary.config({
+  cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
+  api_key: process.env.CLOUDINARY_API_KEY,
+  api_secret: process.env.CLOUDINARY_API_SECRET
+});
 
 //-----------------------------
 //           Models
@@ -244,6 +252,36 @@ app.get("/api/users/logout", auth, (req, res) => {
     return res.status(200).send({
       success: true
     });
+  });
+});
+
+app.post("/api/users/upload-files", auth, admin, formidable(), (req, res) => {
+  cloudinary.uploader.upload(
+    req.files.file.path,
+    result => {
+      res.status(200).send({
+        public_id: result.public_id,
+        url: result.url
+      });
+    },
+    {
+      public_id: `${Date.now()}`,
+      resource_type: "auto"
+    }
+  );
+});
+
+app.get("/api/users/remove-image", auth, admin, (req, res) => {
+  let public_id = req.query.public_id;
+
+  cloudinary.uploader.destroy(public_id, (error, result) => {
+    if (error) {
+      return res.json({
+        success: false,
+        error
+      });
+    }
+    res.status(200).send("Success");
   });
 });
 

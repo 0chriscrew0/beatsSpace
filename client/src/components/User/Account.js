@@ -1,7 +1,6 @@
 import React from "react";
 
 const Account = ({ user }) => {
-  console.log(user);
   return (
     <div className="account p-4">
       <div className="container">

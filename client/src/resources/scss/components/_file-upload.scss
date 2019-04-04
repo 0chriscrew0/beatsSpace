@@ -1,0 +1,14 @@
+.dropzone {
+  background-color: $gray;
+  padding: 1em;
+}
+
+.dropzone-box {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+.dropzone-icon {
+  font-size: 3rem;
+}

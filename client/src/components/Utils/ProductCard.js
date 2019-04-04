@@ -3,12 +3,12 @@ import { Link } from "react-router-dom";
 
 import DefaultImage from "../../resources/img/featured-image-01.jpg";
 
-const ProductCard = ({ type, _id, image, name, price }) => {
+const ProductCard = ({ type, _id, images, name, price }) => {
   return (
     <div className={`card product-card`}>
       <img
         className={`card-img-top img-fluid product-card__img`}
-        src={image ? image : DefaultImage}
+        src={images ? images[0].url : DefaultImage}
         alt="beat"
       />
       <div className="card-body d-flex flex-column justify-content-between">
