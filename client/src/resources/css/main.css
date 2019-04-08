@@ -7460,6 +7460,17 @@ h1, h2, h3, h4, h5, h6 {
   .product-card div {
     background-color: #f1f0ee; }
 
+.card-img-wrapper {
+  display: flex;
+  width: 100%;
+  position: relative;
+  align-items: center;
+  background-color: white; }
+  .card-img-wrapper::before {
+    content: "";
+    display: block;
+    padding-top: 100%; }
+
 .product-card__img {
   width: 100%;
   height: auto; }

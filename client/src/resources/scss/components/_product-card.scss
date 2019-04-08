@@ -36,6 +36,19 @@
   }
 }
 
+.card-img-wrapper {
+  display: flex;
+  width: 100%;
+  position: relative;
+  align-items: center;
+  background-color: white;
+  &::before {
+    content: "";
+    display: block;
+    padding-top: 100%;
+  }
+}
+
 .product-card__img {
   width: 100%;
   height: auto;
