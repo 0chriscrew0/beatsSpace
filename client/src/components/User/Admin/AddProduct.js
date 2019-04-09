@@ -55,7 +55,7 @@ class AddProduct extends Component {
               artist: Yup.string().required("Select an artist"),
               genre: Yup.string().required("Select a genre")
             })}
-            onSubmit={(values, { setFieldValue }) => {
+            onSubmit={values => {
               this.props
                 .dispatch(addProduct(values))
                 .then(response => {
@@ -66,7 +66,7 @@ class AddProduct extends Component {
                 });
             }}
           >
-            {({ values, errors, touched, isSubmitting, setFieldValue }) => (
+            {({ errors, touched, isSubmitting, setFieldValue }) => (
               <Form>
                 <div className="form-group">
                   <FileUpload

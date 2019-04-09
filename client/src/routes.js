@@ -11,6 +11,8 @@ import Register from "./components/Auth/Register";
 import UserDashboard from "./components/User";
 import AddProduct from "./components/User/Admin/AddProduct";
 import Shop from "./components/Shop";
+import ManageArtists from "./components/User/Admin/ManageArtists";
+import ManageGenres from "./components/User/Admin/ManageGenres";
 
 const Routes = () => {
   return (
@@ -25,6 +27,14 @@ const Routes = () => {
         <Route
           path="/admin/add-product"
           component={AuthRoute(AddProduct, true)}
+        />
+        <Route
+          path="/admin/manage-artists"
+          component={AuthRoute(ManageArtists, true)}
+        />
+        <Route
+          path="/admin/manage-genres"
+          component={AuthRoute(ManageGenres, true)}
         />
 
         <Route path="/login" component={AuthRoute(Login, false)} />

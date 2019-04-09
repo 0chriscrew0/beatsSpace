@@ -142,7 +142,7 @@ app.post("/api/product/createArtist", auth, admin, (req, res) => {
 
     return res.status(200).json({
       success: true,
-      doc
+      artist: doc
     });
   });
 });
@@ -169,7 +169,7 @@ app.post("/api/product/createGenre", auth, admin, (req, res) => {
       res.json({ success: false, err });
     }
 
-    res.status(200).json({ success: true, doc });
+    res.status(200).json({ success: true, genre: doc });
   });
 });
 

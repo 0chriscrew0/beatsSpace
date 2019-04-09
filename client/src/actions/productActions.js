@@ -4,7 +4,9 @@ import {
   GET_PRODUCTS_BY_SALES,
   GET_PRODUCTS_BY_ARRIVAL,
   GET_ARTISTS,
+  ADD_ARTIST,
   GET_GENRES,
+  ADD_GENRE,
   ADD_PRODUCT,
   CLEAR_PRODUCT
 } from "./types";
@@ -92,6 +94,24 @@ export function getArtists() {
   };
 }
 
+export function addArtist(newArtist, currentArtists) {
+  const request = axios
+    .post(`${PRODUCT_ROUTES}/createArtist`, newArtist)
+    .then(response => {
+      let artists = [...currentArtists, response.data.artist];
+
+      return {
+        success: response.data.success,
+        artists
+      };
+    });
+
+  return {
+    type: ADD_ARTIST,
+    payload: request
+  };
+}
+
 export function getGenres() {
   const request = axios
     .get(`${PRODUCT_ROUTES}/getGenres`)
@@ -99,6 +119,24 @@ export function getGenres() {
 
   return {
     type: GET_GENRES,
+    payload: request
+  };
+}
+
+export function addGenre(newGenre, currentGenres) {
+  const request = axios
+    .post(`${PRODUCT_ROUTES}/createGenre`, newGenre)
+    .then(response => {
+      let genres = [...currentGenres, response.data.genre];
+
+      return {
+        success: response.data.success,
+        genres
+      };
+    });
+
+  return {
+    type: ADD_GENRE,
     payload: request
   };
 }
