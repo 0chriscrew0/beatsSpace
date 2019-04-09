@@ -4,8 +4,10 @@ import {
   GET_PRODUCTS_BY_SALES,
   GET_ARTISTS,
   ADD_ARTIST,
+  REMOVE_ARTIST,
   GET_GENRES,
   ADD_GENRE,
+  REMOVE_GENRE,
   ADD_PRODUCT,
   CLEAR_PRODUCT
 } from "../actions/types";
@@ -38,12 +40,22 @@ export default function(state = {}, action) {
         ...state,
         artists: action.payload.artists
       };
+    case REMOVE_ARTIST:
+      return {
+        ...state,
+        artists: action.payload.artists
+      };
     case GET_GENRES:
       return {
         ...state,
         genres: action.payload
       };
     case ADD_GENRE:
+      return {
+        ...state,
+        genres: action.payload.genres
+      };
+    case REMOVE_GENRE:
       return {
         ...state,
         genres: action.payload.genres

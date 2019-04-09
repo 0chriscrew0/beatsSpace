@@ -5,8 +5,10 @@ import {
   GET_PRODUCTS_BY_ARRIVAL,
   GET_ARTISTS,
   ADD_ARTIST,
+  REMOVE_ARTIST,
   GET_GENRES,
   ADD_GENRE,
+  REMOVE_GENRE,
   ADD_PRODUCT,
   CLEAR_PRODUCT
 } from "./types";
@@ -112,6 +114,27 @@ export function addArtist(newArtist, currentArtists) {
   };
 }
 
+export function removeArtist(id, currentArtists) {
+  console.log(id);
+  const request = axios
+    .post(`${PRODUCT_ROUTES}/removeArtist`, { id })
+    .then(response => {
+      let artists = currentArtists.filter(item => {
+        return id !== item._id;
+      });
+
+      return {
+        success: response.data.success,
+        artists
+      };
+    });
+
+  return {
+    type: REMOVE_ARTIST,
+    payload: request
+  };
+}
+
 export function getGenres() {
   const request = axios
     .get(`${PRODUCT_ROUTES}/getGenres`)
@@ -137,6 +160,26 @@ export function addGenre(newGenre, currentGenres) {
 
   return {
     type: ADD_GENRE,
+    payload: request
+  };
+}
+
+export function removeGenre(id, currentGenres) {
+  const request = axios
+    .post(`${PRODUCT_ROUTES}/removeGenre`, { id })
+    .then(response => {
+      let genres = currentGenres.filter(item => {
+        return id !== item._id;
+      });
+
+      return {
+        success: response.data.success,
+        genres
+      };
+    });
+
+  return {
+    type: REMOVE_GENRE,
     payload: request
   };
 }

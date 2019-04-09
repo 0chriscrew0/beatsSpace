@@ -4,7 +4,11 @@ import { connect } from "react-redux";
 import { Formik, Form, Field } from "formik";
 import * as Yup from "yup";
 
-import { getGenres, addGenre } from "../../../actions/productActions";
+import {
+  getGenres,
+  addGenre,
+  removeGenre
+} from "../../../actions/productActions";
 
 class ManageGenres extends Component {
   state = {
@@ -20,9 +24,21 @@ class ManageGenres extends Component {
   showCurrentGenres = () =>
     this.state.genres.map(item => (
       <div key={item._id} className="current-genre">
-        <p>{item.name}</p>
+        <span>{item.name}</span>
+        <button
+          onClick={() => this.removeGenre(item._id)}
+          className="ml-3 btn btn-sm btn-danger"
+        >
+          <i className="fas fa-times" />
+        </button>
       </div>
     ));
+
+  removeGenre = id => {
+    this.props.dispatch(removeGenre(id, this.state.genres)).then(response => {
+      this.setState({ genres: response.payload.genres });
+    });
+  };
 
   render() {
     return (

@@ -7669,3 +7669,9 @@ h1, h2, h3, h4, h5, h6 {
   @media (min-width: 768px) {
     .account-section {
       margin: 1em; } }
+
+.current-artist {
+  margin-bottom: 1em; }
+
+.current-genre {
+  margin-bottom: 1em; }

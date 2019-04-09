@@ -4,7 +4,11 @@ import { connect } from "react-redux";
 import { Formik, Form, Field } from "formik";
 import * as Yup from "yup";
 
-import { getArtists, addArtist } from "../../../actions/productActions";
+import {
+  getArtists,
+  addArtist,
+  removeArtist
+} from "../../../actions/productActions";
 
 class ManageArtists extends Component {
   state = {
@@ -20,9 +24,21 @@ class ManageArtists extends Component {
   showCurrentArtists = () =>
     this.state.artists.map(item => (
       <div key={item._id} className="current-artist">
-        <p>{item.name}</p>
+        <span>{item.name}</span>
+        <button
+          onClick={() => this.removeArtist(item._id)}
+          className="ml-3 btn btn-sm btn-danger"
+        >
+          <i className="fas fa-times" />
+        </button>
       </div>
     ));
+
+  removeArtist = id => {
+    this.props.dispatch(removeArtist(id, this.state.artists)).then(response => {
+      this.setState({ artists: response.payload.artists });
+    });
+  };
 
   render() {
     return (

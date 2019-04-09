@@ -157,6 +157,16 @@ app.get("/api/product/getArtists", (req, res) => {
   });
 });
 
+app.post("/api/product/removeArtist", auth, admin, (req, res) => {
+  Artist.deleteOne({ _id: req.body.id }, err => {
+    if (err) {
+      return res.status(400).send(err);
+    }
+
+    return res.status(200).send({ success: true });
+  });
+});
+
 //-----------------------------
 //           Genres
 //-----------------------------
@@ -179,6 +189,16 @@ app.get("/api/product/getGenres", (req, res) => {
       return res.status(400).send(err);
     }
     return res.status(200).send(genres);
+  });
+});
+
+app.post("/api/product/removeGenre", auth, admin, (req, res) => {
+  Genre.deleteOne({ _id: req.body.id }, err => {
+    if (err) {
+      return res.status(400).send(err);
+    }
+
+    return res.status(200).send({ success: true });
   });
 });
 
