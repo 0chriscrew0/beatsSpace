@@ -20,7 +20,7 @@ class Shop extends Component {
     filters: {
       artist: [],
       genre: [],
-      price: []
+      price: {}
     }
   };
 
@@ -35,8 +35,11 @@ class Shop extends Component {
 
   handleFilters = (filters, category) => {
     const newFilters = { ...this.state.filters };
-
     newFilters[category] = filters;
+
+    if (category === "price") {
+      newFilters[category] = [filters.minValue, filters.maxValue];
+    }
 
     this.showFiltered(newFilters);
     this.setState({ filters: newFilters });

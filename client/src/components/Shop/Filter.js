@@ -1,6 +1,9 @@
 import React from "react";
 
 import CheckBoxGroup from "./CheckBoxGroup";
+import RadioGroup from "./RadioGroup";
+
+import { prices } from "../Utils/StaticCategories";
 
 const Filter = ({ products, handleFilters }) => {
   return (
@@ -83,7 +86,12 @@ const Filter = ({ products, handleFilters }) => {
             className="collapse show"
             aria-labelledby="headingThree"
           >
-            <div className="card-body" />
+            <div className="card-body">
+              <RadioGroup
+                list={prices}
+                handleFilters={filters => handleFilters(filters, "price")}
+              />
+            </div>
           </div>
         </div>
       </div>

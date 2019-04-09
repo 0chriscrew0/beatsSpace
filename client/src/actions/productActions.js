@@ -19,7 +19,7 @@ import { PRODUCT_ROUTES } from "../utils/misc";
 // PRODUCTS
 // ======================
 
-export function getProducts(skip, limit, filters = [], previousState = []) {
+export function getProducts(skip, limit, filters = {}, previousState = []) {
   const data = {
     limit,
     skip,
