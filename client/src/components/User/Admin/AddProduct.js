@@ -38,6 +38,7 @@ class AddProduct extends Component {
           <Formik
             initialValues={{
               images: [],
+              audio: null,
               name: "",
               description: "",
               price: "",
@@ -45,6 +46,7 @@ class AddProduct extends Component {
               genre: ""
             }}
             validationSchema={Yup.object().shape({
+              audio: Yup.mixed().required("Audio file is required"),
               name: Yup.string()
                 .max(100, "Title can only be 100 characters")
                 .required(" Enter a title"),
@@ -70,7 +72,8 @@ class AddProduct extends Component {
               <Form>
                 <div className="form-group">
                   <FileUpload
-                    imageHandler={images => {
+                    fileType="Image(s)"
+                    fileHandler={images => {
                       if (images.length === 0) {
                         return;
                       }
@@ -78,6 +81,21 @@ class AddProduct extends Component {
                       setFieldValue("images", images);
                     }}
                   />
+                </div>
+                <div className="form-group">
+                  <FileUpload
+                    fileType="Audio"
+                    fileHandler={audio => {
+                      if (!audio) {
+                        return;
+                      }
+
+                      setFieldValue("audio", audio[0]);
+                    }}
+                  />
+                  {touched.audio && errors.audio && (
+                    <p className="text-danger pt-1">{errors.audio}</p>
+                  )}
                 </div>
                 <div className="form-group">
                   <Field

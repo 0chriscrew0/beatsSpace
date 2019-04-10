@@ -24,39 +24,43 @@ class FileUpload extends Component {
           uploadedFiles: [...this.state.uploadedFiles, response.data]
         },
         () => {
-          this.props.imageHandler(this.state.uploadedFiles);
+          this.props.fileHandler(this.state.uploadedFiles);
         }
       );
     });
   };
 
-  showUploadedImages = () =>
+  showUploadedFiles = () =>
     this.state.uploadedFiles.map(item => (
       <div
         className="mx-2"
         key={item.public_id}
-        onClick={() => this.removeImage(item.public_id)}
+        onClick={() => this.removeFile(item.public_id)}
       >
-        <div
-          className="dropzone-image"
-          style={{
-            background: `url(${item.url}) no-repeat`,
-            backgroundSize: "contain",
-            height: "100px",
-            width: "100px"
-          }}
-        />
+        {this.props.fileType === "Image(s)" ? (
+          <div
+            className="dropzone-image"
+            style={{
+              background: `url(${item.url}) no-repeat`,
+              backgroundSize: "contain",
+              height: "100px",
+              width: "100px"
+            }}
+          />
+        ) : (
+          <div>{item.original_filename}</div>
+        )}
       </div>
     ));
 
-  removeImage = id => {
-    axios.get(`/api/users/remove-image?${id}`).then(response => {
-      let images = this.state.uploadedFiles.filter(item => {
+  removeFile = id => {
+    axios.get(`/api/users/remove-file?${id}`).then(response => {
+      let files = this.state.uploadedFiles.filter(item => {
         return item.public_id !== id;
       });
 
-      this.setState({ uploadedFiles: images }, () =>
-        this.props.imageHandler(images)
+      this.setState({ uploadedFiles: files }, () =>
+        this.props.fileHandler(files)
       );
     });
   };
@@ -69,13 +73,13 @@ class FileUpload extends Component {
             <section className="dropzone-box">
               <div {...getRootProps()}>
                 <input {...getInputProps()} />
-                <h6>Upload Image</h6>
+                <h6>Upload {this.props.fileType}</h6>
                 <i className="fas fa-file-image dropzone-icon" />
                 <p className="mb-0 mt-2">
                   Drag file here, or click to select files
                 </p>
               </div>
-              {this.showUploadedImages()}
+              {this.showUploadedFiles()}
               {this.state.uploading ? <div>loading</div> : null}
             </section>
           )}

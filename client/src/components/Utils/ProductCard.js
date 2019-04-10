@@ -5,8 +5,8 @@ import DefaultImage from "../../resources/img/featured-image-01.jpg";
 
 const ProductCard = ({ _id, images, name, price }) => {
   return (
-    <div className={`card product-card`}>
-      <div className="card-img-wrapper bg-white">
+    <div className="card product-card bg-white border-0`">
+      <div className="card-img-wrapper">
         <img
           className={`card-img-top img-fluid product-card__img`}
           src={images ? images[0].url : DefaultImage}

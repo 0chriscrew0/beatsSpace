@@ -31,9 +31,6 @@
 .product-card {
   width: 100%;
   margin: 0.6em auto;
-  div {
-    background-color: $gray;
-  }
 }
 
 .card-img-wrapper {
@@ -41,7 +38,7 @@
   width: 100%;
   position: relative;
   align-items: center;
-  background-color: white;
+  background-color: $gray;
   &::before {
     content: "";
     display: block;

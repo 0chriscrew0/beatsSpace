@@ -7457,15 +7457,13 @@ h1, h2, h3, h4, h5, h6 {
 .product-card {
   width: 100%;
   margin: 0.6em auto; }
-  .product-card div {
-    background-color: #f1f0ee; }
 
 .card-img-wrapper {
   display: flex;
   width: 100%;
   position: relative;
   align-items: center;
-  background-color: white; }
+  background-color: #f1f0ee; }
   .card-img-wrapper::before {
     content: "";
     display: block;

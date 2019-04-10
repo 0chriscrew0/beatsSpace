@@ -282,13 +282,18 @@ app.get("/api/users/logout", auth, (req, res) => {
   });
 });
 
+//-----------------------------
+//           Files
+//-----------------------------
+
 app.post("/api/users/upload-files", auth, admin, formidable(), (req, res) => {
   cloudinary.uploader.upload(
     req.files.file.path,
     result => {
       res.status(200).send({
         public_id: result.public_id,
-        url: result.url
+        url: result.url,
+        original_filename: req.files.file.name
       });
     },
     {
@@ -298,7 +303,7 @@ app.post("/api/users/upload-files", auth, admin, formidable(), (req, res) => {
   );
 });
 
-app.get("/api/users/remove-image", auth, admin, (req, res) => {
+app.get("/api/users/remove-file", auth, admin, (req, res) => {
   let public_id = req.query.public_id;
 
   cloudinary.uploader.destroy(public_id, (error, result) => {

@@ -37,6 +37,10 @@ const beatSchema = new Schema(
     images: {
       type: Array,
       default: []
+    },
+    audio: {
+      type: Object,
+      required: true
     }
   },
   { timestamps: true }
