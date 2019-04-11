@@ -48,6 +48,9 @@ class ManageGenres extends Component {
             <h5>Current Genres</h5>
             {this.showCurrentGenres()}
           </div>
+
+          <hr />
+
           <h4>Add New Genre</h4>
           <Formik
             initialValues={{ name: "" }}

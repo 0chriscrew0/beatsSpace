@@ -48,6 +48,9 @@ class ManageArtists extends Component {
             <h5>Current Artists</h5>
             {this.showCurrentArtists()}
           </div>
+
+          <hr />
+
           <h4>Add New Artist</h4>
           <Formik
             initialValues={{ name: "" }}

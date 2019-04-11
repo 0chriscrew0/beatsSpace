@@ -7616,6 +7616,10 @@ h1, h2, h3, h4, h5, h6 {
 .shop {
   margin: 5rem auto; }
 
+.shop-no-results {
+  padding: 3em;
+  text-align: center; }
+
 .login-container {
   margin: auto;
   max-width: 90%; }
@@ -7691,6 +7695,14 @@ h1, h2, h3, h4, h5, h6 {
   @media (min-width: 768px) {
     .account-section {
       margin: 1em; } }
+
+.manage-content-links {
+  display: flex;
+  flex-direction: column;
+  background-color: #f1f0ee;
+  padding: 1em 0.6em; }
+  .manage-content-links a {
+    padding: 0.2em; }
 
 .current-artist {
   margin-bottom: 1em; }

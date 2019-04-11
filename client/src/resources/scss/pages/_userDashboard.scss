@@ -26,3 +26,13 @@
     margin: 1em;
   }
 }
+
+.manage-content-links {
+  display: flex;
+  flex-direction: column;
+  background-color: $gray;
+  padding: 1em 0.6em;
+  a {
+    padding: 0.2em;
+  }
+}

@@ -23,7 +23,9 @@ const ProductCardGroup = props => {
         <div>
           {props.beats ? (
             props.beats.length === 0 ? (
-              <div>No Results</div>
+              <div className="shop-no-results">
+                <h3 className="display-5">No Results</h3>
+              </div>
             ) : (
               <div className="container-fluid">
                 <div className="row my-2">{renderCards()}</div>
