@@ -1,8 +1,5 @@
 import React from "react";
 
-import Image00 from "../../resources/img/featured-image-01.jpg";
-// import Image01 from "../../resources/img/featured-image-02.jpg";
-// import Image02 from "../../resources/img/featured-image-03.jpg";
 import ProductCard from "../Utils/ProductCard";
 
 const Featured = props => {
@@ -10,7 +7,7 @@ const Featured = props => {
     props.list
       ? props.list.map((item, index) => (
           <div key={index} className="col-sm-4">
-            <ProductCard type="featured" {...item} image={Image00} />
+            <ProductCard {...item} />
           </div>
         ))
       : null;

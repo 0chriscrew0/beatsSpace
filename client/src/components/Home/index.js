@@ -23,7 +23,7 @@ class Home extends Component {
         <Hero />
         <Featured list={this.props.products.bySales} />
         <Promotion />
-        <NewArrivals />
+        <NewArrivals list={this.props.products.byArrival} />
       </div>
     );
   }
