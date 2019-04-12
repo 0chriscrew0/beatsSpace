@@ -9,7 +9,9 @@ import {
   ADD_GENRE,
   REMOVE_GENRE,
   ADD_PRODUCT,
-  CLEAR_PRODUCT
+  CLEAR_PRODUCT,
+  GET_PRODUCT_DETAILS,
+  CLEAR_PRODUCT_DETAILS
 } from "../actions/types";
 
 export default function(state = {}, action) {
@@ -69,6 +71,16 @@ export default function(state = {}, action) {
       return {
         ...state,
         addedProduct: action.payload
+      };
+    case GET_PRODUCT_DETAILS:
+      return {
+        ...state,
+        productDetails: action.payload
+      };
+    case CLEAR_PRODUCT_DETAILS:
+      return {
+        ...state,
+        productDetails: action.payload
       };
     default:
       return state;

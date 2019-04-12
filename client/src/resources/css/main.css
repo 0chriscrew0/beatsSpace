@@ -7709,3 +7709,10 @@ h1, h2, h3, h4, h5, h6 {
 
 .current-genre {
   margin-bottom: 1em; }
+
+.product-page {
+  margin: 5rem auto; }
+
+.product-content {
+  display: flex;
+  justify-content: space-between; }

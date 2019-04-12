@@ -11,6 +11,7 @@ import Register from "./components/Auth/Register";
 import UserDashboard from "./components/User";
 import AddProduct from "./components/User/Admin/AddProduct";
 import Shop from "./components/Shop";
+import Product from "./components/Product";
 import ManageArtists from "./components/User/Admin/ManageArtists";
 import ManageGenres from "./components/User/Admin/ManageGenres";
 
@@ -20,6 +21,7 @@ const Routes = () => {
       <Switch>
         <Route path="/" component={AuthRoute(Home, null)} exact />
         <Route path="/shop" component={AuthRoute(Shop, null)} />
+        <Route path="/product/:id" component={AuthRoute(Product, null)} />
         <Route
           path="/user/dashboard"
           component={AuthRoute(UserDashboard, true)}

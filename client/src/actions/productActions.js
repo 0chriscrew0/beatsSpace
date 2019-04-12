@@ -10,7 +10,9 @@ import {
   ADD_GENRE,
   REMOVE_GENRE,
   ADD_PRODUCT,
-  CLEAR_PRODUCT
+  CLEAR_PRODUCT,
+  GET_PRODUCT_DETAILS,
+  CLEAR_PRODUCT_DETAILS
 } from "./types";
 
 import { PRODUCT_ROUTES } from "../utils/misc";
@@ -18,6 +20,26 @@ import { PRODUCT_ROUTES } from "../utils/misc";
 // ======================
 // PRODUCTS
 // ======================
+
+export function getProductDetails(id) {
+  const request = axios
+    .get(`${PRODUCT_ROUTES}/beats_by_id?id=${id}`)
+    .then(response => {
+      return response.data[0];
+    });
+
+  return {
+    type: GET_PRODUCT_DETAILS,
+    payload: request
+  };
+}
+
+export function clearProductDetails() {
+  return {
+    type: CLEAR_PRODUCT_DETAILS,
+    payload: null
+  };
+}
 
 export function getProducts(skip, limit, filters = {}, previousState = []) {
   const data = {
