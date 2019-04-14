@@ -8,6 +8,7 @@ import {
   getProductDetails,
   clearProductDetails
 } from "../../actions/productActions";
+import Spinner from "../Utils/Spinner";
 
 class Product extends Component {
   componentDidMount() {
@@ -43,9 +44,11 @@ class Product extends Component {
     return (
       <div className="product-page">
         <div className="container">
-          {this.props.products.productDetails
-            ? this.renderProduct()
-            : "Loading"}
+          {this.props.products.productDetails ? (
+            this.renderProduct()
+          ) : (
+            <Spinner />
+          )}
         </div>
       </div>
     );

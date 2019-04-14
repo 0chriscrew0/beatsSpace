@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 
 import { authenticateUser } from "../actions/userActions";
+import Spinner from "../components/Utils/Spinner";
 
 export default function(ComposedClass, reload, admin = null) {
   class AuthRoute extends Component {
@@ -33,7 +34,7 @@ export default function(ComposedClass, reload, admin = null) {
 
     render() {
       if (this.state.loading) {
-        return <div className="auth-loader">Loading...</div>;
+        return <Spinner />;
       }
       return (
         <div>
