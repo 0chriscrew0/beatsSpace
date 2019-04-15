@@ -1,8 +1,20 @@
 .product-page {
-  margin: 5rem auto;
+  background-color: $gray;
+  min-height: 100vh;
 }
 
 .product-content {
   display: flex;
   justify-content: space-between;
+}
+
+.product-images {
+}
+
+.product-info {
+  background: $white;
+  padding: 2rem;
+  -webkit-box-shadow: 7px 10px 5px -6px rgba(0, 0, 0, 0.63);
+  -moz-box-shadow: 7px 10px 5px -6px rgba(0, 0, 0, 0.63);
+  box-shadow: 7px 10px 5px -6px rgba(0, 0, 0, 0.63);
 }
