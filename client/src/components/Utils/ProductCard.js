@@ -55,7 +55,6 @@ class ProductCard extends Component {
           </div>
 
           <div>
-            {console.log(audio)}
             <Sound url={audio.url} playStatus={this.state.playing} />
           </div>
         </div>

@@ -28,12 +28,14 @@ class Product extends Component {
       <div className="product-wrapper">
         <h4>{productDetails.name}</h4>
 
-        <div className="product-content row py-3">
-          <div className="col-md-6 py-2">
-            <ProductImages images={productDetails.images} />
-          </div>
-          <div className="col-md-6 py-2">
-            <ProductInfo product={productDetails} />
+        <div className="product-content py-3">
+          <div className="row">
+            <div className="col-md-3 py-2">
+              <ProductImages images={productDetails.images} />
+            </div>
+            <div className="col-md-9 py-2 d-flex align-items-end">
+              <ProductInfo product={productDetails} />
+            </div>
           </div>
         </div>
       </div>
