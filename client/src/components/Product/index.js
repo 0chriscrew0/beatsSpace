@@ -1,14 +1,15 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 
+import ProductActions from "./ProductActions";
 import ProductImages from "./ProductImages";
-import ProductInfo from "./ProductInfo";
 
 import {
   getProductDetails,
   clearProductDetails
 } from "../../actions/productActions";
 import Spinner from "../Utils/Spinner";
+import AudioPlayer from "./AudioPlayer";
 
 class Product extends Component {
   componentDidMount() {
@@ -27,12 +28,16 @@ class Product extends Component {
     return (
       <div className="product-wrapper">
         <div className="product-content py-3">
-          <div className="row justify-content-around">
-            <div className="col-md-5 py-2">
-              <ProductImages images={productDetails.images} />
+          <div className="row flex-row">
+            <div className="col-md-6">
+              <h1>{productDetails.name}</h1>
             </div>
-            <div className="col-md-4 py-2">
-              <ProductInfo product={productDetails} />
+            <div className="col-md-6">
+              <ProductImages product={productDetails} />
+              <AudioPlayer audio={productDetails.audio} />
+            </div>
+            <div className="col-md-6">
+              <ProductActions product={productDetails} />
             </div>
           </div>
         </div>

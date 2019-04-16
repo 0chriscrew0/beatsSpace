@@ -7775,13 +7775,30 @@ h1, h2, h3, h4, h5, h6 {
   background-color: #f1f0ee;
   min-height: 100vh; }
 
+.product-left {
+  height: 100%; }
+
 .product-content {
   display: flex;
   justify-content: space-between; }
 
 .product-info {
-  background: #fff;
-  padding: 2rem;
-  -webkit-box-shadow: 7px 10px 5px -6px rgba(0, 0, 0, 0.63);
-  -moz-box-shadow: 7px 10px 5px -6px rgba(0, 0, 0, 0.63);
-  box-shadow: 7px 10px 5px -6px rgba(0, 0, 0, 0.63); }
+  text-align: center; }
+  @media (min-width: 768px) {
+    .product-info {
+      width: 80%;
+      background: rgba(255, 255, 255, 0.4);
+      margin: -2rem 0 0 5rem;
+      position: relative;
+      padding: 2rem;
+      -webkit-box-shadow: 7px 10px 5px -6px rgba(0, 0, 0, 0.63);
+      -moz-box-shadow: 7px 10px 5px -6px rgba(0, 0, 0, 0.63);
+      box-shadow: 7px 10px 5px -6px rgba(0, 0, 0, 0.63); } }
+
+.product-actions {
+  text-align: center;
+  align-self: flex-end;
+  margin-top: 2rem; }
+
+.audio-player {
+  height: 10%; }
