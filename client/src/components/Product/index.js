@@ -32,7 +32,7 @@ class Product extends Component {
             <div className="col-md-6">
               <h1>{productDetails.name}</h1>
             </div>
-            <div className="col-md-6">
+            <div className="col-md-6 px-0">
               <ProductImages product={productDetails} />
               <AudioPlayer audio={productDetails.audio} />
             </div>

@@ -8388,6 +8388,13 @@ react-redux@^6.0.0:
     prop-types "^15.6.2"
     react-is "^16.6.3"
 
+react-responsive-audio-player@^1.5.0:
+  version "1.5.0"
+  resolved "https://registry.yarnpkg.com/react-responsive-audio-player/-/react-responsive-audio-player-1.5.0.tgz#d6f90f40f9439b614d3bb6d0066e5975dc97665f"
+  integrity sha512-HaESYlmftRpRnlL4p57QLqkVjjFCVGPS6CoESCVh7WEo4rts814L9dRtKLLt/jk/Lo+aUn9AAP+Zt3PrpP8TIw==
+  dependencies:
+    prop-types "^15.5.10"
+
 react-reveal@^1.2.2:
   version "1.2.2"
   resolved "https://registry.yarnpkg.com/react-reveal/-/react-reveal-1.2.2.tgz#f47fbc44debc4c185ae2163a215a9e822c7adfef"

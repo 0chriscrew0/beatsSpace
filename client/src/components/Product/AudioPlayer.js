@@ -1,11 +1,12 @@
 import React from "react";
-import { Media, Player, controls } from "react-media-player";
-const { PlayPause, MuteUnmute } = controls;
 
-const AudioPlayer = ({ audio }) => {
+import AudioPlayer from "react-responsive-audio-player";
+import "../../../node_modules/react-responsive-audio-player/dist/audioplayer.min.css";
+
+const AudioPlayerUI = ({ audio, name }) => {
   return (
     <div className="audio-player">
-      <Media>
+      {/* <Media>
         <div className="media">
           <div className="media-player">
             <Player src={audio.url} />
@@ -15,9 +16,14 @@ const AudioPlayer = ({ audio }) => {
             <MuteUnmute />
           </div>
         </div>
-      </Media>
+      </Media> */}
+      <AudioPlayer
+        playlist={[{ url: audio.url, title: name }]}
+        controls={["playpause", "progress"]}
+        cycle={false}
+      />
     </div>
   );
 };
 
-export default AudioPlayer;
+export default AudioPlayerUI;
