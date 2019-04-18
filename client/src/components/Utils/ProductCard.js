@@ -1,26 +1,21 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
-import Sound from "react-sound";
 
 import DefaultImage from "../../resources/img/featured-image-01.jpg";
 
 class ProductCard extends Component {
   state = {
-    playing: Sound.status.PAUSED
+    playing: false
   };
 
   handleIconClick = () => {
     this.setState({
-      playing:
-        this.state.playing === Sound.status.PAUSED
-          ? Sound.status.PLAYING
-          : Sound.status.PAUSED
+      playing: !this.state.playing
     });
   };
 
   render() {
     const { _id, audio, images, name, price } = this.props;
-    const isPlaying = this.state.playing === Sound.status.PLAYING;
 
     return (
       <div className="card product-card bg-white border-0`">
@@ -33,7 +28,7 @@ class ProductCard extends Component {
           <div className="overlay" onClick={this.handleIconClick}>
             <i
               className={`product-card-icon ${
-                isPlaying ? "fas fa-pause" : "fas fa-play"
+                this.state.playing ? "fas fa-square" : "fas fa-play"
               }`}
             />
           </div>
@@ -54,9 +49,15 @@ class ProductCard extends Component {
             </Link>
           </div>
 
-          <div>
-            <Sound url={audio.url} playStatus={this.state.playing} />
-          </div>
+          {this.state.playing ? (
+            <audio
+              style={{ borderRadius: "none" }}
+              className="audio-player"
+              controls
+              autoPlay
+              src={audio.url}
+            />
+          ) : null}
         </div>
       </div>
     );

@@ -1,7 +1,6 @@
 import React from "react";
 
 import AudioPlayer from "react-responsive-audio-player";
-import "../../../node_modules/react-responsive-audio-player/dist/audioplayer.min.css";
 
 const AudioPlayerUI = ({ audio, name }) => {
   return (

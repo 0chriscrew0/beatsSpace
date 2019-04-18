@@ -7570,6 +7570,15 @@ h1, h2, h3, h4, h5, h6 {
   display: flex;
   align-items: center; }
 
+.audio-player {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100vw;
+  z-index: 101;
+  background-color: #111e6c;
+  color: #fff; }
+
 .home-page {
   height: 100%; }
 
@@ -7799,6 +7808,3 @@ h1, h2, h3, h4, h5, h6 {
   text-align: center;
   align-self: flex-end;
   margin-top: 2rem; }
-
-.audio-player {
-  height: 10%; }
