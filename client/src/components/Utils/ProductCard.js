@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
+import AudioPlayer from "./AudioPlayer";
 
 import DefaultImage from "../../resources/img/featured-image-01.jpg";
 
@@ -15,7 +16,7 @@ class ProductCard extends Component {
   };
 
   render() {
-    const { _id, audio, images, name, price } = this.props;
+    const { _id, audio, images, name, price, artist } = this.props;
 
     return (
       <div className="card product-card bg-white border-0`">
@@ -50,13 +51,15 @@ class ProductCard extends Component {
           </div>
 
           {this.state.playing ? (
-            <audio
-              style={{ borderRadius: "none" }}
-              className="audio-player"
-              controls
-              autoPlay
-              src={audio.url}
-            />
+            <div>
+              <AudioPlayer
+                className="audio-player"
+                streamUrl={audio.url}
+                trackTitle={name}
+                preloadType="metadata"
+                track={{ ...this.props }}
+              />
+            </div>
           ) : null}
         </div>
       </div>

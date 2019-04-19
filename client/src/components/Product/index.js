@@ -9,7 +9,7 @@ import {
   clearProductDetails
 } from "../../actions/productActions";
 import Spinner from "../Utils/Spinner";
-import AudioPlayer from "./AudioPlayer";
+import AudioPlayer from "../Utils/AudioPlayer";
 
 class Product extends Component {
   componentDidMount() {
@@ -34,13 +34,18 @@ class Product extends Component {
             </div>
             <div className="col-md-6 px-0">
               <ProductImages product={productDetails} />
-              <AudioPlayer audio={productDetails.audio} />
             </div>
             <div className="col-md-6">
               <ProductActions product={productDetails} />
             </div>
           </div>
         </div>
+        <AudioPlayer
+          streamUrl={productDetails.audio.url}
+          trackTitle={productDetails.name}
+          preloadType="metadata"
+          track={{ ...productDetails }}
+        />
       </div>
     );
   };
