@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { connect } from "react-redux";
 
 import Header from "../components/Layout/Header";
 import Footer from "../components/Layout/Footer";
@@ -16,10 +17,26 @@ class Layout extends Component {
             {this.props.children}
           </div>
         </div>
+        {this.props.player.currentTrack ? (
+          <AudioPlayer
+            className="audio-player"
+            streamUrl={this.props.player.currentTrack.audio.url}
+            trackTitle={this.props.player.currentTrack.name}
+            preloadType="metadata"
+            track={{ ...this.props }}
+          />
+        ) : null}
+
         <Footer />
       </div>
     );
   }
 }
 
-export default Layout;
+const mapStateToProps = state => {
+  return {
+    player: state.player
+  };
+};
+
+export default connect(mapStateToProps)(Layout);

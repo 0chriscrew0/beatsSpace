@@ -1,22 +1,36 @@
 import React, { Component } from "react";
+import { connect } from "react-redux";
 import { Link } from "react-router-dom";
-import AudioPlayer from "./AudioPlayer";
 
 import DefaultImage from "../../resources/img/featured-image-01.jpg";
+
+import {
+  setCurrentTrack,
+  clearCurrentTrack
+} from "../../actions/playerActions";
 
 class ProductCard extends Component {
   state = {
     playing: false
   };
 
-  handleIconClick = () => {
-    this.setState({
-      playing: !this.state.playing
-    });
+  handleIconClick = id => {
+    this.setState(
+      {
+        playing: !this.state.playing
+      },
+      () => {
+        if (this.state.playing) {
+          this.props.dispatch(setCurrentTrack(id));
+        } else {
+          this.props.dispatch(clearCurrentTrack());
+        }
+      }
+    );
   };
 
   render() {
-    const { _id, audio, images, name, price, artist } = this.props;
+    const { _id, images, name, price } = this.props;
 
     return (
       <div className="card product-card bg-white border-0`">
@@ -26,7 +40,7 @@ class ProductCard extends Component {
             src={images ? images[0].url : DefaultImage}
             alt="beat"
           />
-          <div className="overlay" onClick={this.handleIconClick}>
+          <div className="overlay" onClick={() => this.handleIconClick(_id)}>
             <i
               className={`product-card-icon ${
                 this.state.playing ? "fas fa-square" : "fas fa-play"
@@ -49,22 +63,16 @@ class ProductCard extends Component {
               <i className="fas fa-cart-plus" />
             </Link>
           </div>
-
-          {this.state.playing ? (
-            <div>
-              <AudioPlayer
-                className="audio-player"
-                streamUrl={audio.url}
-                trackTitle={name}
-                preloadType="metadata"
-                track={{ ...this.props }}
-              />
-            </div>
-          ) : null}
         </div>
       </div>
     );
   }
 }
 
-export default ProductCard;
+const mapStateToProps = state => {
+  return {
+    player: state.player
+  };
+};
+
+export default connect(mapStateToProps)(ProductCard);

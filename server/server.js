@@ -61,6 +61,16 @@ app.get("/api/product/beats", (req, res) => {
     });
 });
 
+app.get("/api/product/beatById", (req, res) => {
+  console.log(req);
+  Beat.findById(req.body.id)
+    .populate("genre")
+    .populate("artist")
+    .exec((err, docs) => {
+      console.log(docs);
+    });
+});
+
 app.get("/api/product/beats_by_id", (req, res) => {
   let ids = req.query.id.split(",");
   let items = ids.map(id => {
