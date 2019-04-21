@@ -14,14 +14,14 @@ class ProductCard extends Component {
     playing: false
   };
 
-  handleIconClick = id => {
+  handleIconClick = trackData => {
     this.setState(
       {
         playing: !this.state.playing
       },
       () => {
         if (this.state.playing) {
-          this.props.dispatch(setCurrentTrack(id));
+          this.props.dispatch(setCurrentTrack(trackData));
         } else {
           this.props.dispatch(clearCurrentTrack());
         }
@@ -30,7 +30,7 @@ class ProductCard extends Component {
   };
 
   render() {
-    const { _id, images, name, price } = this.props;
+    const { _id, images, name, price, artist, audio } = this.props;
 
     return (
       <div className="card product-card bg-white border-0`">
@@ -40,7 +40,12 @@ class ProductCard extends Component {
             src={images ? images[0].url : DefaultImage}
             alt="beat"
           />
-          <div className="overlay" onClick={() => this.handleIconClick(_id)}>
+          <div
+            className="overlay"
+            onClick={() =>
+              this.handleIconClick({ _id, images, name, artist, audio })
+            }
+          >
             <i
               className={`product-card-icon ${
                 this.state.playing ? "fas fa-square" : "fas fa-play"

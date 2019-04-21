@@ -23,7 +23,7 @@ class Layout extends Component {
             streamUrl={this.props.player.currentTrack.audio.url}
             trackTitle={this.props.player.currentTrack.name}
             preloadType="metadata"
-            track={{ ...this.props }}
+            track={this.props.player.currentTrack}
           />
         ) : null}
 
