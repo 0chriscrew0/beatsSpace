@@ -1,5 +1,8 @@
 import React, { Component } from "react";
+import { connect } from "react-redux";
 import Sound from "react-sound";
+
+import { clearCurrentTrack } from "../../actions/playerActions";
 
 class AudioPlayer extends Component {
   state = {
@@ -38,6 +41,10 @@ class AudioPlayer extends Component {
     });
   };
 
+  exitPlayer = () => {
+    this.props.dispatch(clearCurrentTrack());
+  };
+
   render() {
     const { name, artist, images, audio } = this.props.track;
 
@@ -58,6 +65,7 @@ class AudioPlayer extends Component {
             }`}
             onClick={this.handlePlayClick}
           />
+          <i className="fas fa-times" onClick={this.exitPlayer} />
           <h2>{name}</h2>
           <h4>{artist.name}</h4>
           <div className="progress">
@@ -76,4 +84,4 @@ class AudioPlayer extends Component {
   }
 }
 
-export default AudioPlayer;
+export default connect()(AudioPlayer);

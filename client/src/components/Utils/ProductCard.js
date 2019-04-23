@@ -14,17 +14,33 @@ class ProductCard extends Component {
     playing: false
   };
 
+  componentWillReceiveProps(nextProps) {
+    if (
+      nextProps.player.currentTrack &&
+      nextProps.player.currentTrack._id === this.props._id
+    ) {
+      this.setState({
+        playing: true
+      });
+    }
+    if (
+      nextProps.player.currentTrack === null ||
+      (nextProps.player.currentTrack &&
+        nextProps.player.currentTrack._id !== this.props._id)
+    ) {
+      this.setState({
+        playing: false
+      });
+    }
+  }
+
   handleIconClick = trackData => {
     this.setState(
       {
-        playing: !this.state.playing
+        playing: true
       },
       () => {
-        if (this.state.playing) {
-          this.props.dispatch(setCurrentTrack(trackData));
-        } else {
-          this.props.dispatch(clearCurrentTrack());
-        }
+        this.props.dispatch(setCurrentTrack(trackData));
       }
     );
   };
@@ -42,8 +58,11 @@ class ProductCard extends Component {
           />
           <div
             className="overlay"
-            onClick={() =>
-              this.handleIconClick({ _id, images, name, artist, audio })
+            onClick={
+              this.state.playing
+                ? null
+                : () =>
+                    this.handleIconClick({ _id, images, name, artist, audio })
             }
           >
             <i
