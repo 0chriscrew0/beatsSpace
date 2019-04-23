@@ -1,9 +1,12 @@
-.audio-player-wrapper {
+.audio-player {
   position: fixed;
   bottom: 0;
   left: 0;
   z-index: 101;
   width: 100vw;
-  height: auto;
   background-color: $white;
+
+  img {
+    width: 50px;
+  }
 }

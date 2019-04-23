@@ -25,7 +25,6 @@
     "react-scripts": "2.1.5",
     "react-slick": "^0.23.2",
     "react-sound": "^1.2.0",
-    "react-soundplayer": "^1.0.4",
     "redux": "^4.0.1",
     "redux-promise": "^0.6.0",
     "redux-thunk": "^2.3.0",

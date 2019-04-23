@@ -48,7 +48,7 @@ class ProductCard extends Component {
           >
             <i
               className={`product-card-icon ${
-                this.state.playing ? "fas fa-square" : "fas fa-play"
+                this.state.playing ? null : "fas fa-play"
               }`}
             />
           </div>

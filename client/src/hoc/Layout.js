@@ -18,13 +18,12 @@ class Layout extends Component {
           </div>
         </div>
         {this.props.player.currentTrack ? (
-          <AudioPlayer
-            className="audio-player"
-            streamUrl={this.props.player.currentTrack.audio.url}
-            trackTitle={this.props.player.currentTrack.name}
-            preloadType="metadata"
-            track={this.props.player.currentTrack}
-          />
+          <div className="audio-player-wrapper">
+            <AudioPlayer
+              className="audio-player-wrapper"
+              track={this.props.player.currentTrack}
+            />
+          </div>
         ) : null}
 
         <Footer />

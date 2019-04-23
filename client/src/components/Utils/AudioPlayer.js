@@ -1,41 +1,73 @@
 import React, { Component } from "react";
-import { withSoundCloudAudio } from "react-soundplayer/addons";
-import {
-  PlayButton,
-  Progress,
-  Timer,
-  VolumeControl
-} from "react-soundplayer/components";
+import Sound from "react-sound";
 
-import "react-soundplayer/styles/buttons.css";
-import "react-soundplayer/styles/icons.css";
-import "react-soundplayer/styles/progress.css";
-import "react-soundplayer/styles/volume.css";
+class AudioPlayer extends Component {
+  state = {
+    playing: Sound.status.PLAYING,
+    elapsed: 0,
+    duration: 0,
+    position: 0
+  };
 
-class ProgressSoundPlayer extends Component {
+  formatMilliseconds = millis => {
+    let minutes = Math.floor(millis / 60000);
+    let seconds = ((millis % 60000) / 1000).toFixed(0);
+    return seconds === 60
+      ? minutes + 1 + ":00"
+      : minutes + ":" + (seconds < 10 ? "0" : "") + seconds;
+  };
+
+  handlePlaying = audio => {
+    let elapsed = this.formatMilliseconds(audio.position);
+    let total = this.formatMilliseconds(audio.duration);
+    let position = audio.position / audio.duration;
+
+    this.setState({
+      elapsed,
+      total,
+      position
+    });
+  };
+
+  handlePlayClick = () => {
+    this.setState({
+      playing:
+        this.state.playing === Sound.status.PLAYING
+          ? Sound.status.PAUSED
+          : Sound.status.PLAYING
+    });
+  };
+
   render() {
-    const { track, currentTime, duration } = this.props;
+    const { name, artist, images, audio } = this.props.track;
 
     return (
-      <div className="p2 border navy mt1 mb3 flex flex-center rounded">
-        <PlayButton
-          className="flex-none h4 mr2 button white btn-big button-outline button-grow bg-orange circle"
-          {...this.props}
+      <div className="audio-player-wrapper">
+        <Sound
+          url={audio.url}
+          playStatus={this.state.playing}
+          onPlaying={audio => this.handlePlaying(audio)}
         />
-        <div className="flex-auto">
-          <h2 className="h4 nowrap m0">{track ? track.artist.name : ""}</h2>
-          <h2 className="h4 nowrap caps m0">{track ? track.name : ""}</h2>
-          <div className="flex flex-center">
-            <VolumeControl
-              className="mr2 flex flex-center"
-              buttonClassName="flex-none h6 button white btn-small button-outline button-grow bg-orange circle btn-square"
-              {...this.props}
-            />
-            <Progress
-              className="mt1 mb1 rounded"
-              innerClassName="rounded-left"
-              value={(currentTime / duration) * 100 || 0}
-              {...this.props}
+        <div className="audio-player">
+          <img className="img-fluid" alt="" src={images[0].url} />
+          <i
+            className={`fas ${
+              this.state.playing === Sound.status.PLAYING
+                ? "fa-pause"
+                : "fa-play"
+            }`}
+            onClick={this.handlePlayClick}
+          />
+          <h2>{name}</h2>
+          <h4>{artist.name}</h4>
+          <div className="progress">
+            <div
+              className="progress-bar bg-primary"
+              role="progressbar"
+              style={{ width: `${this.state.position * 100}%` }}
+              aria-valuenow={this.state.position * 100}
+              aria-valuemin="0"
+              aria-valuemax="100"
             />
           </div>
         </div>
@@ -44,4 +76,4 @@ class ProgressSoundPlayer extends Component {
   }
 }
 
-export default withSoundCloudAudio(ProgressSoundPlayer);
+export default AudioPlayer;
