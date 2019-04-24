@@ -2,6 +2,13 @@
 // This file contains all styles related to the footer of the site/application.
 // -----------------------------------------------------------------------------
 
+.footer-wrapper {
+  margin-bottom: 64px;
+  @include media-breakpoint-up(md) {
+    margin-bottom: 104px;
+  }
+}
+
 .footer {
   color: $light;
   background-color: $dark;

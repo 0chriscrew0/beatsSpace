@@ -70,28 +70,34 @@ class AudioPlayer extends Component {
               aria-valuemax="100"
             />
           </div>
-          <div className="container-fluid">
-            <div className="row">
-              <div className="col-3 px-0">
+          <div className="container-fluid px-0">
+            <div className="d-flex justify-content-between">
+              <div className="d-flex justify-content-start">
                 <div className="audio-player-image">
                   <img className="img-fluid" alt="beat" src={images[0].url} />
                 </div>
+
+                <div className="d-flex justify-content-around align-items-center">
+                  <i
+                    className={`audio-player-play fas ${
+                      this.state.playing === Sound.status.PLAYING
+                        ? "fa-pause"
+                        : "fa-play"
+                    }`}
+                    onClick={this.handlePlayClick}
+                  />
+                </div>
+                <div className="px-0 my-auto d-flex-column">
+                  <h6 className="mb-0">{artist.name}</h6>
+                  <p className="my-0">{name}</p>
+                </div>
               </div>
 
-              <div className="col-6 px-0 d-flex-column justify-items-center">
-                <h6 className="mb-0 mt-2 display-6">{name}</h6>
-                <p className="my-0">{artist.name}</p>
-              </div>
-              <div className="col-3 d-flex justify-content-around align-items-center">
+              <div className="d-flex justify-content-around align-items-center">
                 <i
-                  className={`audio-player-play fas ${
-                    this.state.playing === Sound.status.PLAYING
-                      ? "fa-pause"
-                      : "fa-play"
-                  }`}
-                  onClick={this.handlePlayClick}
+                  className="audio-player-exit fas fa-times"
+                  onClick={this.exitPlayer}
                 />
-                <i className="fas fa-times" onClick={this.exitPlayer} />
               </div>
             </div>
           </div>

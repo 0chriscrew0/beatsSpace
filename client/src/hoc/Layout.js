@@ -26,9 +26,7 @@ class Layout extends Component {
           </div>
         ) : null}
         <div
-          style={
-            this.props.player.currentTrack ? { marginBottom: "64px" } : null
-          }
+          className={this.props.player.currentTrack ? "footer-wrapper" : null}
         >
           <Footer />
         </div>
