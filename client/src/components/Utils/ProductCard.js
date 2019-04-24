@@ -4,10 +4,7 @@ import { Link } from "react-router-dom";
 
 import DefaultImage from "../../resources/img/featured-image-01.jpg";
 
-import {
-  setCurrentTrack,
-  clearCurrentTrack
-} from "../../actions/playerActions";
+import { setCurrentTrack } from "../../actions/playerActions";
 
 class ProductCard extends Component {
   state = {

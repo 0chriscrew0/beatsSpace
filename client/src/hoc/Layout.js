@@ -25,8 +25,13 @@ class Layout extends Component {
             />
           </div>
         ) : null}
-
-        <Footer />
+        <div
+          style={
+            this.props.player.currentTrack ? { marginBottom: "64px" } : null
+          }
+        >
+          <Footer />
+        </div>
       </div>
     );
   }

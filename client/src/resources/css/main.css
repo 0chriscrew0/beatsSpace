@@ -7570,15 +7570,20 @@ h1, h2, h3, h4, h5, h6 {
   display: flex;
   align-items: center; }
 
-.audio-player {
+.audio-player-wrapper {
   position: fixed;
   bottom: 0;
   left: 0;
-  z-index: 101;
   width: 100vw;
-  background-color: #fff; }
-  .audio-player img {
-    width: 50px; }
+  background-color: #fff;
+  z-index: 101; }
+  .audio-player-wrapper .audio-player-exit {
+    float: right;
+    font-size: 18px;
+    padding-right: 0.4rem;
+    padding-top: 0.4rem; }
+  .audio-player-wrapper .audio-player-image {
+    width: 60px; }
 
 .home-page {
   height: 100%; }

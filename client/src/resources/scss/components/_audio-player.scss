@@ -1,12 +1,19 @@
-.audio-player {
+.audio-player-wrapper {
   position: fixed;
   bottom: 0;
   left: 0;
-  z-index: 101;
   width: 100vw;
   background-color: $white;
+  z-index: 101;
 
-  img {
-    width: 50px;
+  .audio-player-exit {
+    float: right;
+    font-size: 18px;
+    padding-right: 0.4rem;
+    padding-top: 0.4rem;
+  }
+
+  .audio-player-image {
+    width: 60px;
   }
 }
