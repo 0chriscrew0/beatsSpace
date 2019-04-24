@@ -5,6 +5,7 @@ import { Link } from "react-router-dom";
 import DefaultImage from "../../resources/img/featured-image-01.jpg";
 
 import { setCurrentTrack } from "../../actions/playerActions";
+import AudioLoading from "./AudioLoading";
 
 class ProductCard extends Component {
   state = {
@@ -62,11 +63,11 @@ class ProductCard extends Component {
                     this.handleIconClick({ _id, images, name, artist, audio })
             }
           >
-            <i
-              className={`product-card-icon ${
-                this.state.playing ? null : "fas fa-play"
-              }`}
-            />
+            {this.state.playing ? (
+              <AudioLoading />
+            ) : (
+              <i className="product-card-icon fas fa-play" />
+            )}
           </div>
         </div>
 
