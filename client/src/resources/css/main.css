@@ -7603,10 +7603,14 @@ h1, h2, h3, h4, h5, h6 {
     .audio-player-wrapper .audio-player-exit:hover {
       cursor: pointer; }
   .audio-player-wrapper .audio-player-image {
-    width: 60px; }
+    display: flex;
+    align-items: center;
+    width: 60px;
+    min-height: 60px; }
     @media (min-width: 768px) {
       .audio-player-wrapper .audio-player-image {
-        width: 100px; } }
+        width: 100px;
+        min-height: 100px; } }
 
 .loader {
   display: flex;
