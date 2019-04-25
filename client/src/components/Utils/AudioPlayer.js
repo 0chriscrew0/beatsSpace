@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import Sound from "react-sound";
 
-import { clearCurrentTrack } from "../../actions/playerActions";
+import { clearCurrentTrack, setPlayStatus } from "../../actions/playerActions";
 
 class AudioPlayer extends Component {
   state = {
@@ -11,6 +11,12 @@ class AudioPlayer extends Component {
     duration: 0,
     position: 0
   };
+
+  componentWillReceiveProps(nextProps) {
+    if (nextProps.playing) {
+      this.setState({ playing: nextProps.playing });
+    }
+  }
 
   formatMilliseconds = millis => {
     let minutes = Math.floor(millis / 60000);
@@ -33,12 +39,13 @@ class AudioPlayer extends Component {
   };
 
   handlePlayClick = () => {
-    this.setState({
-      playing:
+    this.props.dispatch(
+      setPlayStatus(
         this.state.playing === Sound.status.PLAYING
           ? Sound.status.PAUSED
           : Sound.status.PLAYING
-    });
+      )
+    );
   };
 
   exitPlayer = () => {
@@ -57,12 +64,9 @@ class AudioPlayer extends Component {
         />
 
         <div className="audio-player">
-          <div
-            className="progress"
-            style={{ backgroundColor: "$primary", height: "4px" }}
-          >
+          <div className="progress" style={{ height: "4px" }}>
             <div
-              className="progress-bar"
+              className="progress-bar bg-dark"
               role="progressbar"
               style={{ width: `${this.state.position * 100}%` }}
               aria-valuenow={this.state.position * 100}
@@ -107,4 +111,8 @@ class AudioPlayer extends Component {
   }
 }
 
-export default connect()(AudioPlayer);
+const mapStateToProps = state => {
+  return { playing: state.player.playing };
+};
+
+export default connect(mapStateToProps)(AudioPlayer);

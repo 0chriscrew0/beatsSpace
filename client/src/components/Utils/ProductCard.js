@@ -64,7 +64,9 @@ class ProductCard extends Component {
             }
           >
             {this.state.playing ? (
-              <AudioLoading />
+              <AudioLoading
+                noAnimation={this.props.player.playing === "PAUSED"}
+              />
             ) : (
               <i className="product-card-icon fas fa-play" />
             )}

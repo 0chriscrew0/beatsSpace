@@ -7579,6 +7579,7 @@ h1, h2, h3, h4, h5, h6 {
   bottom: 0;
   left: 0;
   width: 100vw;
+  color: #000033;
   background-color: #fff;
   z-index: 101;
   font-size: 1rem; }
@@ -7664,6 +7665,13 @@ h1, h2, h3, h4, h5, h6 {
   100% {
     transform: scaleY(1);
     transform-origin: 50% 50%; } }
+
+.no-animation {
+  -webkit-animation: none !important;
+  -moz-animation: none !important;
+  -o-animation: none !important;
+  -ms-animation: none !important;
+  animation: none !important; }
 
 .home-page {
   height: 100%; }
