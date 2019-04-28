@@ -44,7 +44,9 @@ class ProductCard extends Component {
   };
 
   render() {
-    const { _id, images, name, price, artist, audio } = this.props;
+    const { _id, images, name, description, price, artist, audio } = this.props;
+
+    const modalId = name.replace(/\s+/g, "");
 
     return (
       <div className="card product-card bg-white border-0`">
@@ -80,9 +82,56 @@ class ProductCard extends Component {
           </h5>
 
           <div className="product-card-buttons">
-            <Link className="btn btn-info" to={`/product/${_id}`}>
+            <button
+              type="button"
+              class="btn btn-info"
+              data-toggle="modal"
+              data-target={`#${modalId}`}
+            >
               Details
-            </Link>
+            </button>
+            <div
+              class="modal fade"
+              id={modalId}
+              tabindex="-1"
+              role="dialog"
+              aria-labelledby="exampleModalCenterTitle"
+              aria-hidden="true"
+            >
+              <div class="modal-dialog modal-dialog-centered" role="document">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLongTitle">
+                      {name}
+                    </h5>
+                    <button
+                      type="button"
+                      class="close"
+                      data-dismiss="modal"
+                      aria-label="Close"
+                    >
+                      <span aria-hidden="true">&times;</span>
+                    </button>
+                  </div>
+                  <div class="modal-body">
+                    <p className="text-muted">Created by {artist.name}</p>
+                    <div>{description}</div>
+                  </div>
+                  <div class="modal-footer">
+                    <button
+                      type="button"
+                      class="btn btn-warning"
+                      data-dismiss="modal"
+                    >
+                      Close
+                    </button>
+                    <button type="button" class="btn btn-primary">
+                      Add to Cart
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
             <Link className="btn btn-default" to={`/product/${_id}`}>
               <i className="fas fa-cart-plus" />
             </Link>
