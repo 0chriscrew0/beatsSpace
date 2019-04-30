@@ -120,11 +120,12 @@ class ProductCard extends Component {
                   <div class="modal-footer">
                     <button
                       type="button"
-                      class="btn btn-warning"
+                      class="btn btn-warning mr-auto"
                       data-dismiss="modal"
                     >
                       Close
                     </button>
+                    <h6 className="my-0 mr-2">${price}</h6>
                     <button type="button" class="btn btn-primary">
                       Add to Cart
                     </button>
