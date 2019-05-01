@@ -91,43 +91,46 @@ class ProductCard extends Component {
           <div className="product-card-buttons">
             <button
               type="button"
-              class="btn btn-info"
+              className="btn btn-info"
               data-toggle="modal"
               data-target={`#${modalId}`}
             >
               Details
             </button>
             <div
-              class="modal fade"
+              className="modal fade"
               id={modalId}
-              tabindex="-1"
+              tabIndex="-1"
               role="dialog"
               aria-labelledby="exampleModalCenterTitle"
               aria-hidden="true"
             >
-              <div class="modal-dialog modal-dialog-centered" role="document">
-                <div class="modal-content">
-                  <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLongTitle">
+              <div
+                className="modal-dialog modal-dialog-centered"
+                role="document"
+              >
+                <div className="modal-content">
+                  <div className="modal-header">
+                    <h5 className="modal-title" id="exampleModalLongTitle">
                       {name}
                     </h5>
                     <button
                       type="button"
-                      class="close"
+                      className="close"
                       data-dismiss="modal"
                       aria-label="Close"
                     >
                       <span aria-hidden="true">&times;</span>
                     </button>
                   </div>
-                  <div class="modal-body">
+                  <div className="modal-body">
                     <p className="text-muted">Created by {artist.name}</p>
                     <div>{description}</div>
                   </div>
-                  <div class="modal-footer">
+                  <div className="modal-footer">
                     <button
                       type="button"
-                      class="btn btn-warning mr-auto"
+                      className="btn btn-warning mr-auto"
                       data-dismiss="modal"
                     >
                       Close
@@ -135,7 +138,7 @@ class ProductCard extends Component {
                     <h6 className="my-0 mr-2">${price}</h6>
                     <button
                       type="button"
-                      class="btn btn-primary"
+                      className="btn btn-primary"
                       onClick={this.addToCart}
                     >
                       Add to Cart
