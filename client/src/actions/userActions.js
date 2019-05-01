@@ -4,7 +4,8 @@ import {
   LOGIN_USER,
   REGISTER_USER,
   LOGOUT_USER,
-  AUTHENTICATE_USER
+  AUTHENTICATE_USER,
+  ADD_TO_CART
 } from "./types";
 import { USER_ROUTES } from "../utils/misc";
 
@@ -48,6 +49,17 @@ export function authenticateUser() {
 
   return {
     type: AUTHENTICATE_USER,
+    payload: request
+  };
+}
+
+export function addProductToCart(id) {
+  const request = axios
+    .post(`${USER_ROUTES}/addToCart`, id)
+    .then(response => response.data);
+
+  return {
+    type: ADD_TO_CART,
     payload: request
   };
 }

@@ -282,6 +282,40 @@ app.get("/api/users/logout", auth, (req, res) => {
   });
 });
 
+app.post("/api/users/addToCart", auth, (req, res) => {
+  User.findOne({ _id: req.user._id }, (err, user) => {
+    let duplicate = false;
+
+    user.cart.forEach(item => {
+      if (item.id === req.body.productId) {
+        duplicate = true;
+      }
+    });
+
+    if (duplicate) {
+    } else {
+      User.findOneAndUpdate(
+        { _id: req.user._id },
+        {
+          $push: {
+            cart: {
+              id: mongoose.Types.ObjectId(req.body.productId),
+              quantity: 1,
+              data: Date.now()
+            }
+          }
+        },
+        { new: true },
+        (err, doc) => {
+          if (err) return res.json({ success: false, err });
+
+          res.status(200).json(doc.cart);
+        }
+      );
+    }
+  });
+});
+
 //-----------------------------
 //           Files
 //-----------------------------

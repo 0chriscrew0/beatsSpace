@@ -1,11 +1,12 @@
 import React, { Component } from "react";
+import { withRouter } from "react-router-dom";
 import { connect } from "react-redux";
-import { Link } from "react-router-dom";
 
 import DefaultImage from "../../resources/img/featured-image-01.jpg";
 
 import { setCurrentTrack } from "../../actions/playerActions";
 import AudioLoading from "./AudioLoading";
+import { addProductToCart } from "../../actions/userActions";
 
 class ProductCard extends Component {
   state = {
@@ -41,6 +42,12 @@ class ProductCard extends Component {
         this.props.dispatch(setCurrentTrack(trackData));
       }
     );
+  };
+
+  addToCart = () => {
+    this.props.user.userData.isAuth
+      ? this.props.dispatch(addProductToCart(this.props._id))
+      : this.props.history.push("/login");
   };
 
   render() {
@@ -126,16 +133,20 @@ class ProductCard extends Component {
                       Close
                     </button>
                     <h6 className="my-0 mr-2">${price}</h6>
-                    <button type="button" class="btn btn-primary">
+                    <button
+                      type="button"
+                      class="btn btn-primary"
+                      onClick={this.addToCart}
+                    >
                       Add to Cart
                     </button>
                   </div>
                 </div>
               </div>
             </div>
-            <Link className="btn btn-default" to={`/product/${_id}`}>
+            <button className="btn btn-default" onClick={this.addToCart}>
               <i className="fas fa-cart-plus" />
-            </Link>
+            </button>
           </div>
         </div>
       </div>
@@ -145,8 +156,9 @@ class ProductCard extends Component {
 
 const mapStateToProps = state => {
   return {
-    player: state.player
+    player: state.player,
+    user: state.user
   };
 };
 
-export default connect(mapStateToProps)(ProductCard);
+export default connect(mapStateToProps)(withRouter(ProductCard));
