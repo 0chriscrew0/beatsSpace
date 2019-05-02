@@ -283,16 +283,18 @@ app.get("/api/users/logout", auth, (req, res) => {
 });
 
 app.post("/api/users/addToCart", auth, (req, res) => {
+  const productId = req.body.productId;
   User.findOne({ _id: req.user._id }, (err, user) => {
     let duplicate = false;
 
     user.cart.forEach(item => {
-      if (item.id === req.body.productId) {
+      if (item.id == req.body.productId) {
         duplicate = true;
       }
     });
 
     if (duplicate) {
+      res.status(200).json({ duplicate: true });
     } else {
       User.findOneAndUpdate(
         { _id: req.user._id },

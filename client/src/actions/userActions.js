@@ -53,10 +53,13 @@ export function authenticateUser() {
   };
 }
 
-export function addProductToCart(id) {
+export function addProductToCart(productId) {
   const request = axios
-    .post(`${USER_ROUTES}/addToCart`, id)
-    .then(response => response.data);
+    .post(`${USER_ROUTES}/addToCart`, { productId })
+    .then(response => {
+      console.log(response);
+      return response.data;
+    });
 
   return {
     type: ADD_TO_CART,
