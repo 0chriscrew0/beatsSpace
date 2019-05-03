@@ -52,6 +52,12 @@ class ProductCard extends Component {
 
   render() {
     const { _id, images, name, description, price, artist, audio } = this.props;
+    let isInCart = false;
+    this.props.user.userData.cart.forEach(item => {
+      if (item.id === _id) {
+        isInCart = true;
+      }
+    });
 
     const modalId = name.replace(/\s+/g, "");
 
@@ -140,17 +146,23 @@ class ProductCard extends Component {
                       type="button"
                       className="btn btn-primary"
                       onClick={this.addToCart}
+                      disabled={isInCart}
                     >
-                      Add to Cart
+                      {isInCart ? "Item in cart" : "Add To Cart"}
                     </button>
                   </div>
                 </div>
               </div>
             </div>
-            <button className="btn btn-default" onClick={this.addToCart}>
+            <button
+              className="btn btn-default"
+              onClick={this.addToCart}
+              disabled={isInCart}
+            >
               <i className="fas fa-cart-plus" />
             </button>
           </div>
+          {/* {isInCart && <p className="mt-2 mb-0">Item is in your cart</p>} */}
         </div>
       </div>
     );

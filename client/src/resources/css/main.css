@@ -7906,3 +7906,40 @@ h1, h2, h3, h4, h5, h6 {
   text-align: center;
   align-self: flex-end;
   margin-top: 2rem; }
+
+.cart {
+  padding: 1em; }
+
+.cart-item {
+  padding: 0.6em;
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.8em; }
+
+.cart-item-image {
+  display: flex;
+  position: relative;
+  width: 100px;
+  align-items: center;
+  background-color: #f1f0ee; }
+  .cart-item-image img {
+    width: 100%;
+    height: auto; }
+
+.cart-item-info {
+  margin-left: 16px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between; }
+
+.cart-item-info-title strong {
+  font-size: 1em; }
+
+.cart-item-right {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  color: #dc3545; }
+
+.cart-item-price {
+  float: right; }

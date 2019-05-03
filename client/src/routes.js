@@ -11,6 +11,7 @@ import Register from "./components/Auth/Register";
 import UserDashboard from "./components/User";
 import AddProduct from "./components/User/Admin/AddProduct";
 import Shop from "./components/Shop";
+import Cart from "./components/User/Cart";
 import ManageArtists from "./components/User/Admin/ManageArtists";
 import ManageGenres from "./components/User/Admin/ManageGenres";
 
@@ -24,6 +25,7 @@ const Routes = () => {
           path="/user/dashboard"
           component={AuthRoute(UserDashboard, true)}
         />
+        <Route path="/user/cart" component={AuthRoute(Cart, true)} />
         <Route
           path="/admin/add-product"
           component={AuthRoute(AddProduct, true)}

@@ -293,7 +293,7 @@ app.post("/api/users/addToCart", auth, (req, res) => {
     });
 
     if (duplicate) {
-      res.status(200).json({ duplicate: true });
+      res.status(200).json(req.user.cart);
     } else {
       User.findOneAndUpdate(
         { _id: req.user._id },
@@ -322,10 +322,10 @@ app.post("/api/users/getCartDetails", auth, (req, res) => {
   const ids = cart.map(item => item.id);
 
   Beat.find({ _id: { $in: ids } })
-    .populate("genre")
     .populate("artist")
+    .populate("genre")
     .exec((err, docs) => {
-      console.log(docs);
+      if (err) return res.json({ success: false, err });
       return res.status(200).send(docs);
     });
 });
