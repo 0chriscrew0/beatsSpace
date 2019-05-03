@@ -283,7 +283,6 @@ app.get("/api/users/logout", auth, (req, res) => {
 });
 
 app.post("/api/users/addToCart", auth, (req, res) => {
-  const productId = req.body.productId;
   User.findOne({ _id: req.user._id }, (err, user) => {
     let duplicate = false;
 
@@ -316,6 +315,19 @@ app.post("/api/users/addToCart", auth, (req, res) => {
       );
     }
   });
+});
+
+app.post("/api/users/getCartDetails", auth, (req, res) => {
+  const cart = req.body;
+  const ids = cart.map(item => item.id);
+
+  Beat.find({ _id: { $in: ids } })
+    .populate("genre")
+    .populate("artist")
+    .exec((err, docs) => {
+      console.log(docs);
+      return res.status(200).send(docs);
+    });
 });
 
 //-----------------------------

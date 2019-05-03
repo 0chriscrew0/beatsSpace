@@ -1,7 +1,25 @@
-import React from "react";
+import React, { Component } from "react";
+import { connect } from "react-redux";
+import { getCartDetails } from "../../actions/userActions";
 
-const Cart = () => {
-  return <div>cart</div>;
+class Cart extends Component {
+  state = {
+    loading: true
+  };
+
+  componentDidMount() {
+    this.props.dispatch(getCartDetails(this.props.user.userData.cart));
+  }
+
+  render() {
+    return <div className="cart">cart</div>;
+  }
+}
+
+const mapStateToProps = state => {
+  return {
+    user: state.user
+  };
 };
 
-export default Cart;
+export default connect(mapStateToProps)(Cart);
