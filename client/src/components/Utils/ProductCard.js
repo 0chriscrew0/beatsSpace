@@ -53,11 +53,13 @@ class ProductCard extends Component {
   render() {
     const { _id, images, name, description, price, artist, audio } = this.props;
     let isInCart = false;
-    this.props.user.userData.cart.forEach(item => {
-      if (item.id === _id) {
-        isInCart = true;
-      }
-    });
+    if (this.props.user.userData.cart) {
+      this.props.user.userData.cart.forEach(item => {
+        if (item.id === _id) {
+          isInCart = true;
+        }
+      });
+    }
 
     const modalId = name.replace(/\s+/g, "");
 

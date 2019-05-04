@@ -10,15 +10,19 @@
 }
 
 .cart-item-image {
+  width: 50px;
+  @include media-breakpoint-up(md) {
+    width: 100px;
+  }
+}
+
+.cart-item-image-wrapper {
   display: flex;
   position: relative;
-  width: 100px;
+  width: 100%;
+  height: auto;
   align-items: center;
   background-color: $gray;
-  img {
-    width: 100%;
-    height: auto;
-  }
 }
 
 .cart-item-info {

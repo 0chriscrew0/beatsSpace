@@ -7917,14 +7917,18 @@ h1, h2, h3, h4, h5, h6 {
   font-size: 0.8em; }
 
 .cart-item-image {
+  width: 50px; }
+  @media (min-width: 768px) {
+    .cart-item-image {
+      width: 100px; } }
+
+.cart-item-image-wrapper {
   display: flex;
   position: relative;
-  width: 100px;
+  width: 100%;
+  height: auto;
   align-items: center;
   background-color: #f1f0ee; }
-  .cart-item-image img {
-    width: 100%;
-    height: auto; }
 
 .cart-item-info {
   margin-left: 16px;

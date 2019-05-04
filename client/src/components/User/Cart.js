@@ -22,7 +22,7 @@ class Cart extends Component {
   renderCartItems = () =>
     this.props.user.userData.cartDetails ? (
       this.props.user.userData.cartDetails.map(item => (
-        <div>
+        <div key={item._id}>
           <CartItem item={item} />
           <hr className="my-1" />
         </div>
