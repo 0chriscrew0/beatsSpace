@@ -25,7 +25,7 @@ ReactDOM.render(
         window.__REDUX_DEVTOOLS_EXTENSION__()
     )}
   >
-    <Router>
+    <Router onUpdate={() => window.scrollTo(0, 0)}>
       <Routes />
     </Router>
   </Provider>,

@@ -2,6 +2,12 @@
   padding: 1em;
 }
 
+.cart-header,
+.cart-quantity,
+.cart-subtotal {
+  display: inline-block;
+}
+
 .cart-item {
   padding: 0.6em;
   display: flex;

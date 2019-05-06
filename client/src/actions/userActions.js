@@ -58,7 +58,6 @@ export function addProductToCart(productId) {
   const request = axios
     .post(`${USER_ROUTES}/addToCart`, { productId })
     .then(response => {
-      console.log(response);
       return response.data;
     });
 
@@ -72,7 +71,6 @@ export function getCartDetails(ids) {
   const request = axios
     .post(`${USER_ROUTES}/getCartDetails`, ids)
     .then(response => {
-      console.log(response);
       return response.data;
     });
 
