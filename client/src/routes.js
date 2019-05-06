@@ -2,6 +2,7 @@ import React from "react";
 import { Switch, Route } from "react-router-dom";
 
 import Layout from "./hoc/Layout";
+import ScrollToTop from "./components/Utils/ScrollToTop";
 import AuthRoute from "./hoc/AuthRoute";
 
 import Home from "./components/Home";
@@ -18,6 +19,7 @@ import ManageGenres from "./components/User/Admin/ManageGenres";
 const Routes = () => {
   return (
     <Layout>
+      <ScrollToTop />
       <Switch>
         <Route path="/" component={AuthRoute(Home, null)} exact />
         <Route path="/shop" component={AuthRoute(Shop, null)} />
