@@ -8,6 +8,19 @@
   display: inline-block;
 }
 
+.cart-header {
+  @include media-breakpoint-up(md) {
+    display: block;
+  }
+}
+
+.cart-quantity {
+  margin-left: 0.6rem;
+  @include media-breakpoint-up(md) {
+    margin-left: 0;
+  }
+}
+
 .cart-item {
   padding: 0.6em;
   display: flex;

@@ -7915,6 +7915,16 @@ h1, h2, h3, h4, h5, h6 {
 .cart-subtotal {
   display: inline-block; }
 
+@media (min-width: 768px) {
+  .cart-header {
+    display: block; } }
+
+.cart-quantity {
+  margin-left: 0.6rem; }
+  @media (min-width: 768px) {
+    .cart-quantity {
+      margin-left: 0; } }
+
 .cart-item {
   padding: 0.6em;
   display: flex;

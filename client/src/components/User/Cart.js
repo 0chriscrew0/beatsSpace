@@ -50,37 +50,34 @@ class Cart extends Component {
     return (
       <div className="cart">
         <div className="container">
-          <div>
-            <h4 className="cart-header">My Cart</h4>
-            <p className="cart-quantity ml-2 mb-3">
-              ({this.props.user.userData.cart.length} Items):
-            </p>
-            <p className="cart-subtotal lead ml-2 mb-3 text-danger">
-              ${this.calculateSubtotal()}
-            </p>
-          </div>
-
-          {this.state.loading ? (
-            <Spinner />
-          ) : (
-            <div>{this.renderCartItems()}</div>
-          )}
-
-          <div>
-            <Link
-              to="/user/checkout"
-              className="btn btn-block btn-primary mt-3"
-            >
-              Checkout
-            </Link>
-            <div className="my-3">
-              <span>Still looking?</span>
+          <div className="row flex-md-row-reverse">
+            <div className="col-xs-12 col-md-5 cart-info">
+              <h4 className="cart-header">My Cart</h4>
+              <p className="cart-quantity mb-3">
+                ({this.props.user.userData.cart.length} Items):
+              </p>
+              <p className="cart-subtotal lead ml-2 mb-3 text-danger">
+                ${this.calculateSubtotal()}
+              </p>
+              <div className="mb-4">
+                <span>Still looking?</span>
+                <Link to="/shop" className="btn btn-sm btn-outline-info ml-2">
+                  Go to Store
+                </Link>
+              </div>
               <Link
-                to="/shop"
-                className="btn btn-sm btn-outline-secondary ml-2"
+                to="/user/checkout"
+                className="btn btn-block btn-primary mb-3"
               >
-                Go to Store
+                Checkout
               </Link>
+            </div>
+            <div className="col-xs-12 col-md-7 cart-items">
+              {this.state.loading ? (
+                <Spinner />
+              ) : (
+                <div>{this.renderCartItems()}</div>
+              )}
             </div>
           </div>
         </div>
