@@ -37,6 +37,20 @@
   text-align: center;
 }
 
+.cart-amount {
+  font-size: 12px;
+  background: $secondary;
+  color: $white;
+  padding: 0 5px;
+  vertical-align: top;
+  margin-left: -6px;
+  padding-left: 9px;
+  padding-right: 9px;
+  -webkit-border-radius: 9px;
+  -moz-border-radius: 9px;
+  border-radius: 9px;
+}
+
 .logout-link {
   &:hover {
     cursor: pointer;
