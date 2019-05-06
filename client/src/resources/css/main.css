@@ -7932,11 +7932,16 @@ h1, h2, h3, h4, h5, h6 {
   .cart-header {
     display: block; } }
 
-.cart-quantity {
-  margin-left: 0.6rem; }
-  @media (min-width: 768px) {
-    .cart-quantity {
-      margin-left: 0; } }
+@media (min-width: 768px) {
+  .cart-info {
+    margin: 0 0 auto 1em; } }
+
+@media (min-width: 768px) {
+  .cart-items {
+    border: solid #f1f0ee 1px;
+    border-left: none;
+    border-bottom: none;
+    padding: 1rem 2rem; } }
 
 .cart-item {
   padding: 0.6em;

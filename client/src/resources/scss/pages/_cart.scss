@@ -14,10 +14,18 @@
   }
 }
 
-.cart-quantity {
-  margin-left: 0.6rem;
+.cart-info {
   @include media-breakpoint-up(md) {
-    margin-left: 0;
+    margin: 0 0 auto 1em;
+  }
+}
+
+.cart-items {
+  @include media-breakpoint-up(md) {
+    border: solid $gray 1px;
+    border-left: none;
+    border-bottom: none;
+    padding: 1rem 2rem;
   }
 }
 
