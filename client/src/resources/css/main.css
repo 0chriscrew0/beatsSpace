@@ -7801,6 +7801,9 @@ h1, h2, h3, h4, h5, h6 {
   padding: 3em;
   text-align: center; }
 
+.filter-card-body {
+  padding: 0.4em 1em; }
+
 .login-container {
   margin: auto;
   max-width: 90%; }

@@ -101,14 +101,16 @@ class Shop extends Component {
     const regularContent = (
       <div className="container shop">
         <div className="row">
-          <div className="col-sm-3">
-            <Filter products={products} handleFilters={this.handleFilters} />
-          </div>
-          <div className="col-sm-9">
+          <div className="col-sm-12">
             <ToolBar
               grid={this.state.grid}
               handleGrid={() => this.handleGrid()}
             />
+          </div>
+          <div className="col-sm-3 mt-4">
+            <Filter products={products} handleFilters={this.handleFilters} />
+          </div>
+          <div className="col-sm-9">
             <LoadProductCards
               grid={this.state.grid}
               limit={this.state.limit}
