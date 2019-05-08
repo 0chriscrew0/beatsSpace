@@ -23,20 +23,22 @@ class CheckBoxGroup extends Component {
 
   render() {
     return (
-      <div className="shop-checkbox-group">
+      <div className="bg-gray">
         {this.props.list
           ? this.props.list.map(item => (
-              <div key={item._id} className="form-check">
+              <div
+                key={item._id}
+                className="pretty p-default p-thick p-curve p-smooth d-block my-3"
+              >
                 <input
-                  className="form-check-input"
                   type="checkbox"
                   checked={this.state.checked.indexOf(item._id) !== -1}
                   id={item._id}
                   onChange={this.handleToggle(item._id)}
                 />
-                <label className="form-check-label" htmlFor={item._id}>
-                  {item.name}
-                </label>
+                <div className="state p-primary-o">
+                  <label htmlFor={item._id}>{item.name}</label>
+                </div>
               </div>
             ))
           : null}

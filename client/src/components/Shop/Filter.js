@@ -4,7 +4,8 @@ import {
   AccordionItem,
   AccordionItemHeading,
   AccordionItemPanel,
-  AccordionItemButton
+  AccordionItemButton,
+  AccordionItemState
 } from "react-accessible-accordion";
 
 import CheckBoxGroup from "./CheckBoxGroup";
@@ -23,8 +24,19 @@ const Filter = ({ products, handleFilters }) => {
         id="accordionExample"
       >
         <AccordionItem uuid="artists" className="filter-card">
-          <AccordionItemHeading className="filter-card-header" id="headingOne">
-            <AccordionItemButton>Artists</AccordionItemButton>
+          <AccordionItemHeading className="filter-card-header">
+            <AccordionItemButton className="filter-card-button">
+              <span className="filter-card-title">Artists</span>
+              <AccordionItemState>
+                {({ expanded }) => (
+                  <i
+                    className={`fas fa-chevron-down filter-icon ${
+                      expanded ? "filter-icon-expanded" : null
+                    }`}
+                  />
+                )}
+              </AccordionItemState>
+            </AccordionItemButton>
           </AccordionItemHeading>
           <AccordionItemPanel className="filter-card-body">
             <CheckBoxGroup
@@ -34,8 +46,19 @@ const Filter = ({ products, handleFilters }) => {
           </AccordionItemPanel>
         </AccordionItem>
         <AccordionItem uuid="genres" className="filter-card">
-          <AccordionItemHeading className="filter-card-header" id="headingTwo">
-            <AccordionItemButton>Genres</AccordionItemButton>
+          <AccordionItemHeading className="filter-card-header">
+            <AccordionItemButton className="filter-card-button">
+              <span className="filter-card-title">Genres</span>
+              <AccordionItemState>
+                {({ expanded }) => (
+                  <i
+                    className={`fas fa-chevron-down filter-icon ${
+                      expanded ? "filter-icon-expanded" : null
+                    }`}
+                  />
+                )}
+              </AccordionItemState>
+            </AccordionItemButton>
           </AccordionItemHeading>
           <AccordionItemPanel className="filter-card-body">
             <CheckBoxGroup
@@ -45,11 +68,19 @@ const Filter = ({ products, handleFilters }) => {
           </AccordionItemPanel>
         </AccordionItem>
         <AccordionItem uuid="price" className="filter-card">
-          <AccordionItemHeading
-            className="filter-card-header"
-            id="headingThree"
-          >
-            <AccordionItemButton>Price</AccordionItemButton>
+          <AccordionItemHeading className="filter-card-header">
+            <AccordionItemButton className="filter-card-button">
+              <span className="filter-card-title">Price</span>
+              <AccordionItemState>
+                {({ expanded }) => (
+                  <i
+                    className={`fas fa-chevron-down filter-icon ${
+                      expanded ? "filter-icon-expanded" : null
+                    }`}
+                  />
+                )}
+              </AccordionItemState>
+            </AccordionItemButton>
           </AccordionItemHeading>
           <AccordionItemPanel className="filter-card-body">
             <RadioGroup

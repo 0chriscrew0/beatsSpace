@@ -1,0 +1,26 @@
+.filter-card-button {
+  background-color: $gray;
+  padding: 0.4em 0.6em;
+  &:hover {
+    cursor: pointer;
+  }
+}
+
+.filter-card-title {
+  font-weight: bold;
+}
+
+.filter-icon {
+  float: right;
+  margin-top: 3px;
+  -moz-transition: all 0.25s linear;
+  -webkit-transition: all 0.25s linear;
+  transition: all 0.25s linear;
+}
+
+.filter-icon-expanded {
+  -ms-transform: rotate(180deg);
+  -moz-transform: rotate(180deg);
+  -webkit-transform: rotate(180deg);
+  transform: rotate(180deg);
+}

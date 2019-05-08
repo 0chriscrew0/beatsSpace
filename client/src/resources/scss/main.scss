@@ -4,7 +4,7 @@
 @import "abstracts/variables", "abstracts/functions", "abstracts/mixins";
 
 // 2. Vendors
-@import "vendors/normalize", "vendors/bootstrap";
+@import "vendors/normalize", "vendors/bootstrap", "vendors/pretty-checkbox";
 
 // 3. Base stuff
 @import "base/base", "base/fonts", "base/typography";
@@ -14,7 +14,8 @@
 
 // 5. Components
 @import "components/button", "components/product-card", "components/file-upload",
-  "components/spinner", "components/audio-player", "components/audio-loader";
+  "components/spinner", "components/audio-player", "components/audio-loader",
+  "components/filter";
 
 // 6. Page-specific styles
 @import "pages/home", "pages/shop", "pages/login", "pages/register",

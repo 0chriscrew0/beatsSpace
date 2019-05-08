@@ -15,9 +15,11 @@ class RadioGroup extends Component {
       <div className="shop-radio-group">
         {this.props.list
           ? this.props.list.map((item, index) => (
-              <div key={index} className="form-check">
+              <div
+                key={index}
+                className="pretty p-default p-thick p-round p-smooth d-block my-3"
+              >
                 <input
-                  className="form-check-input"
                   type="radio"
                   name="price"
                   value={item}
@@ -25,11 +27,13 @@ class RadioGroup extends Component {
                   checked={this.state.selected === item.name}
                   onChange={this.handleChecked(item)}
                 />
-                <label className="form-check-label" htmlFor={item.name}>
-                  {item.name === "All" || item.name === "Free"
-                    ? item.name
-                    : `$${item.name}`}
-                </label>
+                <div className="state p-primary-o">
+                  <label htmlFor={item.name}>
+                    {item.name === "All" || item.name === "Free"
+                      ? item.name
+                      : `$${item.name}`}
+                  </label>
+                </div>
               </div>
             ))
           : null}
