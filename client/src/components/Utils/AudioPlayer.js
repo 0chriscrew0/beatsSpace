@@ -3,6 +3,7 @@ import { connect } from "react-redux";
 import Sound from "react-sound";
 
 import { clearCurrentTrack, setPlayStatus } from "../../actions/playerActions";
+import ProgressBar from "./ProgressBar";
 
 class AudioPlayer extends Component {
   state = {
@@ -64,16 +65,7 @@ class AudioPlayer extends Component {
         />
 
         <div className="audio-player">
-          <div className="progress" style={{ height: "4px" }}>
-            <div
-              className="progress-bar bg-dark"
-              role="progressbar"
-              style={{ width: `${this.state.position * 100}%` }}
-              aria-valuenow={this.state.position * 100}
-              aria-valuemin="0"
-              aria-valuemax="100"
-            />
-          </div>
+          <ProgressBar percentage={this.state.position * 100} />
           <div className="container-fluid px-0">
             <div className="d-flex justify-content-between">
               <div className="d-flex justify-content-start">

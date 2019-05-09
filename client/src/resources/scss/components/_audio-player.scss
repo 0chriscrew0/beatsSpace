@@ -44,3 +44,16 @@
     }
   }
 }
+
+.progress-bar {
+  position: relative;
+  height: 4px;
+  width: 100%;
+  background-color: $gray;
+}
+
+.filler {
+  background-color: $primary;
+  height: 100%;
+  transition: width 0.2s ease;
+}
