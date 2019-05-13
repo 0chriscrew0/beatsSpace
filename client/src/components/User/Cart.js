@@ -8,28 +8,30 @@ import CartItem from "./CartItem";
 
 class Cart extends Component {
   state = {
-    loading: true
+    loading: true,
+    cartDetails: []
   };
 
   componentDidMount() {
     this.props
       .dispatch(getCartDetails(this.props.user.userData.cart))
-      .then(() => {
-        this.setState({ loading: false });
+      .then(response => {
+        this.setState({ loading: false, cartDetails: response.payload });
       });
   }
 
   renderCartItems = () =>
-    this.props.user.userData.cartDetails ? (
-      this.props.user.userData.cartDetails.map(item => (
+    this.state.cartDetails.length ? (
+      this.state.cartDetails.map(item => (
         <div key={item._id}>
           <CartItem item={item} removeItem={this.removeItem} />
           <hr className="my-1" />
         </div>
       ))
     ) : (
-      <div>
-        <h4>Your cart is empty!</h4>
+      <div className="py-5">
+        <p className="lead mb-0">Your cart is empty!</p>
+        <hr className="my-2" />
         <Link to="/shop" className="btn btn-secondary">
           Go to Store
         </Link>
@@ -38,17 +40,19 @@ class Cart extends Component {
 
   calculateSubtotal = () => {
     let total = 0;
-    this.props.user.userData.cartDetails &&
-      this.props.user.userData.cartDetails.forEach(item => {
-        total += item.price;
-      });
+
+    this.state.cartDetails.forEach(item => {
+      total += item.price;
+    });
 
     return total;
   };
 
   removeItem = id => {
     console.log(id);
-    this.props.dispatch(removeFromCart(id));
+    this.props.dispatch(removeFromCart(id)).then(response => {
+      this.setState({ cartDetails: response.payload });
+    });
   };
 
   render() {
