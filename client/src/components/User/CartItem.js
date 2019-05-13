@@ -1,13 +1,19 @@
 import React from "react";
 
+import DefaultImage from "../../resources/img/logo.png";
+
 const CartItem = props => {
-  const { name, images, artist, genre, price } = props.item;
+  const { _id, name, images, artist, genre, price } = props.item;
 
   return (
     <div className="cart-item">
       <div className="cart-item-image">
         <div className="cart-item-image-wrapper">
-          <img className="img-fluid" src={images[0].url} alt={name} />
+          <img
+            className="img-fluid"
+            src={images ? images[0].url : DefaultImage}
+            alt={name}
+          />
         </div>
       </div>
 
@@ -30,6 +36,7 @@ const CartItem = props => {
         <button
           style={{ fontSize: "0.7em" }}
           className="btn btn-sm btn-outline-primary"
+          onClick={() => props.removeItem(_id)}
         >
           Remove
         </button>

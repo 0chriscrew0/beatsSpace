@@ -6,7 +6,8 @@ import {
   LOGOUT_USER,
   AUTHENTICATE_USER,
   ADD_TO_CART,
-  GET_CART_DETAILS
+  GET_CART_DETAILS,
+  REMOVE_FROM_CART
 } from "./types";
 import { USER_ROUTES } from "../utils/misc";
 
@@ -76,6 +77,18 @@ export function getCartDetails(ids) {
 
   return {
     type: GET_CART_DETAILS,
+    payload: request
+  };
+}
+
+export function removeFromCart(id) {
+  console.log(id);
+  const request = axios
+    .post(`${USER_ROUTES}/removeFromCart`, { id })
+    .then(response => response.data);
+
+  return {
+    type: REMOVE_FROM_CART,
     payload: request
   };
 }

@@ -72,7 +72,7 @@ class Header extends Component {
         key={index}
       >
         <NavLink className="nav-link" to={item.url}>
-          <i class="fas fa-shopping-cart" style={{ fontSize: "24px" }} />
+          <i className="fas fa-shopping-cart" style={{ fontSize: "24px" }} />
           <span className="cart-amount">
             {user.cart ? user.cart.length : 0}{" "}
           </span>

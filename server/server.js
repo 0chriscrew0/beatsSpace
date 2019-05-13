@@ -330,6 +330,23 @@ app.post("/api/users/getCartDetails", auth, (req, res) => {
     });
 });
 
+app.post("/api/users/removeFromCart", auth, (req, res) => {
+  const itemId = req.body.id;
+  console.log(itemId);
+
+  User.findByIdAndUpdate(
+    req.user._id,
+    { $pull: { cart: { id: mongoose.Types.ObjectId(itemId) } } },
+    { new: true },
+    (err, doc) => {
+      if (err) return res.json({ success: false, err });
+
+      console.log(doc.cart);
+      res.status(200).json(doc.cart);
+    }
+  );
+});
+
 //-----------------------------
 //           Files
 //-----------------------------

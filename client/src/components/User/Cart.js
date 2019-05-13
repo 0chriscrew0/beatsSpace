@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 
-import { getCartDetails } from "../../actions/userActions";
+import { getCartDetails, removeFromCart } from "../../actions/userActions";
 import Spinner from "../Utils/Spinner";
 import CartItem from "./CartItem";
 
@@ -23,7 +23,7 @@ class Cart extends Component {
     this.props.user.userData.cartDetails ? (
       this.props.user.userData.cartDetails.map(item => (
         <div key={item._id}>
-          <CartItem item={item} />
+          <CartItem item={item} removeItem={this.removeItem} />
           <hr className="my-1" />
         </div>
       ))
@@ -44,6 +44,11 @@ class Cart extends Component {
       });
 
     return total;
+  };
+
+  removeItem = id => {
+    console.log(id);
+    this.props.dispatch(removeFromCart(id));
   };
 
   render() {
