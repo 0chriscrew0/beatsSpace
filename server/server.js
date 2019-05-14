@@ -332,17 +332,22 @@ app.post("/api/users/getCartDetails", auth, (req, res) => {
 
 app.post("/api/users/removeFromCart", auth, (req, res) => {
   const itemId = req.body.id;
-  console.log(itemId);
 
   User.findByIdAndUpdate(
     req.user._id,
     { $pull: { cart: { id: mongoose.Types.ObjectId(itemId) } } },
     { new: true },
-    (err, doc) => {
+    (err, user) => {
       if (err) return res.json({ success: false, err });
+      const ids = user.cart.map(item => item.id);
 
-      console.log(doc.cart);
-      res.status(200).json(doc.cart);
+      Beat.find({ _id: { $in: ids } })
+        .populate("artist")
+        .populate("genre")
+        .exec((err, docs) => {
+          if (err) return res.json({ success: false, err });
+          return res.status(200).send(docs);
+        });
     }
   );
 });

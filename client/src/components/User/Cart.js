@@ -49,7 +49,6 @@ class Cart extends Component {
   };
 
   removeItem = id => {
-    console.log(id);
     this.props.dispatch(removeFromCart(id)).then(response => {
       this.setState({ cartDetails: response.payload });
     });
