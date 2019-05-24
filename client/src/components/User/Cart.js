@@ -81,41 +81,45 @@ class Cart extends Component {
                 <div>{this.renderCartItems()}</div>
               )}
             </div>
-            <div className="col-xs-12 col-md-4 py-4 cart-info">
-              {this.state.showTotal ? (
-                <React.Fragment>
-                  <p className="cart-quantity mb-3">
-                    Subtotal ({this.props.user.userData.cart.length}{" "}
-                    {this.props.user.userData.cart.length === 1
-                      ? "Item"
-                      : "Items"}
-                    ):
-                  </p>
-                  <p className="cart-subtotal lead ml-2 mb-3 text-danger">
-                    ${this.calculateSubtotal()}
-                  </p>
+            {this.state.cartDetails.length ? (
+              <div className="col-xs-12 col-md-4 py-4 cart-info">
+                {!this.state.success ? (
+                  <React.Fragment>
+                    <p className="cart-quantity mb-3">
+                      Subtotal ({this.props.user.userData.cart.length}{" "}
+                      {this.props.user.userData.cart.length === 1
+                        ? "Item"
+                        : "Items"}
+                      ):
+                    </p>
+                    <p className="cart-subtotal lead ml-2 mb-3 text-danger">
+                      ${this.calculateSubtotal()}
+                    </p>
 
-                  <Paypal
-                    paymentTotal={this.calculateSubtotal()}
-                    error={data => this.transactionError(data)}
-                    canceled={data => this.transactionCanceled(data)}
-                    success={payment => this.transactionSuccess(payment)}
-                  />
-                </React.Fragment>
-              ) : (
-                <div className="success-total">
-                  <h4>Thank You!</h4>
-                  <h6>Your order has been completed.</h6>
-                </div>
-              )}
+                    <Paypal
+                      paymentTotal={this.calculateSubtotal()}
+                      error={data => this.transactionError(data)}
+                      canceled={data => this.transactionCanceled(data)}
+                      success={payment => this.transactionSuccess(payment)}
+                    />
+                  </React.Fragment>
+                ) : (
+                  <div className="success-total">
+                    <h4>Thank You!</h4>
+                    <h6>Your order has been completed.</h6>
+                  </div>
+                )}
 
-              <hr />
+                <hr />
 
-              <span>Still looking?</span>
-              <Link to="/shop" className="btn btn-sm btn-outline-info ml-2">
-                Go to Store
-              </Link>
-            </div>
+                <span>Still looking?</span>
+                <Link to="/shop" className="btn btn-sm btn-outline-info ml-2">
+                  Go to Store
+                </Link>
+              </div>
+            ) : (
+              <div />
+            )}
           </div>
         </div>
       </div>
