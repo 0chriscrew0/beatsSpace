@@ -8,7 +8,7 @@
     "client": "npm run start --prefix client",
     "client-install": "yarn add --prefix client",
     "watch-scss": "node-sass --watch client/src/resources/scss -o client/src/resources/css",
-    "dev": "concurrently \"npm run server\" \"npm run client\""
+    "dev": "concurrently \"npm run server\" \"npm run client\" \"npm run watch-scss\""
   },
   "license": "MIT",
   "dependencies": {
