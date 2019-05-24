@@ -413,6 +413,47 @@ app.post("/api/users/order-success", auth, (req, res) => {
 
   transactionData.data = req.body.paymentData;
   transactionData.product = history;
+
+  User.findOneAndUpdate(
+    { _id: req.user._id },
+    { $push: { history: history }, $set: { cart: [] } },
+    { new: true },
+    (err, user) => {
+      if (err) return res.status(400).json({ success: false, err });
+
+      const payment = new Payment(transactionData);
+      payment.save((err, doc) => {
+        if (err) return res.status(400).json({ success: false, err });
+
+        let products = [];
+
+        doc.product.forEach(item => {
+          products.push(item.id);
+        });
+
+        async.eachOfSeries(
+          products,
+          (id, callback) => {
+            Product.update(
+              { _id: id },
+              { $inc: { sold: 1 } },
+              { new: false },
+              callback
+            );
+          },
+          err => {
+            if (err) return res.status(400).json({ success: false, err });
+
+            res.status(200).json({
+              success: true,
+              cart: user.cart,
+              cartDetail: []
+            });
+          }
+        );
+      });
+    }
+  );
 });
 
 const port = process.env.PORT || 5000;
