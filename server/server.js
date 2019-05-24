@@ -30,6 +30,7 @@ const User = require("./models/User");
 const Genre = require("./models/Genre");
 const Artist = require("./models/Artist");
 const Beat = require("./models/Beat");
+const Payment = require("./models/Payment");
 
 //-----------------------------
 //           Middleware
@@ -385,6 +386,33 @@ app.get("/api/users/remove-file", auth, admin, (req, res) => {
     }
     res.status(200).send("Success");
   });
+});
+
+app.post("/api/users/order-success", auth, (req, res) => {
+  let history = [];
+  let transactionData = {};
+
+  // USER HISTORY
+  req.body.cartDetails.forEach(item => {
+    history.push({
+      dateofPurchase: Date.now(),
+      name: item.name,
+      artist: item.artist.name,
+      id: item._id,
+      price: item.price,
+      paymentId: req.body.paymentData.paymentID
+    });
+  });
+
+  transactionData.user = {
+    id: req.user._id,
+    firstname: req.user.firstname,
+    lastname: req.user.lastname,
+    email: req.user.email
+  };
+
+  transactionData.data = req.body.paymentData;
+  transactionData.product = history;
 });
 
 const port = process.env.PORT || 5000;
