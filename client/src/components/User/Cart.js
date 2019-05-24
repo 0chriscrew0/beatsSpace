@@ -5,6 +5,7 @@ import { Link } from "react-router-dom";
 import { getCartDetails, removeFromCart } from "../../actions/userActions";
 import Spinner from "../Utils/Spinner";
 import CartItem from "./CartItem";
+import Paypal from "../Utils/Paypal";
 
 class Cart extends Component {
   state = {
@@ -54,6 +55,12 @@ class Cart extends Component {
     });
   };
 
+  transactionError = data => {};
+
+  transactionCanceled = data => {};
+
+  transactionSuccess = data => {};
+
   render() {
     return (
       <div className="cart">
@@ -77,12 +84,12 @@ class Cart extends Component {
                 ${this.calculateSubtotal()}
               </p>
 
-              <Link
-                to="/user/checkout"
-                className="btn btn-block btn-primary mb-3"
-              >
-                Checkout
-              </Link>
+              <Paypal
+                paymentTotal={this.calculateSubtotal()}
+                error={data => this.transactionError(data)}
+                canceled={data => this.transactionCanceled(data)}
+                success={data => this.transactionSuccess(data)}
+              />
 
               <hr />
 
