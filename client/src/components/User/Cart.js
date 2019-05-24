@@ -2,7 +2,11 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 
-import { getCartDetails, removeFromCart } from "../../actions/userActions";
+import {
+  getCartDetails,
+  removeFromCart,
+  onOrderSuccess
+} from "../../actions/userActions";
 import Spinner from "../Utils/Spinner";
 import CartItem from "./CartItem";
 import Paypal from "../Utils/Paypal";
@@ -10,7 +14,6 @@ import Paypal from "../Utils/Paypal";
 class Cart extends Component {
   state = {
     loading: true,
-    showTotal: true,
     success: false,
     cartDetails: []
   };
@@ -62,10 +65,21 @@ class Cart extends Component {
   transactionCanceled = data => {};
 
   transactionSuccess = payment => {
-    this.setState({
-      showTotal: false,
-      success: true
-    });
+    this.props
+      .dispatch(
+        onOrderSuccess({
+          cartDetails: this.state.cartDetails,
+          paymentData: payment
+        })
+      )
+      .then(() => {
+        if (this.props.user.orderSuccess) {
+          this.setState({
+            success: true,
+            cartDetails: []
+          });
+        }
+      });
   };
 
   render() {
@@ -81,7 +95,7 @@ class Cart extends Component {
                 <div>{this.renderCartItems()}</div>
               )}
             </div>
-            {this.state.cartDetails.length ? (
+            {this.state.cartDetails.length || this.state.success ? (
               <div className="col-xs-12 col-md-4 py-4 cart-info">
                 {!this.state.success ? (
                   <React.Fragment>

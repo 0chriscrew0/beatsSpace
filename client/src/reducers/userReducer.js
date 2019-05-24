@@ -5,7 +5,8 @@ import {
   LOGOUT_USER,
   ADD_TO_CART,
   GET_CART_DETAILS,
-  REMOVE_FROM_CART
+  REMOVE_FROM_CART,
+  ON_ORDER_SUCCESS
 } from "../actions/types";
 
 export default function(state = {}, action) {
@@ -51,6 +52,16 @@ export default function(state = {}, action) {
         userData: {
           ...state.userData,
           cart: action.payload
+        }
+      };
+    case ON_ORDER_SUCCESS:
+      return {
+        ...state,
+        orderSuccess: action.payload.success,
+        userData: {
+          ...state.userData,
+          cart: action.payload.cart,
+          cartDetails: action.payload.cartDetails
         }
       };
     default:
