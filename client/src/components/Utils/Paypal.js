@@ -33,7 +33,7 @@ class Paypal extends Component {
           onSuccess={onSuccess}
           onCancel={onCancel}
           style={{
-            size: "large",
+            size: "small",
             color: "blue",
             shape: "rect",
             label: "checkout"

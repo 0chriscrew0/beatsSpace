@@ -111,6 +111,7 @@ class Cart extends Component {
                     </p>
 
                     <Paypal
+                      style={{ textAlign: "center" }}
                       paymentTotal={this.calculateSubtotal()}
                       error={data => this.transactionError(data)}
                       canceled={data => this.transactionCanceled(data)}
