@@ -7,7 +7,8 @@ import {
   AUTHENTICATE_USER,
   ADD_TO_CART,
   GET_CART_DETAILS,
-  REMOVE_FROM_CART
+  REMOVE_FROM_CART,
+  ON_ORDER_SUCCESS
 } from "./types";
 import { USER_ROUTES } from "../utils/misc";
 
@@ -89,6 +90,17 @@ export function removeFromCart(id) {
 
   return {
     type: REMOVE_FROM_CART,
+    payload: request
+  };
+}
+
+export function onOrderSuccess(data) {
+  const request = axios
+    .post(`${USER_ROUTES}/order-success`, data)
+    .then(response => response.data);
+
+  return {
+    type: ON_ORDER_SUCCESS,
     payload: request
   };
 }

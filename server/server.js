@@ -3,6 +3,7 @@ const cookieParser = require("cookie-parser");
 const mongoose = require("mongoose");
 const formidable = require("express-formidable");
 const cloudinary = require("cloudinary");
+const async = require("async");
 require("dotenv").config();
 
 const app = express();
@@ -425,16 +426,16 @@ app.post("/api/users/order-success", auth, (req, res) => {
       payment.save((err, doc) => {
         if (err) return res.status(400).json({ success: false, err });
 
-        let products = [];
+        let beats = [];
 
         doc.product.forEach(item => {
-          products.push(item.id);
+          beats.push(item.id);
         });
 
-        async.eachOfSeries(
-          products,
+        async.eachSeries(
+          beats,
           (id, callback) => {
-            Product.update(
+            Beat.updateOne(
               { _id: id },
               { $inc: { sold: 1 } },
               { new: false },
