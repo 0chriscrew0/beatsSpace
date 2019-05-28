@@ -10,6 +10,8 @@ import Login from "./components/Auth/Login";
 import Register from "./components/Auth/Register";
 
 import Account from "./components/User/Account";
+import Profile from "./components/User/Profile";
+import Admin from "./components/User/Admin";
 import AddProduct from "./components/User/Admin/AddProduct";
 import Shop from "./components/Shop";
 import Cart from "./components/User/Cart";
@@ -23,19 +25,29 @@ const Routes = () => {
       <Switch>
         <Route path="/" component={AuthRoute(Home, null)} exact />
         <Route path="/shop" component={AuthRoute(Shop, null)} />
-        <Route path="/user/account" component={AuthRoute(Account, true)} />
+        <Route
+          path="/user/account"
+          component={AuthRoute(Account, true)}
+          exact
+        />
+        <Route
+          path="/user/profile"
+          component={AuthRoute(Profile, true)}
+          exact
+        />
         <Route path="/user/cart" component={AuthRoute(Cart, true)} />
+        <Route path="/admin" component={AuthRoute(Admin, true, true)} exact />
         <Route
           path="/admin/add-product"
-          component={AuthRoute(AddProduct, true)}
+          component={AuthRoute(AddProduct, true, true)}
         />
         <Route
           path="/admin/manage-artists"
-          component={AuthRoute(ManageArtists, true)}
+          component={AuthRoute(ManageArtists, true, true)}
         />
         <Route
           path="/admin/manage-genres"
-          component={AuthRoute(ManageGenres, true)}
+          component={AuthRoute(ManageGenres, true, true)}
         />
 
         <Route path="/login" component={AuthRoute(Login, false)} />

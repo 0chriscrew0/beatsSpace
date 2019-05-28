@@ -20,10 +20,10 @@ export default function(ComposedClass, reload, admin = null) {
           }
         } else {
           if (admin && !user.isAdmin) {
-            this.props.history.push("/user/dashboard");
+            this.props.history.push("/user/account");
           } else {
             if (reload === false) {
-              this.props.history.push("/user/dashboard");
+              this.props.history.push("/user/account");
             }
           }
         }
