@@ -21,7 +21,7 @@ class Header extends Component {
       },
       {
         name: "Account",
-        url: "/user/dashboard",
+        url: "/user/account",
         public: false
       },
       {

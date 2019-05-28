@@ -88,7 +88,7 @@ export default withFormik({
   handleSubmit(values, { props }) {
     props.dispatch(loginUser(values)).then(response => {
       if (response.payload.success) {
-        props.history.push("/user/dashboard");
+        props.history.push("/user/account");
       }
     });
   }

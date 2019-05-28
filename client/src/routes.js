@@ -9,7 +9,7 @@ import Home from "./components/Home";
 import Login from "./components/Auth/Login";
 import Register from "./components/Auth/Register";
 
-import UserDashboard from "./components/User";
+import Account from "./components/User/Account";
 import AddProduct from "./components/User/Admin/AddProduct";
 import Shop from "./components/Shop";
 import Cart from "./components/User/Cart";
@@ -23,10 +23,7 @@ const Routes = () => {
       <Switch>
         <Route path="/" component={AuthRoute(Home, null)} exact />
         <Route path="/shop" component={AuthRoute(Shop, null)} />
-        <Route
-          path="/user/dashboard"
-          component={AuthRoute(UserDashboard, true)}
-        />
+        <Route path="/user/account" component={AuthRoute(Account, true)} />
         <Route path="/user/cart" component={AuthRoute(Cart, true)} />
         <Route
           path="/admin/add-product"
