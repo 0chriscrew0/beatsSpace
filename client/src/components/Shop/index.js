@@ -2,7 +2,7 @@ import React, { Component } from "react";
 
 import { connect } from "react-redux";
 import {
-  getProducts,
+  getProductsShop,
   getArtists,
   getGenres
 } from "../../actions/productActions";
@@ -29,7 +29,7 @@ class Shop extends Component {
     this.props.dispatch(getGenres());
 
     this.props.dispatch(
-      getProducts(this.state.skip, this.state.limit, this.state.filters)
+      getProductsShop(this.state.skip, this.state.limit, this.state.filters)
     );
   }
 
@@ -46,9 +46,11 @@ class Shop extends Component {
   };
 
   showFiltered = filters => {
-    this.props.dispatch(getProducts(0, this.state.limit, filters)).then(() => {
-      this.setState({ skip: 0 });
-    });
+    this.props
+      .dispatch(getProductsShop(0, this.state.limit, filters))
+      .then(() => {
+        this.setState({ skip: 0 });
+      });
   };
 
   loadMore = () => {
@@ -56,7 +58,7 @@ class Shop extends Component {
 
     this.props
       .dispatch(
-        getProducts(
+        getProductsShop(
           skip,
           this.state.limit,
           this.state.filters,

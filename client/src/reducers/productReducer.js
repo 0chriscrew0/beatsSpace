@@ -1,7 +1,10 @@
 import {
-  GET_PRODUCTS,
+  GET_PRODUCTS_SHOP,
   GET_PRODUCTS_BY_ARRIVAL,
   GET_PRODUCTS_BY_SALES,
+  GET_PRODUCTS,
+  EDIT_PRODUCT,
+  REMOVE_PRODUCT,
   GET_ARTISTS,
   ADD_ARTIST,
   REMOVE_ARTIST,
@@ -16,7 +19,7 @@ import {
 
 export default function(state = {}, action) {
   switch (action.type) {
-    case GET_PRODUCTS:
+    case GET_PRODUCTS_SHOP:
       return {
         ...state,
         beats: action.payload.beats,
@@ -36,6 +39,16 @@ export default function(state = {}, action) {
       return {
         ...state,
         artists: action.payload
+      };
+    case GET_PRODUCTS:
+      return {
+        ...state,
+        manageProducts: action.payload
+      };
+    case REMOVE_PRODUCT:
+      return {
+        ...state,
+        manageProducts: action.payload.products
       };
     case ADD_ARTIST:
       return {

@@ -137,6 +137,26 @@ app.post("/api/product/shop", (req, res) => {
     });
 });
 
+app.get("/api/product/getProducts", (req, res) => {
+  Beat.find({}, (err, products) => {
+    if (err) {
+      return res.status(400).send(err);
+    }
+
+    return res.status(200).send(products);
+  });
+});
+
+app.post("/api/product/removeProduct", auth, admin, (req, res) => {
+  Beat.deleteOne({ _id: req.body.id }, err => {
+    if (err) {
+      return res.status(400).send(err);
+    }
+
+    return res.status(200).send({ success: true });
+  });
+});
+
 //-----------------------------
 //           Artist
 //-----------------------------

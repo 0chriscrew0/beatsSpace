@@ -1,8 +1,11 @@
 import axios from "axios";
 import {
-  GET_PRODUCTS,
+  GET_PRODUCTS_SHOP,
   GET_PRODUCTS_BY_SALES,
   GET_PRODUCTS_BY_ARRIVAL,
+  GET_PRODUCTS,
+  EDIT_PRODUCT,
+  REMOVE_PRODUCT,
   GET_ARTISTS,
   ADD_ARTIST,
   REMOVE_ARTIST,
@@ -41,7 +44,7 @@ export function clearProductDetails() {
   };
 }
 
-export function getProducts(skip, limit, filters = {}, previousState = []) {
+export function getProductsShop(skip, limit, filters = {}, previousState = []) {
   const data = {
     limit,
     skip,
@@ -58,7 +61,7 @@ export function getProducts(skip, limit, filters = {}, previousState = []) {
   });
 
   return {
-    type: GET_PRODUCTS,
+    type: GET_PRODUCTS_SHOP,
     payload: request
   };
 }
@@ -100,6 +103,37 @@ export function clearNewProduct() {
   return {
     type: CLEAR_PRODUCT,
     payload: {}
+  };
+}
+
+export function getProducts() {
+  const request = axios
+    .get(`${PRODUCT_ROUTES}/getProducts`)
+    .then(response => response.data);
+
+  return {
+    type: GET_PRODUCTS,
+    payload: request
+  };
+}
+
+export function removeProduct(id, currentProducts) {
+  const request = axios
+    .post(`${PRODUCT_ROUTES}/removeProduct`, { id })
+    .then(response => {
+      let products = currentProducts.filter(item => {
+        return id !== item._id;
+      });
+
+      return {
+        success: response.data.success,
+        products
+      };
+    });
+
+  return {
+    type: REMOVE_PRODUCT,
+    payload: request
   };
 }
 

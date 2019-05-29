@@ -19,6 +19,9 @@ const Admin = () => {
             <Link to="/admin/manage-genres" className="">
               Manage Genres
             </Link>
+            <Link to="/admin/manage-products" className="">
+              Manage Products
+            </Link>
           </div>
         </div>
       </div>
