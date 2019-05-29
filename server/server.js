@@ -138,13 +138,29 @@ app.post("/api/product/shop", (req, res) => {
 });
 
 app.get("/api/product/getProducts", (req, res) => {
-  Beat.find({}, (err, products) => {
-    if (err) {
-      return res.status(400).send(err);
-    }
+  Beat.find({})
+    .populate("artist")
+    .populate("genre")
+    .exec((err, products) => {
+      if (err) {
+        return res.status(400).send(err);
+      }
 
-    return res.status(200).send(products);
-  });
+      return res.status(200).send(products);
+    });
+});
+
+app.post("/api/product/editProduct", auth, admin, (req, res) => {
+  Beat.findByIdAndUpdate(
+    req.body.id,
+    req.body.data,
+    { new: true },
+    (err, doc) => {
+      if (err) return res.status(400).send(err);
+
+      res.status(200).send({ success: true, products: doc });
+    }
+  );
 });
 
 app.post("/api/product/removeProduct", auth, admin, (req, res) => {
@@ -152,6 +168,14 @@ app.post("/api/product/removeProduct", auth, admin, (req, res) => {
     if (err) {
       return res.status(400).send(err);
     }
+
+    User.updateMany(
+      {},
+      { $pull: { cart: { id: mongoose.Types.ObjectId(req.body.id) } } },
+      () => {
+        if (err) return res.status(400).send(err);
+      }
+    );
 
     return res.status(200).send({ success: true });
   });
@@ -322,9 +346,7 @@ app.post("/api/users/addToCart", auth, (req, res) => {
         {
           $push: {
             cart: {
-              id: mongoose.Types.ObjectId(req.body.productId),
-              quantity: 1,
-              data: Date.now()
+              id: mongoose.Types.ObjectId(req.body.productId)
             }
           }
         },

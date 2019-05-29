@@ -45,6 +45,11 @@ export default function(state = {}, action) {
         ...state,
         manageProducts: action.payload
       };
+    case EDIT_PRODUCT:
+      return {
+        ...state,
+        manageProducts: action.payload.products
+      };
     case REMOVE_PRODUCT:
       return {
         ...state,

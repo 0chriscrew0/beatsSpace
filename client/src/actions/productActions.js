@@ -117,6 +117,17 @@ export function getProducts() {
   };
 }
 
+export function editProduct(id, data) {
+  const request = axios
+    .post(`${PRODUCT_ROUTES}/editProduct`, { id, data })
+    .then(response => response.data);
+
+  return {
+    type: EDIT_PRODUCT,
+    payload: request
+  };
+}
+
 export function removeProduct(id, currentProducts) {
   const request = axios
     .post(`${PRODUCT_ROUTES}/removeProduct`, { id })
