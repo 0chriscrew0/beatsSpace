@@ -5,8 +5,17 @@
     }
   }
 }
+
+.account {
+  @include media-breakpoint-up(md) {
+    div {
+      margin-left: 0;
+    }
+  }
+}
+
 .account-section {
-  margin: 1em 0;
+  margin: 0 0 1em;
   padding: 1em;
   div {
     display: flex;
@@ -24,6 +33,9 @@
 
   @include media-breakpoint-up(md) {
     margin: 1em;
+    div {
+      margin-left: 0;
+    }
   }
 }
 

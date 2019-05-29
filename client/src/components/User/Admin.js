@@ -7,7 +7,7 @@ const Admin = () => {
   return (
     <UserDashBoard>
       <div className="admin">
-        <div className="container py-4">
+        <div className="container">
           <div className="manage-content-links">
             <h4>Manage Content</h4>
             <Link to="/admin/add-product" className="add-product">
