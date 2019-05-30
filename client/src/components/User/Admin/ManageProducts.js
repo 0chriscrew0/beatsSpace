@@ -10,7 +10,6 @@ import {
   getProducts,
   editProduct,
   removeProduct,
-  clearNewProduct,
   getArtists,
   getGenres
 } from "../../../actions/productActions";
@@ -98,7 +97,7 @@ class ManageGenres extends Component {
                     this.props
                       .dispatch(editProduct(item._id, values))
                       .then(response => {
-                        this.props.history.push("/admin/manage-products");
+                        window.location.reload();
                       });
                   }}
                 >

@@ -210,6 +210,19 @@ app.get("/api/product/getArtists", (req, res) => {
   });
 });
 
+app.post("/api/product/editArtist", auth, admin, (req, res) => {
+  Artist.findByIdAndUpdate(
+    req.body.id,
+    req.body.data,
+    { new: true },
+    (err, doc) => {
+      if (err) return res.status(400).send(err);
+
+      res.status(200).send({ success: true, artists: doc });
+    }
+  );
+});
+
 app.post("/api/product/removeArtist", auth, admin, (req, res) => {
   Artist.deleteOne({ _id: req.body.id }, err => {
     if (err) {
@@ -243,6 +256,19 @@ app.get("/api/product/getGenres", (req, res) => {
     }
     return res.status(200).send(genres);
   });
+});
+
+app.post("/api/product/editGenre", auth, admin, (req, res) => {
+  Genre.findByIdAndUpdate(
+    req.body.id,
+    req.body.data,
+    { new: true },
+    (err, doc) => {
+      if (err) return res.status(400).send(err);
+
+      res.status(200).send({ success: true, genres: doc });
+    }
+  );
 });
 
 app.post("/api/product/removeGenre", auth, admin, (req, res) => {

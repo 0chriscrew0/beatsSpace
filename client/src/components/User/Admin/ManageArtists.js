@@ -4,10 +4,13 @@ import { connect } from "react-redux";
 import { Formik, Form, Field } from "formik";
 import * as Yup from "yup";
 
+import { ID } from "../../../utils/misc";
+
 import {
   getArtists,
   addArtist,
-  removeArtist
+  removeArtist,
+  editArtist
 } from "../../../actions/productActions";
 
 class ManageArtists extends Component {
@@ -22,17 +25,109 @@ class ManageArtists extends Component {
   }
 
   showCurrentArtists = () =>
-    this.state.artists.map(item => (
-      <div key={item._id} className="current-artist">
-        <span>{item.name}</span>
-        <button
-          onClick={() => this.removeArtist(item._id)}
-          className="ml-3 btn btn-sm btn-danger"
-        >
-          <i className="fas fa-times" />
-        </button>
-      </div>
-    ));
+    this.state.artists.map(item => {
+      const modalId = ID();
+
+      return (
+        <div key={item._id} className="current-artist">
+          <span>{item.name}</span>
+          <button
+            type="button"
+            className="ml-3 btn btn-sm btn-outline-warning"
+            data-toggle="modal"
+            data-target={`#${modalId}`}
+          >
+            <i className="fas fa-edit" />
+          </button>
+          <div
+            className="modal fade"
+            id={modalId}
+            tabIndex="-1"
+            role="dialog"
+            aria-labelledby="exampleModalLabel"
+            aria-hidden="true"
+          >
+            <div className="modal-dialog" role="document">
+              <div className="modal-content">
+                <div className="modal-header">
+                  <h5 className="modal-title" id="exampleModalLabel">
+                    Edit Artist
+                  </h5>
+                  <button
+                    type="button"
+                    className="close"
+                    data-dismiss="modal"
+                    aria-label="Close"
+                  >
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>
+                <div className="modal-body">
+                  <Formik
+                    initialValues={{
+                      name: item.name
+                    }}
+                    validationSchema={Yup.object().shape({
+                      name: Yup.string()
+                        .max(100, "Artist can only be 100 characters")
+                        .required("Enter a name")
+                    })}
+                    onSubmit={values => {
+                      this.props
+                        .dispatch(editArtist(item._id, values))
+                        .then(response => {
+                          window.location.reload();
+                        });
+                    }}
+                  >
+                    {({ errors, touched, isSubmitting }) => (
+                      <Form>
+                        <div className="form-group">
+                          <Field
+                            className={`form-control ${touched.name &&
+                              errors.name &&
+                              "is-invalid"}`}
+                            type="text"
+                            name="name"
+                            placeholder="Name"
+                          />
+                          {touched.name && errors.name && (
+                            <p className="text-danger pt-1">{errors.name}</p>
+                          )}
+                        </div>
+
+                        <button
+                          disabled={isSubmitting}
+                          className="btn btn-primary"
+                          type="submit"
+                        >
+                          Edit Artist
+                        </button>
+                      </Form>
+                    )}
+                  </Formik>
+                </div>
+                <div className="modal-footer">
+                  <button
+                    type="button"
+                    className="btn btn-secondary"
+                    data-dismiss="modal"
+                  >
+                    Close
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+          <button
+            onClick={() => this.removeArtist(item._id)}
+            className="ml-3 btn btn-sm btn-danger"
+          >
+            <i className="fas fa-times" />
+          </button>
+        </div>
+      );
+    });
 
   removeArtist = id => {
     this.props.dispatch(removeArtist(id, this.state.artists)).then(response => {

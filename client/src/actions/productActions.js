@@ -15,7 +15,9 @@ import {
   ADD_PRODUCT,
   CLEAR_PRODUCT,
   GET_PRODUCT_DETAILS,
-  CLEAR_PRODUCT_DETAILS
+  CLEAR_PRODUCT_DETAILS,
+  EDIT_GENRE,
+  EDIT_ARTIST
 } from "./types";
 
 import { PRODUCT_ROUTES } from "../utils/misc";
@@ -181,6 +183,17 @@ export function addArtist(newArtist, currentArtists) {
   };
 }
 
+export function editArtist(id, data) {
+  const request = axios
+    .post(`${PRODUCT_ROUTES}/editArtist`, { id, data })
+    .then(response => response.data);
+
+  return {
+    type: EDIT_ARTIST,
+    payload: request
+  };
+}
+
 export function removeArtist(id, currentArtists) {
   console.log(id);
   const request = axios
@@ -227,6 +240,17 @@ export function addGenre(newGenre, currentGenres) {
 
   return {
     type: ADD_GENRE,
+    payload: request
+  };
+}
+
+export function editGenre(id, data) {
+  const request = axios
+    .post(`${PRODUCT_ROUTES}/editGenre`, { id, data })
+    .then(response => response.data);
+
+  return {
+    type: EDIT_GENRE,
     payload: request
   };
 }

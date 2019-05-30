@@ -14,7 +14,9 @@ import {
   ADD_PRODUCT,
   CLEAR_PRODUCT,
   GET_PRODUCT_DETAILS,
-  CLEAR_PRODUCT_DETAILS
+  CLEAR_PRODUCT_DETAILS,
+  EDIT_ARTIST,
+  EDIT_GENRE
 } from "../actions/types";
 
 export default function(state = {}, action) {
@@ -60,6 +62,11 @@ export default function(state = {}, action) {
         ...state,
         artists: action.payload.artists
       };
+    case EDIT_ARTIST:
+      return {
+        ...state,
+        artists: action.payload.artists
+      };
     case REMOVE_ARTIST:
       return {
         ...state,
@@ -71,6 +78,11 @@ export default function(state = {}, action) {
         genres: action.payload
       };
     case ADD_GENRE:
+      return {
+        ...state,
+        genres: action.payload.genres
+      };
+    case EDIT_GENRE:
       return {
         ...state,
         genres: action.payload.genres
