@@ -206,7 +206,9 @@ app.get("/api/product/getArtists", (req, res) => {
       return res.status(400).send(err);
     }
 
-    return res.status(200).send(artists);
+    const newArtists = artists.filter(item => item.name !== "Unkown");
+
+    return res.status(200).send(newArtists);
   });
 });
 
@@ -224,7 +226,7 @@ app.post("/api/product/editArtist", auth, admin, (req, res) => {
 });
 
 app.post("/api/product/removeArtist", auth, admin, (req, res) => {
-  Artist.deleteOne({ _id: req.body.id }, err => {
+  Artist.updateOne({ _id: req.body.id }, { name: "Unkown" }, err => {
     if (err) {
       return res.status(400).send(err);
     }
@@ -254,7 +256,10 @@ app.get("/api/product/getGenres", (req, res) => {
     if (err) {
       return res.status(400).send(err);
     }
-    return res.status(200).send(genres);
+
+    const newGenres = genres.filter(item => item.name !== "None");
+
+    return res.status(200).send(newGenres);
   });
 });
 
@@ -272,7 +277,7 @@ app.post("/api/product/editGenre", auth, admin, (req, res) => {
 });
 
 app.post("/api/product/removeGenre", auth, admin, (req, res) => {
-  Genre.deleteOne({ _id: req.body.id }, err => {
+  Genre.updateOne({ _id: req.body.id }, { name: "None" }, err => {
     if (err) {
       return res.status(400).send(err);
     }
