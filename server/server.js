@@ -32,6 +32,7 @@ const Genre = require("./models/Genre");
 const Artist = require("./models/Artist");
 const Beat = require("./models/Beat");
 const Payment = require("./models/Payment");
+const Site = require("./models/Site");
 
 //-----------------------------
 //           Middleware
@@ -541,6 +542,18 @@ app.post("/api/users/order-success", auth, (req, res) => {
       });
     }
   );
+});
+
+//-----------------------------
+//           Site
+//-----------------------------
+
+app.get("/api/site/site-info", (req, res) => {
+  Site.find({}, (err, sites) => {
+    if (err) return res.status(400).send(err);
+
+    res.status(200).send(sites[0].siteInfo);
+  });
 });
 
 const port = process.env.PORT || 5000;

@@ -18,6 +18,7 @@ import Cart from "./components/User/Cart";
 import ManageArtists from "./components/User/Admin/ManageArtists";
 import ManageGenres from "./components/User/Admin/ManageGenres";
 import ManageProducts from "./components/User/Admin/ManageProducts";
+import ManageSite from "./components/User/Admin/ManageSite";
 
 const Routes = () => {
   return (
@@ -53,6 +54,10 @@ const Routes = () => {
         <Route
           path="/admin/manage-products"
           component={AuthRoute(ManageProducts, true, true)}
+        />
+        <Route
+          path="/admin/manage-site"
+          component={AuthRoute(ManageSite, true, true)}
         />
 
         <Route path="/login" component={AuthRoute(Login, false)} />
