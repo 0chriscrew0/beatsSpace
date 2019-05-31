@@ -8562,6 +8562,9 @@ h1, h2, h3, h4, h5, h6 {
   .manage-content-links a {
     padding: 0.2em; }
 
+.update-profile {
+  background-color: #f1f0ee; }
+
 .current-artist {
   margin-bottom: 1em; }
 

@@ -8,7 +8,9 @@ import {
   ADD_TO_CART,
   GET_CART_DETAILS,
   REMOVE_FROM_CART,
-  ON_ORDER_SUCCESS
+  ON_ORDER_SUCCESS,
+  EDIT_PROFILE,
+  CLEAR_UPDATE_PROFILE_SUCCESS
 } from "./types";
 import { USER_ROUTES } from "../utils/misc";
 
@@ -102,5 +104,23 @@ export function onOrderSuccess(data) {
   return {
     type: ON_ORDER_SUCCESS,
     payload: request
+  };
+}
+
+export function editProfile(data) {
+  const request = axios
+    .post(`${USER_ROUTES}/update-profile`, data)
+    .then(response => response.data);
+
+  return {
+    type: EDIT_PROFILE,
+    payload: request
+  };
+}
+
+export function clearUpdateProfileSuccess() {
+  return {
+    type: CLEAR_UPDATE_PROFILE_SUCCESS,
+    payload: {}
   };
 }

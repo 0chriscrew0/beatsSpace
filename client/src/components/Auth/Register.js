@@ -17,31 +17,33 @@ class Register extends Component {
             <h3 className="text-secondary">BeatsStore</h3>
             <Form>
               <h4 className="pb-1">Register</h4>
-              <div className="form-group">
-                <Field
-                  className={`form-control ${touched.firstname &&
-                    errors.firstname &&
-                    "is-invalid"}`}
-                  type="text"
-                  name="firstname"
-                  placeholder="First Name"
-                />
-                {touched.firstname && errors.firstname && (
-                  <p className="text-danger pt-1">{errors.firstname}</p>
-                )}
-              </div>
-              <div className="form-group">
-                <Field
-                  className={`form-control ${touched.lastname &&
-                    errors.lastname &&
-                    "is-invalid"}`}
-                  type="text"
-                  name="lastname"
-                  placeholder="Last Name"
-                />
-                {touched.lastname && errors.lastname && (
-                  <p className="text-danger pt-1">{errors.lastname}</p>
-                )}
+              <div className="form-row">
+                <div className="form-group col-md-6">
+                  <Field
+                    className={`form-control ${touched.firstname &&
+                      errors.firstname &&
+                      "is-invalid"}`}
+                    type="text"
+                    name="firstname"
+                    placeholder="First Name"
+                  />
+                  {touched.firstname && errors.firstname && (
+                    <p className="text-danger pt-1">{errors.firstname}</p>
+                  )}
+                </div>
+                <div className="form-group col-md-6">
+                  <Field
+                    className={`form-control ${touched.lastname &&
+                      errors.lastname &&
+                      "is-invalid"}`}
+                    type="text"
+                    name="lastname"
+                    placeholder="Last Name"
+                  />
+                  {touched.lastname && errors.lastname && (
+                    <p className="text-danger pt-1">{errors.lastname}</p>
+                  )}
+                </div>
               </div>
 
               <div className="form-group">
