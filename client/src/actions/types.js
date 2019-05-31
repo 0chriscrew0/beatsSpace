@@ -33,3 +33,4 @@ export const CLEAR_CURRENT_TRACK = "CLEAR_CURRENT_TRACK";
 export const SET_PLAY_STATUS = "SET_PLAY_STATUS";
 
 export const GET_SITE_INFO = "GET_SITE_INFO";
+export const EDIT_SITE_INFO = "EDIT_SITE_INFO";

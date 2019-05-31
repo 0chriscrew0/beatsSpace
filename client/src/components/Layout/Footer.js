@@ -1,8 +1,8 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
-const Footer = () => {
-  return (
+const Footer = ({ data }) => {
+  return data.siteInfo ? (
     <section className="footer">
       <div className="container">
         <div className="row">
@@ -21,9 +21,9 @@ const Footer = () => {
           </div>
           <div className="col-md-4 footer-info">
             <div className="footer-contact">
-              <p>Phone: (555) 555 5555</p>
-              <p>Email: email@beatsstore.com</p>
-              <p>Address: 1234 Main Street Houston, TX 77333</p>
+              <p>Phone: {data.siteInfo.phone}</p>
+              <p>Email: {data.siteInfo.email}</p>
+              <p>Address: {data.siteInfo.address}</p>
             </div>
             <div className="footer-social">
               <Link to="/" className="fab fa-facebook-square" />
@@ -44,7 +44,7 @@ const Footer = () => {
         </div>
       </div>
     </section>
-  );
+  ) : null;
 };
 
 export default Footer;

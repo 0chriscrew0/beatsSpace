@@ -5,9 +5,13 @@ import * as Yup from "yup";
 
 import Spinner from "../../Utils/Spinner";
 
-import { getSiteInfo } from "../../../actions/siteActions";
+import { getSiteInfo, editSiteInfo } from "../../../actions/siteActions";
 
 class ManageSite extends Component {
+  state = {
+    success: false
+  };
+
   componentDidMount() {
     this.props.dispatch(getSiteInfo());
   }
@@ -17,20 +21,20 @@ class ManageSite extends Component {
       <div className="manage-site">
         {this.props.site.siteInfo ? (
           <div className="container py-5">
-            <h2>Manage Site Information</h2>
+            <h3>Manage Site Information</h3>
             <div className="py-4">
               <Formik
                 initialValues={{
-                  phone: this.props.site.siteInfo[0].phone,
-                  email: this.props.site.siteInfo[0].email,
-                  address: this.props.site.siteInfo[0].address,
-                  promotionHeader: "",
-                  promotionText: "",
-                  promotionButton: ""
+                  phone: this.props.site.siteInfo.phone,
+                  email: this.props.site.siteInfo.email,
+                  address: this.props.site.siteInfo.address,
+                  promotionHeader: this.props.site.promotion.promotionHeader,
+                  promotionText: this.props.site.promotion.promotionText,
+                  promotionButton: this.props.site.promotion.promotionButton
                 }}
                 validationSchema={Yup.object().shape({
                   phone: Yup.string()
-                    .max(10, "Phone can only be 10 characters")
+                    .max(20, "Phone can only be 20 characters")
                     .required("Enter phone number"),
                   email: Yup.string()
                     .max(100, "Email can only be 100 characters")
@@ -48,7 +52,28 @@ class ManageSite extends Component {
                     .max(20, "Promotion header can only be 20 characters")
                     .required("Enter promotion button text")
                 })}
-                onSubmit={values => {}}
+                onSubmit={values => {
+                  const dataToSubmit = {
+                    promotion: {
+                      promotionHeader: values.promotionHeader,
+                      promotionText: values.promotionText,
+                      promotionButton: values.promotionButton
+                    },
+                    siteInfo: {
+                      phone: values.phone,
+                      email: values.email,
+                      address: values.address
+                    }
+                  };
+                  this.props
+                    .dispatch(editSiteInfo(dataToSubmit))
+                    .then(response => {
+                      this.setState({ success: true });
+                      setInterval(() => {
+                        window.location.reload();
+                      }, 3000);
+                    });
+                }}
               >
                 {({ errors, touched, isSubmitting }) => (
                   <Form>
@@ -151,7 +176,7 @@ class ManageSite extends Component {
 
                     <button
                       disabled={isSubmitting}
-                      className="btn btn-primary"
+                      className="btn btn-block btn-primary"
                       type="submit"
                     >
                       Update Site
@@ -160,6 +185,11 @@ class ManageSite extends Component {
                 )}
               </Formik>
             </div>
+            {this.state.success ? (
+              <span className="mt-3 p-2 rounded bg-success">
+                Site updated successfully, reloading in 3 seconds
+              </span>
+            ) : null}
           </div>
         ) : (
           <Spinner />

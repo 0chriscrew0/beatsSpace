@@ -5,7 +5,14 @@ import Header from "../components/Layout/Header";
 import Footer from "../components/Layout/Footer";
 import AudioPlayer from "../components/Utils/AudioPlayer";
 
+import { getSiteInfo } from "../actions/siteActions";
+
 class Layout extends Component {
+  componentDidMount() {
+    if (Object.keys(this.props.site).length === 0) {
+      this.props.dispatch(getSiteInfo());
+    }
+  }
   render() {
     return (
       <div className="flex-wrapper">
@@ -28,7 +35,7 @@ class Layout extends Component {
         <div
           className={this.props.player.currentTrack ? "footer-wrapper" : null}
         >
-          <Footer />
+          <Footer data={this.props.site} />
         </div>
       </div>
     );
@@ -37,7 +44,8 @@ class Layout extends Component {
 
 const mapStateToProps = state => {
   return {
-    player: state.player
+    player: state.player,
+    site: state.site
   };
 };
 

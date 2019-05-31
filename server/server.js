@@ -552,8 +552,24 @@ app.get("/api/site/site-info", (req, res) => {
   Site.find({}, (err, sites) => {
     if (err) return res.status(400).send(err);
 
-    res.status(200).send(sites[0].siteInfo);
+    res.status(200).send(sites[0]);
   });
+});
+
+app.post("/api/site/site-info", auth, admin, (req, res) => {
+  Site.findOneAndUpdate(
+    { name: "Site" },
+    { $set: { siteInfo: req.body.siteInfo, promotion: req.body.promotion } },
+    { new: true },
+    (err, doc) => {
+      if (err) return res.status(400).json({ success: false, err });
+
+      return res.status(200).send({
+        success: true,
+        siteInfo: doc.siteInfo
+      });
+    }
+  );
 });
 
 const port = process.env.PORT || 5000;
