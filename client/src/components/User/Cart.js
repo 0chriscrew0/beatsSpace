@@ -88,7 +88,7 @@ class Cart extends Component {
         <div className="container">
           <div className="row">
             <div className="col-xs-12 col-md-7 cart-items">
-              <h4 className="cart-header">My Cart</h4>
+              <h4 className="cart-header pl-1">My Cart</h4>
               {this.state.loading ? (
                 <Spinner />
               ) : (

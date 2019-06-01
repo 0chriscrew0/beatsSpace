@@ -22,9 +22,7 @@
 
 .cart-items {
   @include media-breakpoint-up(md) {
-    border: solid $gray 1px;
-    border-left: none;
-    border-bottom: none;
+    border-right: solid $gray 1px;
     padding: 1rem 2rem;
   }
 }
