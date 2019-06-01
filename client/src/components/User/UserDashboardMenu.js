@@ -3,8 +3,9 @@ import { NavLink } from "react-router-dom";
 
 const UserDashboardMenu = ({ user }) => {
   return (
-    <div>
-      <ul className="nav pb-0">
+    <div className="user-dashboard-menu">
+      <h3 className="pl-2">My Account</h3>
+      <ul className="nav ml-0 pb-0">
         <li className="nav-item">
           <NavLink
             to="/user/account"

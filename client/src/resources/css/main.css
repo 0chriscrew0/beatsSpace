@@ -8348,7 +8348,7 @@ h1, h2, h3, h4, h5, h6 {
     border-bottom-left-radius: 0;
     border-bottom-right-radius: 0; }
     .user-dashboard-wrapper li a.active {
-      background-color: #f1f0ee; }
+      color: #2f7fda; }
   @media (min-width: 576px) {
     .user-dashboard-wrapper {
       padding-top: 2em; }
@@ -8357,9 +8357,13 @@ h1, h2, h3, h4, h5, h6 {
         -webkit-box-shadow: none;
         -moz-box-shadow: none;
         box-shadow: none;
-        padding-top: 0; }
+        padding-top: 0;
+        padding-left: 0; }
+        .user-dashboard-wrapper ul li {
+          padding-left: 0; }
         .user-dashboard-wrapper ul a {
-          text-align: left; }
+          text-align: left;
+          font-size: 1.2em; }
       .user-dashboard-wrapper hr {
         display: none; } }
 

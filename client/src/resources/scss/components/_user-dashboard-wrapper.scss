@@ -16,7 +16,7 @@
       border-bottom-right-radius: 0;
 
       &.active {
-        background-color: $gray;
+        color: $info;
       }
     }
   }
@@ -28,8 +28,13 @@
       -moz-box-shadow: none;
       box-shadow: none;
       padding-top: 0;
+      padding-left: 0;
+      li {
+        padding-left: 0;
+      }
       a {
         text-align: left;
+        font-size: 1.2em;
       }
     }
     hr {
