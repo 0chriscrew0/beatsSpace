@@ -10,7 +10,14 @@
   }
   li {
     a {
+      color: $black;
       padding: 0 0.4rem;
+      border-bottom-left-radius: 0;
+      border-bottom-right-radius: 0;
+
+      &.active {
+        background-color: $gray;
+      }
     }
   }
   @include media-breakpoint-up(sm) {

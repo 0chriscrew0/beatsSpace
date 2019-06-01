@@ -10,7 +10,7 @@ const UserDashboard = props => {
         <div className="col-md-4 px-0">
           <UserDashboardMenu user={props.user} />
         </div>
-        <div className="col-md-8">{props.children}</div>
+        <div className="col-md-8 pb-4">{props.children}</div>
       </div>
     </div>
   );

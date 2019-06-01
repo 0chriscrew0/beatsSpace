@@ -90,7 +90,7 @@ const Profile = props => {
 
                   <button
                     disabled={isSubmitting}
-                    className="btn btn-primary"
+                    className="btn btn-block btn-primary"
                     type="submit"
                   >
                     Update Profile

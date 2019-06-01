@@ -8,7 +8,7 @@ const UserDashboardMenu = ({ user }) => {
         <li className="nav-item">
           <NavLink
             to="/user/account"
-            className="nav-link btn btn-sm btn-outline-primary border-0 rounded-0 rounded-top p-2"
+            className="nav-link btn btn-sm border-0 p-2"
           >
             Account
           </NavLink>
@@ -16,25 +16,19 @@ const UserDashboardMenu = ({ user }) => {
         <li className="nav-item">
           <NavLink
             to="/user/profile"
-            className="nav-link btn btn-sm btn-outline-primary border-0 rounded-0 rounded-top p-2"
+            className="nav-link btn btn-sm border-0 p-2"
           >
             Profile
           </NavLink>
         </li>
         <li className="nav-item">
-          <NavLink
-            to="/user/cart"
-            className="nav-link btn btn-sm btn-outline-primary border-0 rounded-0 rounded-top p-2"
-          >
+          <NavLink to="/user/cart" className="nav-link btn btn-sm border-0 p-2">
             My Cart
           </NavLink>
         </li>
         {user.userData.isAdmin && (
           <li className="nav-item">
-            <NavLink
-              to="/admin"
-              className="nav-link btn btn-sm btn-outline-primary border-0 rounded-0 rounded-top p-2"
-            >
+            <NavLink to="/admin" className="nav-link btn btn-sm border-0 p-2">
               Admin
             </NavLink>
           </li>
