@@ -11,9 +11,9 @@ const Profile = props => {
   return (
     <UserDashboard>
       <div className="profile">
-        <div className="row">
+        <div className="row px-3">
+          <h4 className="">Profile Information</h4>
           <div className="col-12 py-4 update-profile">
-            <h4 className="pb-3">Profile Information</h4>
             <Formik
               initialValues={{
                 firstname: props.user.userData.firstname,
