@@ -14,7 +14,7 @@ class Register extends Component {
       <div className="container">
         <div className="register-container py-5">
           <div className="register-form">
-            <h3 className="text-secondary">BeatsStore</h3>
+            <h3 className="text-secondary">BeatsSpace</h3>
             <Form>
               <h4 className="pb-1">Register</h4>
               <div className="form-row">

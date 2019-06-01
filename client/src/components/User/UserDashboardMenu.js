@@ -11,7 +11,7 @@ const UserDashboardMenu = ({ user }) => {
             to="/user/account"
             className="nav-link btn btn-sm border-0 p-2"
           >
-            Account
+            Account Info
           </NavLink>
         </li>
         <li className="nav-item">

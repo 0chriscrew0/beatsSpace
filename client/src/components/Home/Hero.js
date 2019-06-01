@@ -17,8 +17,8 @@ class Hero extends Component {
               />
             </div>
             <div className="col-sm-6 px-4 hero-text">
-              <h4>Header</h4>
-              <h2>Lorem ipsum dolor sit amet.</h2>
+              <h4>BeatsSpace</h4>
+              <h2>Purchase beats online</h2>
               <Link to="/shop" className="btn btn-outline-secondary my-2">
                 Go to Store
               </Link>

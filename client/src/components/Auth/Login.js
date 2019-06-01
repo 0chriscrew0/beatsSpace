@@ -15,7 +15,7 @@ class Login extends Component {
       <div className="container">
         <div className="login-container py-5">
           <div className="login-form">
-            <h3 className="text-secondary">Beats Store</h3>
+            <h3 className="text-secondary">BeatsSpace</h3>
             <Form>
               <h4 className="pb-1">Login</h4>
               <div className="form-group">

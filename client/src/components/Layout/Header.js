@@ -147,7 +147,7 @@ class Header extends Component {
                 data-target=".navbar-collapse.show"
                 onClick={this.state.isOpen ? this.handleClick : null}
               >
-                BeatsStore
+                BeatsSpace
               </h4>
             </NavLink>
 
