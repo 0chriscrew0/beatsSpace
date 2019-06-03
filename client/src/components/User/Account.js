@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import moment from "moment";
 
 import UserDashboard from ".";
@@ -23,10 +24,23 @@ const Account = props => {
             <h4>Account Info</h4>
             <div className="col-12 mt-0 account-section account-section-info">
               <div>
-                <span>{props.user.userData.firstname}</span>
-                <span>{props.user.userData.lastname}</span>
-                <span>{props.user.userData.email}</span>
+                <span>
+                  <strong>First Name: </strong>
+                  {props.user.userData.firstname}
+                </span>
+                <span>
+                  <strong>Last Name: </strong>
+                  {props.user.userData.lastname}
+                </span>
+                <span>
+                  <strong>Email: </strong>
+                  {props.user.userData.email}
+                </span>
               </div>
+
+              <Link to="/user/profile" className="btn btn-primary mt-3">
+                Update Profile
+              </Link>
             </div>
             <h4>Purchase History</h4>
             <div className="col-12 mt-0 account-section account-section-history">
