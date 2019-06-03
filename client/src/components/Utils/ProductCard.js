@@ -10,7 +10,8 @@ import { addProductToCart } from "../../actions/userActions";
 
 class ProductCard extends Component {
   state = {
-    playing: false
+    playing: false,
+    loginToAddCart: false
   };
 
   componentWillReceiveProps(nextProps) {
@@ -149,6 +150,7 @@ class ProductCard extends Component {
                       className="btn btn-primary"
                       onClick={this.addToCart}
                       disabled={isInCart}
+                      data-dismiss={!this.props.user.userData.isAuth && "modal"}
                     >
                       {isInCart ? "Item in cart" : "Add To Cart"}
                     </button>
