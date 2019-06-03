@@ -226,14 +226,28 @@ app.post("/api/product/editArtist", auth, admin, (req, res) => {
   );
 });
 
-app.post("/api/product/removeArtist", auth, admin, (req, res) => {
-  Artist.updateOne({ _id: req.body.id }, { name: "Unkown" }, err => {
-    if (err) {
-      return res.status(400).send(err);
-    }
-
-    return res.status(200).send({ success: true });
+app.post("/api/product/removeArtist", auth, admin, async (req, res) => {
+  let noneArtist = await Artist.findOne({ name: "Unkown" }, (err, artist) => {
+    return artist;
   });
+  if (!noneArtist) {
+    noneArtist = new Artist({ name: "Unkown" });
+    noneArtist.save();
+  }
+  console.log(noneArtist);
+  Beat.updateMany(
+    { artist: { _id: req.body.id } },
+    { $set: { artist: noneArtist } },
+    err => {
+      if (err) return res.status(400).json({ success: false, err });
+
+      Artist.deleteOne({ _id: req.body.id }, err => {
+        if (err) return res.status(400).json({ success: false, err });
+
+        res.status(200).send({ success: true });
+      });
+    }
+  );
 });
 
 //-----------------------------
@@ -277,14 +291,27 @@ app.post("/api/product/editGenre", auth, admin, (req, res) => {
   );
 });
 
-app.post("/api/product/removeGenre", auth, admin, (req, res) => {
-  Genre.updateOne({ _id: req.body.id }, { name: "None" }, err => {
-    if (err) {
-      return res.status(400).send(err);
-    }
-
-    return res.status(200).send({ success: true });
+app.post("/api/product/removeGenre", auth, admin, async (req, res) => {
+  let noneGenre = await Genre.findOne({ name: "None" }, (err, genre) => {
+    return genre;
   });
+  if (!noneGenre) {
+    noneGenre = new Genre({ name: "None" });
+    noneGenre.save();
+  }
+  Beat.updateMany(
+    { genre: { _id: req.body.id } },
+    { $set: { genre: noneGenre } },
+    err => {
+      if (err) return res.status(400).json({ success: false, err });
+
+      Genre.deleteOne({ _id: req.body.id }, err => {
+        if (err) return res.status(400).json({ success: false, err });
+
+        res.status(200).send({ success: true });
+      });
+    }
+  );
 });
 
 //-----------------------------

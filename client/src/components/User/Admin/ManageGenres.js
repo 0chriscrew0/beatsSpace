@@ -15,7 +15,8 @@ import {
 
 class ManageGenres extends Component {
   state = {
-    genres: []
+    genres: [],
+    success: false
   };
 
   componentDidMount() {
@@ -37,7 +38,7 @@ class ManageGenres extends Component {
             data-toggle="modal"
             data-target={`#${modalId}`}
           >
-            <i className="fas fa-edit" />
+            <ion-icon name="create" /> Edit
           </button>
           <div
             className="modal fade"
@@ -120,18 +121,74 @@ class ManageGenres extends Component {
             </div>
           </div>
           <button
-            onClick={() => this.removeGenre(item._id)}
-            className="ml-3 btn btn-sm btn-danger"
+            className="ml-3 btn btn-sm btn-outline-danger"
+            data-toggle="modal"
+            data-target={`#${modalId}-delete`}
           >
-            <i className="fas fa-times" />
+            <ion-icon name="trash" /> Delete
           </button>
+          <div
+            className="modal fade"
+            id={`${modalId}-delete`}
+            tabIndex="-1"
+            role="dialog"
+            aria-labelledby="exampleModalLabel"
+            aria-hidden="true"
+          >
+            <div className="modal-dialog" role="document">
+              <div className="modal-content">
+                <div className="modal-header">
+                  <h5 className="modal-title" id="exampleModalLabel">
+                    Delete Genre
+                  </h5>
+                  <button
+                    type="button"
+                    className="close"
+                    data-dismiss="modal"
+                    aria-label="Close"
+                  >
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>
+                <div className="modal-body">
+                  Are your sure you want to delete the genre:{" "}
+                  <strong>{item.name}?</strong>
+                  {this.state.success && (
+                    <div className="mt-3 p-2 rounded bg-success">
+                      Genre deleted successfully, reloading in 3 seconds
+                    </div>
+                  )}
+                </div>
+                <div className="modal-footer">
+                  <button
+                    type="button"
+                    className="btn btn-primary"
+                    data-dismiss="modal"
+                  >
+                    Close
+                  </button>
+                  <button
+                    type="button"
+                    className="btn btn-danger"
+                    onClick={() => this.removeGenre(item._id)}
+                  >
+                    Yes
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
       );
     });
 
   removeGenre = id => {
     this.props.dispatch(removeGenre(id, this.state.genres)).then(response => {
-      this.setState({ genres: response.payload.genres });
+      this.setState({ success: true }, () => {
+        setInterval(() => {
+          window.location.reload();
+        }, 3000);
+      });
     });
   };
 
@@ -140,7 +197,7 @@ class ManageGenres extends Component {
       <div className="manage-genres">
         <div className="container py-5">
           <div className="current-genres">
-            <h5>Current Genres</h5>
+            <h4>Current Genres</h4>
             {this.showCurrentGenres()}
           </div>
 

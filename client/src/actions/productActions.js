@@ -195,7 +195,6 @@ export function editArtist(id, data) {
 }
 
 export function removeArtist(id, currentArtists) {
-  console.log(id);
   const request = axios
     .post(`${PRODUCT_ROUTES}/removeArtist`, { id })
     .then(response => {

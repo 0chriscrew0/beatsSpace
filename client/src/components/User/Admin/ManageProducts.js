@@ -37,7 +37,7 @@ class ManageGenres extends Component {
 
   showCurrentProducts = () =>
     this.state.products.map(item => (
-      <div key={item._id} className="current-product">
+      <div key={item._id} className="current-product py-2">
         <span>{item.name}</span>
         <button
           type="button"
@@ -45,7 +45,7 @@ class ManageGenres extends Component {
           data-toggle="modal"
           data-target={`#${item.name.replace(/\s+/g, "")}`}
         >
-          <i className="fas fa-edit" />
+          <ion-icon name="create" /> Edit
         </button>
         <div
           className="modal fade"
@@ -242,7 +242,7 @@ class ManageGenres extends Component {
           onClick={() => this.removeProduct(item._id)}
           className="ml-3 btn btn-sm btn-outline-danger"
         >
-          <i className="fas fa-times" />
+          <ion-icon name="trash" /> Delete
         </button>
       </div>
     ));

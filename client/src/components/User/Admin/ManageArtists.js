@@ -15,7 +15,8 @@ import {
 
 class ManageArtists extends Component {
   state = {
-    artists: []
+    artists: [],
+    success: false
   };
 
   componentDidMount() {
@@ -29,19 +30,19 @@ class ManageArtists extends Component {
       const modalId = ID();
 
       return (
-        <div key={item._id} className="current-artist">
+        <div key={item._id} className="current-artist py-2">
           <span>{item.name}</span>
           <button
             type="button"
             className="ml-3 btn btn-sm btn-outline-warning"
             data-toggle="modal"
-            data-target={`#${modalId}`}
+            data-target={`#${modalId}-edit`}
           >
-            <i className="fas fa-edit" />
+            <ion-icon name="create" /> Edit
           </button>
           <div
             className="modal fade"
-            id={modalId}
+            id={`${modalId}-edit`}
             tabIndex="-1"
             role="dialog"
             aria-labelledby="exampleModalLabel"
@@ -120,18 +121,74 @@ class ManageArtists extends Component {
             </div>
           </div>
           <button
-            onClick={() => this.removeArtist(item._id)}
-            className="ml-3 btn btn-sm btn-danger"
+            className="ml-3 btn btn-sm btn-outline-danger"
+            data-toggle="modal"
+            data-target={`#${modalId}-delete`}
           >
-            <i className="fas fa-times" />
+            <ion-icon name="trash" /> Delete
           </button>
+          <div
+            className="modal fade"
+            id={`${modalId}-delete`}
+            tabIndex="-1"
+            role="dialog"
+            aria-labelledby="exampleModalLabel"
+            aria-hidden="true"
+          >
+            <div className="modal-dialog" role="document">
+              <div className="modal-content">
+                <div className="modal-header">
+                  <h5 className="modal-title" id="exampleModalLabel">
+                    Delete Artist
+                  </h5>
+                  <button
+                    type="button"
+                    className="close"
+                    data-dismiss="modal"
+                    aria-label="Close"
+                  >
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>
+                <div className="modal-body">
+                  Are your sure you want to delete the artist:{" "}
+                  <strong>{item.name}?</strong>
+                  {this.state.success && (
+                    <div className="mt-3 p-2 rounded bg-success">
+                      Artist deleted successfully, reloading in 3 seconds
+                    </div>
+                  )}
+                </div>
+                <div className="modal-footer">
+                  <button
+                    type="button"
+                    className="btn btn-primary"
+                    data-dismiss="modal"
+                  >
+                    Close
+                  </button>
+                  <button
+                    type="button"
+                    className="btn btn-danger"
+                    onClick={() => this.removeArtist(item._id)}
+                  >
+                    Yes
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
       );
     });
 
   removeArtist = id => {
     this.props.dispatch(removeArtist(id, this.state.artists)).then(response => {
-      this.setState({ artists: response.payload.artists });
+      this.setState({ success: true }, () => {
+        setInterval(() => {
+          window.location.reload();
+        }, 3000);
+      });
     });
   };
 
@@ -140,7 +197,7 @@ class ManageArtists extends Component {
       <div className="manage-artists">
         <div className="container py-5">
           <div className="current-artists">
-            <h5>Current Artists</h5>
+            <h4>Current Artists</h4>
             {this.showCurrentArtists()}
           </div>
 
