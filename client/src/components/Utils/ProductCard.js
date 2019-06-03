@@ -62,7 +62,7 @@ class ProductCard extends Component {
       });
     }
 
-    const modalId = name.replace(/[^a-zA-Z0-9]+/, "");
+    const modalId = '_' + _id;
 
     return (
       <div className="card product-card bg-white border-0`">
