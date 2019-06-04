@@ -18,7 +18,8 @@ class ManageGenres extends Component {
   state = {
     products: [],
     artists: [],
-    genres: []
+    genres: [],
+    success: false
   };
 
   componentDidMount() {
@@ -36,216 +37,269 @@ class ManageGenres extends Component {
   }
 
   showCurrentProducts = () =>
-    this.state.products.map(item => (
-      <div key={item._id} className="current-product py-2">
-        <span>{item.name}</span>
-        <button
-          type="button"
-          className="ml-3 btn btn-sm btn-outline-warning"
-          data-toggle="modal"
-          data-target={`#${item.name.replace(/\s+/g, "")}`}
-        >
-          <ion-icon name="create" /> Edit
-        </button>
-        <div
-          className="modal fade"
-          id={item.name.replace(/\s+/g, "")}
-          tabIndex="-1"
-          role="dialog"
-          aria-labelledby="exampleModalLabel"
-          aria-hidden="true"
-        >
-          <div className="modal-dialog" role="document">
-            <div className="modal-content">
-              <div className="modal-header">
-                <h5 className="modal-title" id="exampleModalLabel">
-                  Edit Product
-                </h5>
-                <button
-                  type="button"
-                  className="close"
-                  data-dismiss="modal"
-                  aria-label="Close"
-                >
-                  <span aria-hidden="true">&times;</span>
-                </button>
+    this.state.products.map(item => {
+      const modalId = "_" + item._id;
+
+      return (
+        <div key={item._id} className="current-product py-2">
+          <span>{item.name}</span>
+          <button
+            type="button"
+            className="ml-3 btn btn-sm btn-outline-warning"
+            data-toggle="modal"
+            data-target={`#${modalId}-edit`}
+          >
+            <ion-icon name="create" /> Edit
+          </button>
+          <div
+            className="modal fade"
+            id={`${modalId}-edit`}
+            tabIndex="-1"
+            role="dialog"
+            aria-labelledby="exampleModalLabel"
+            aria-hidden="true"
+          >
+            <div className="modal-dialog" role="document">
+              <div className="modal-content">
+                <div className="modal-header">
+                  <h5 className="modal-title" id="exampleModalLabel">
+                    Edit Product
+                  </h5>
+                  <button
+                    type="button"
+                    className="close"
+                    data-dismiss="modal"
+                    aria-label="Close"
+                  >
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>
+                <div className="modal-body">
+                  <Formik
+                    initialValues={{
+                      images: item.images,
+                      audio: item.audio,
+                      name: item.name,
+                      description: item.description,
+                      price: item.price,
+                      artist: item.artist._id,
+                      genre: item.genre._id
+                    }}
+                    validationSchema={Yup.object().shape({
+                      audio: Yup.mixed().required("Audio file is required"),
+                      name: Yup.string()
+                        .max(100, "Title can only be 100 characters")
+                        .required(" Enter a title"),
+                      description: Yup.string()
+                        .max(500, "Description can only be 500 characters")
+                        .required("Enter a description"),
+                      price: Yup.number().required("Enter a price"),
+                      artist: Yup.string().required("Select an artist"),
+                      genre: Yup.string().required("Select a genre")
+                    })}
+                    onSubmit={values => {
+                      this.props
+                        .dispatch(editProduct(item._id, values))
+                        .then(response => {
+                          window.location.reload();
+                        });
+                    }}
+                  >
+                    {({ errors, touched, isSubmitting, setFieldValue }) => (
+                      <Form>
+                        <div className="form-group">
+                          <FileUpload
+                            fileType="Image(s)"
+                            fileHandler={images => {
+                              if (images.length === 0) {
+                                return;
+                              }
+
+                              setFieldValue("images", images);
+                            }}
+                          />
+                        </div>
+                        <div className="form-group">
+                          <FileUpload
+                            fileType="Audio"
+                            fileHandler={audio => {
+                              if (!audio) {
+                                return;
+                              }
+
+                              setFieldValue("audio", audio[0]);
+                            }}
+                          />
+                          {touched.audio && errors.audio && (
+                            <p className="text-danger pt-1">{errors.audio}</p>
+                          )}
+                        </div>
+                        <div className="form-group">
+                          <Field
+                            className={`form-control ${touched.name &&
+                              errors.name &&
+                              "is-invalid"}`}
+                            type="text"
+                            name="name"
+                            placeholder="Name"
+                          />
+                          {touched.name && errors.name && (
+                            <p className="text-danger pt-1">{errors.name}</p>
+                          )}
+                        </div>
+                        <div className="form-group">
+                          <Field
+                            className={`form-control ${touched.description &&
+                              errors.description &&
+                              "is-invalid"}`}
+                            type="text"
+                            name="description"
+                            placeholder="Description"
+                          />
+                          {touched.description && errors.description && (
+                            <p className="text-danger pt-1">
+                              {errors.description}
+                            </p>
+                          )}
+                        </div>
+                        <div className="form-group">
+                          <Field
+                            className={`form-control ${touched.price &&
+                              errors.price &&
+                              "is-invalid"}`}
+                            type="number"
+                            name="price"
+                            placeholder="Price"
+                          />
+                          {touched.price && errors.price && (
+                            <p className="text-danger pt-1">{errors.price}</p>
+                          )}
+                        </div>
+                        <div className="form-group">
+                          <Field
+                            className={`form-control ${touched.artist &&
+                              errors.artist &&
+                              "is-invalid"}`}
+                            component="select"
+                            name="artist"
+                          >
+                            <option defaultValue>Select artist</option>
+                            {this.state.artists.map(artist => (
+                              <option key={artist._id} value={artist._id}>
+                                {artist.name}
+                              </option>
+                            ))}
+                          </Field>
+                          {touched.artist && errors.artist && (
+                            <p className="text-danger pt-1">{errors.artist}</p>
+                          )}
+                        </div>
+                        <div className="form-group">
+                          <Field
+                            className={`form-control ${touched.genre &&
+                              errors.genre &&
+                              "is-invalid"}`}
+                            component="select"
+                            name="genre"
+                          >
+                            <option defaultValue>Select genre</option>
+                            {this.state.genres.map(genre => (
+                              <option key={genre._id} value={genre._id}>
+                                {genre.name}
+                              </option>
+                            ))}
+                          </Field>
+                          {touched.description && errors.description && (
+                            <p className="text-danger pt-1">
+                              {errors.description}
+                            </p>
+                          )}
+                        </div>
+
+                        <button
+                          disabled={isSubmitting}
+                          className="btn btn-primary"
+                          type="submit"
+                        >
+                          Edit Product
+                        </button>
+                      </Form>
+                    )}
+                  </Formik>
+                </div>
+                <div className="modal-footer">
+                  <button
+                    type="button"
+                    className="btn btn-secondary"
+                    data-dismiss="modal"
+                  >
+                    Close
+                  </button>
+                </div>
               </div>
-              <div className="modal-body">
-                <Formik
-                  initialValues={{
-                    images: item.images,
-                    audio: item.audio,
-                    name: item.name,
-                    description: item.description,
-                    price: item.price,
-                    artist: item.artist._id,
-                    genre: item.genre._id
-                  }}
-                  validationSchema={Yup.object().shape({
-                    audio: Yup.mixed().required("Audio file is required"),
-                    name: Yup.string()
-                      .max(100, "Title can only be 100 characters")
-                      .required(" Enter a title"),
-                    description: Yup.string()
-                      .max(500, "Description can only be 500 characters")
-                      .required("Enter a description"),
-                    price: Yup.number().required("Enter a price"),
-                    artist: Yup.string().required("Select an artist"),
-                    genre: Yup.string().required("Select a genre")
-                  })}
-                  onSubmit={values => {
-                    this.props
-                      .dispatch(editProduct(item._id, values))
-                      .then(response => {
-                        window.location.reload();
-                      });
-                  }}
-                >
-                  {({ errors, touched, isSubmitting, setFieldValue }) => (
-                    <Form>
-                      <div className="form-group">
-                        <FileUpload
-                          fileType="Image(s)"
-                          fileHandler={images => {
-                            if (images.length === 0) {
-                              return;
-                            }
-
-                            setFieldValue("images", images);
-                          }}
-                        />
-                      </div>
-                      <div className="form-group">
-                        <FileUpload
-                          fileType="Audio"
-                          fileHandler={audio => {
-                            if (!audio) {
-                              return;
-                            }
-
-                            setFieldValue("audio", audio[0]);
-                          }}
-                        />
-                        {touched.audio && errors.audio && (
-                          <p className="text-danger pt-1">{errors.audio}</p>
-                        )}
-                      </div>
-                      <div className="form-group">
-                        <Field
-                          className={`form-control ${touched.name &&
-                            errors.name &&
-                            "is-invalid"}`}
-                          type="text"
-                          name="name"
-                          placeholder="Name"
-                        />
-                        {touched.name && errors.name && (
-                          <p className="text-danger pt-1">{errors.name}</p>
-                        )}
-                      </div>
-                      <div className="form-group">
-                        <Field
-                          className={`form-control ${touched.description &&
-                            errors.description &&
-                            "is-invalid"}`}
-                          type="text"
-                          name="description"
-                          placeholder="Description"
-                        />
-                        {touched.description && errors.description && (
-                          <p className="text-danger pt-1">
-                            {errors.description}
-                          </p>
-                        )}
-                      </div>
-                      <div className="form-group">
-                        <Field
-                          className={`form-control ${touched.price &&
-                            errors.price &&
-                            "is-invalid"}`}
-                          type="number"
-                          name="price"
-                          placeholder="Price"
-                        />
-                        {touched.price && errors.price && (
-                          <p className="text-danger pt-1">{errors.price}</p>
-                        )}
-                      </div>
-                      <div className="form-group">
-                        <Field
-                          className={`form-control ${touched.artist &&
-                            errors.artist &&
-                            "is-invalid"}`}
-                          component="select"
-                          name="artist"
-                        >
-                          <option defaultValue>Select artist</option>
-                          {this.state.artists.map(artist => (
-                            <option key={artist._id} value={artist._id}>
-                              {artist.name}
-                            </option>
-                          ))}
-                        </Field>
-                        {touched.artist && errors.artist && (
-                          <p className="text-danger pt-1">{errors.artist}</p>
-                        )}
-                      </div>
-                      <div className="form-group">
-                        <Field
-                          className={`form-control ${touched.genre &&
-                            errors.genre &&
-                            "is-invalid"}`}
-                          component="select"
-                          name="genre"
-                        >
-                          <option defaultValue>Select genre</option>
-                          {this.state.genres.map(genre => (
-                            <option key={genre._id} value={genre._id}>
-                              {genre.name}
-                            </option>
-                          ))}
-                        </Field>
-                        {touched.description && errors.description && (
-                          <p className="text-danger pt-1">
-                            {errors.description}
-                          </p>
-                        )}
-                      </div>
-
-                      <button
-                        disabled={isSubmitting}
-                        className="btn btn-primary"
-                        type="submit"
-                      >
-                        Edit Product
-                      </button>
-                    </Form>
+            </div>
+          </div>
+          <button
+            className="ml-3 btn btn-sm btn-outline-danger"
+            data-toggle="modal"
+            data-target={`#${modalId}-delete`}
+          >
+            <ion-icon name="trash" /> Delete
+          </button>
+          <div
+            className="modal fade"
+            id={`${modalId}-delete`}
+            tabIndex="-1"
+            role="dialog"
+            aria-labelledby="exampleModalLabel"
+            aria-hidden="true"
+          >
+            <div className="modal-dialog" role="document">
+              <div className="modal-content">
+                <div className="modal-header">
+                  <h5 className="modal-title" id="exampleModalLabel">
+                    Delete Product
+                  </h5>
+                  <button
+                    type="button"
+                    className="close"
+                    data-dismiss="modal"
+                    aria-label="Close"
+                  >
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>
+                <div className="modal-body">
+                  Are your sure you want to delete the product:{" "}
+                  <strong>{item.name}?</strong>
+                  {this.state.success && (
+                    <div className="mt-3 p-2 rounded bg-success">
+                      Product deleted successfully, reloading in 3 seconds
+                    </div>
                   )}
-                </Formik>
-              </div>
-              <div className="modal-footer">
-                <button
-                  type="button"
-                  className="btn btn-secondary"
-                  data-dismiss="modal"
-                >
-                  Close
-                </button>
-                <button type="button" className="btn btn-primary">
-                  Save changes
-                </button>
+                </div>
+                <div className="modal-footer">
+                  <button
+                    type="button"
+                    className="btn btn-primary"
+                    data-dismiss="modal"
+                  >
+                    Close
+                  </button>
+                  <button
+                    type="button"
+                    className="btn btn-danger"
+                    onClick={() => this.removeProduct(item._id)}
+                  >
+                    Yes
+                  </button>
+                </div>
               </div>
             </div>
           </div>
         </div>
-        <button
-          onClick={() => this.removeProduct(item._id)}
-          className="ml-3 btn btn-sm btn-outline-danger"
-        >
-          <ion-icon name="trash" /> Delete
-        </button>
-      </div>
-    ));
+      );
+    });
 
   editProduct = id => {};
 
@@ -253,7 +307,11 @@ class ManageGenres extends Component {
     this.props
       .dispatch(removeProduct(id, this.state.products))
       .then(response => {
-        this.setState({ products: response.payload.products });
+        this.setState({ success: true }, () => {
+          setInterval(() => {
+            window.location.reload();
+          }, 3000);
+        });
       });
   };
 
