@@ -3,6 +3,7 @@ const cookieParser = require("cookie-parser");
 const mongoose = require("mongoose");
 const formidable = require("express-formidable");
 const cloudinary = require("cloudinary");
+const stripeLoader = require("stripe");
 const async = require("async");
 require("dotenv").config();
 
@@ -501,6 +502,29 @@ app.get("/api/users/remove-file", auth, admin, (req, res) => {
     }
     res.status(200).send("Success");
   });
+});
+
+const stripe = new stripeLoader(process.env.STRIPE_SECRET_KEY);
+
+const charge = (token, amount) => {
+  return stripe.charges.create({
+    amount: amount * 100,
+    currency: "usd",
+    source: token.id,
+    description: "Statement Description"
+  });
+};
+
+app.post("/api/stripe-payment", auth, async (req, res) => {
+  try {
+    console.log(req.body);
+    let data = await charge(req.body.token, req.body.amount);
+    console.log(data);
+    res.send("Charged!");
+  } catch (e) {
+    console.log(e);
+    res.status(500);
+  }
 });
 
 app.post("/api/users/order-success", auth, (req, res) => {

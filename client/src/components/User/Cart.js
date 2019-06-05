@@ -10,6 +10,7 @@ import {
 import Spinner from "../Utils/Spinner";
 import CartItem from "./CartItem";
 import Paypal from "../Utils/Paypal";
+import Stripe from "../Utils/Stripe";
 
 class Cart extends Component {
   state = {
@@ -117,6 +118,8 @@ class Cart extends Component {
                       canceled={data => this.transactionCanceled(data)}
                       success={payment => this.transactionSuccess(payment)}
                     />
+
+                    <Stripe amount={this.calculateSubtotal()} />
                   </React.Fragment>
                 ) : (
                   <div className="success-total">
