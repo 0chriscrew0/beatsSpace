@@ -10,6 +10,9 @@
     "watch-scss": "node-sass --watch client/src/resources/scss -o client/src/resources/css",
     "dev": "concurrently \"npm run server\" \"npm run client\" \"npm run watch-scss\""
   },
+  "engines": {
+    "node": "12.2.0"
+  },
   "license": "MIT",
   "dependencies": {
     "@fortawesome/fontawesome-svg-core": "^1.2.15",
