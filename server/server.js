@@ -5,6 +5,7 @@ const formidable = require("express-formidable");
 const cloudinary = require("cloudinary");
 const stripeLoader = require("stripe");
 const async = require("async");
+const path = require("path");
 require("dotenv").config();
 
 const app = express();
@@ -17,8 +18,6 @@ mongoose.connect(process.env.MONGO_URI, { useNewUrlParser: true });
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 app.use(cookieParser());
-
-app.use(express.static("client/build"));
 
 cloudinary.config({
   cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
@@ -624,10 +623,10 @@ app.post("/api/site/site-info", auth, admin, (req, res) => {
 });
 
 if (process.env.NODE_ENV === "production") {
-  const path = require("path");
+  app.use(express.static("client/build"));
 
-  app.get("/*", (req, res) => {
-    res.sendFile(path.resolve(__dirname, "../client", "build", "index.html"));
+  app.get("*", (req, res) => {
+    res.sendFile(path.resolve(__dirname, "client", "build", "index.html"));
   });
 }
 
