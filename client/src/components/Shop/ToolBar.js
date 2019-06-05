@@ -6,10 +6,6 @@ const ToolBar = ({ mobile, handleGrid, grid, filter }) => {
       <h4 className="mb-0">Beats</h4>
       <div className="mobile-shop-toolbar-buttons">
         {mobile ? (
-          <button className="btn btn-sm btn-outline-primary ml-2">Sort</button>
-        ) : null}
-
-        {mobile ? (
           <Fragment>
             <button
               type="button"
