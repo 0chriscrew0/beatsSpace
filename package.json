@@ -1,5 +1,5 @@
 {
-  "name": "guitar-store",
+  "name": "beats-store",
   "version": "1.0.0",
   "main": "server/server.js",
   "scripts": {
@@ -8,7 +8,8 @@
     "client": "npm run start --prefix client",
     "client-install": "yarn add --prefix client",
     "watch-scss": "node-sass --watch client/src/resources/scss -o client/src/resources/css",
-    "dev": "concurrently \"npm run server\" \"npm run client\" \"npm run watch-scss\""
+    "dev": "concurrently \"npm run server\" \"npm run client\" \"npm run watch-scss\"",
+    "heroku-postbuild": "NPM_CONFIG_PRODUCTION=false yarn add --prefix client && yarn run build --prefix client"
   },
   "engines": {
     "node": "12.2.0"
