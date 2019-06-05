@@ -36,6 +36,9 @@
 
 .cart-item-image {
   width: 50px;
+  -webkit-box-shadow: 6px 7px 5px -5px rgba(0, 0, 0, 0.75);
+  -moz-box-shadow: 6px 7px 5px -5px rgba(0, 0, 0, 0.75);
+  box-shadow: 6px 7px 5px -5px rgba(0, 0, 0, 0.75);
   @include media-breakpoint-up(md) {
     width: 100px;
   }
