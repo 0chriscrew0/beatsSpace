@@ -8639,13 +8639,13 @@ h1, h2, h3, h4, h5, h6 {
   font-size: 0.8em; }
 
 .cart-item-image {
-  width: 50px;
-  -webkit-box-shadow: 6px 7px 5px -5px rgba(0, 0, 0, 0.75);
-  -moz-box-shadow: 6px 7px 5px -5px rgba(0, 0, 0, 0.75);
-  box-shadow: 6px 7px 5px -5px rgba(0, 0, 0, 0.75); }
+  width: 50px; }
   @media (min-width: 768px) {
     .cart-item-image {
-      width: 100px; } }
+      width: 100px;
+      -webkit-box-shadow: 6px 7px 5px -5px rgba(0, 0, 0, 0.75);
+      -moz-box-shadow: 6px 7px 5px -5px rgba(0, 0, 0, 0.75);
+      box-shadow: 6px 7px 5px -5px rgba(0, 0, 0, 0.75); } }
 
 .cart-item-image-wrapper {
   display: flex;
