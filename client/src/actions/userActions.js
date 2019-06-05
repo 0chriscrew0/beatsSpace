@@ -85,7 +85,6 @@ export function getCartDetails(ids) {
 }
 
 export function removeFromCart(id) {
-  console.log(id);
   const request = axios
     .post(`${USER_ROUTES}/removeFromCart`, { id })
     .then(response => response.data);

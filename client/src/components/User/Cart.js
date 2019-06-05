@@ -111,15 +111,27 @@ class Cart extends Component {
                       ${this.calculateSubtotal()}
                     </p>
 
-                    <Paypal
-                      style={{ textAlign: "center" }}
-                      paymentTotal={this.calculateSubtotal()}
-                      error={data => this.transactionError(data)}
-                      canceled={data => this.transactionCanceled(data)}
-                      success={payment => this.transactionSuccess(payment)}
-                    />
+                    <div className="mx-auto">
+                      <h6>Checkout with Paypal</h6>
+                      <Paypal
+                        style={{ textAlign: "center" }}
+                        paymentTotal={this.calculateSubtotal()}
+                        error={data => this.transactionError(data)}
+                        canceled={data => this.transactionCanceled(data)}
+                        success={payment => this.transactionSuccess(payment)}
+                      />
+                    </div>
 
-                    <Stripe amount={this.calculateSubtotal()} />
+                    <p className="text-center mb-0 mt-3">or</p>
+                    <hr className="mt-0 text-center w-50" />
+
+                    <div className="py-3">
+                      <h6>Checkout with Stripe</h6>
+                      <Stripe
+                        amount={this.calculateSubtotal()}
+                        onSuccess={payment => this.transactionSuccess(payment)}
+                      />
+                    </div>
                   </React.Fragment>
                 ) : (
                   <div className="success-total">

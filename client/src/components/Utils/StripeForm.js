@@ -1,7 +1,5 @@
 import React, { Component } from "react";
 import { CardElement, injectStripe } from "react-stripe-elements";
-import { Formik, Form, Field } from "formik";
-import * as Yup from "yup";
 
 class StripeForm extends Component {
   handleSubmit = async e => {
@@ -10,23 +8,33 @@ class StripeForm extends Component {
     let { token } = await this.props.stripe.createToken();
     const amount = this.props.amount;
 
-    await fetch("/api/stripe-payment", {
+    const paymentData = await fetch("/api/stripe-payment", {
       method: "POST",
       headers: {
         "Content-type": "application/json"
       },
       body: JSON.stringify({ token, amount })
-    });
+    })
+      .then(res => {
+        return res.json();
+      })
+      .then(data => {
+        const formattedData = {
+          paymentID: data.id,
+          ...data
+        };
 
-    console.log(token);
+        return formattedData;
+      });
+
+    this.props.onSuccess(paymentData);
   };
 
   render() {
     return (
       <div>
-        <Formik />
         <form onSubmit={this.handleSubmit}>
-          <CardElement />
+          <CardElement className="py-3" />
           <button className="btn btn-primary">Place Order</button>
         </form>
       </div>

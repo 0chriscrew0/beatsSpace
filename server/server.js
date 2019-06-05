@@ -517,12 +517,10 @@ const charge = (token, amount) => {
 
 app.post("/api/stripe-payment", auth, async (req, res) => {
   try {
-    console.log(req.body);
     let data = await charge(req.body.token, req.body.amount);
-    console.log(data);
-    res.send("Charged!");
+    res.status(200).json(data);
   } catch (e) {
-    console.log(e);
+    // console.log(e);
     res.status(500);
   }
 });

@@ -12,7 +12,10 @@ class Stripe extends Component {
 "
         >
           <Elements>
-            <StripeForm amount={this.props.amount} />
+            <StripeForm
+              amount={this.props.amount}
+              onSuccess={this.props.onSuccess}
+            />
           </Elements>
         </StripeProvider>
       </div>
