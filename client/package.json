@@ -7,7 +7,7 @@
     "@fortawesome/free-solid-svg-icons": "^5.7.2",
     "@fortawesome/react-fontawesome": "^0.1.4",
     "@material-ui/core": "^3.9.2",
-    "axios": "^0.18.0",
+    "axios": "^0.18.1",
     "basscss": "^8.0.10",
     "bootstrap": "^4.3.1",
     "formik": "^1.5.1",
