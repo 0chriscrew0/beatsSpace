@@ -17,7 +17,7 @@
   "license": "MIT",
   "dependencies": {
     "@fortawesome/fontawesome-svg-core": "^1.2.15",
-    "bcrypt": "^3.0.6",
+    "bcrypt": "^5.0.0",
     "cloudinary": "^1.14.0",
     "concurrently": "^4.1.0",
     "cookie-parser": "^1.4.4",
